@@ -1,3 +1,97 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "react"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-useless-undefined": "off", // causes eslint to remove usages of undefined e.g. `someFunction(undefined)` which is dangerous and not advisable
+    "unicorn/prevent-abbreviations": "off" // this one is annoying due to prevalence of the term Props within React code
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.js?(x)"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "unicorn/prefer-module": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.tsx",
+        "**/*.jsx"
+      ],
+      "rules": {
+        "unicorn/no-null": "off",
+        "unicorn/filename-case": [
+          "error",
+          {
+            "case": "pascalCase"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "**/app/**/*.tsx"
+      ],
+      "rules": {
+        "unicorn/filename-case": [
+          "error",
+          {
+            "case": "kebabCase"
+          }
+        ]
+      }
+    },
+    // hooks-specific
+    {
+      "files": [
+        "**/hooks/**/*.ts",
+        "**/use*.ts"
+      ],
+      "rules": {
+        "unicorn/filename-case": [
+          "error",
+          {
+            "case": "camelCase"
+          }
+        ]
+      }
+    }
+  ]
 }

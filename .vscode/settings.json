@@ -1,0 +1,31 @@
+{
+  // VSCode Settings
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss",
+  },
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // Language-specific Overrides
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Extension Settings
+  "eslint.enable": true,
+  "eslint.format.enable": false,
+  "prettier.enable": true
+}
