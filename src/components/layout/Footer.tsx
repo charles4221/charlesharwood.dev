@@ -1,10 +1,20 @@
-import { faLinkedin, faSpotify } from '@fortawesome/free-brands-svg-icons';
+import {
+  IconDefinition,
+  faLinkedin,
+  faSpotify,
+} from '@fortawesome/free-brands-svg-icons';
 import { faHeart } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Container } from '../Container';
+import { Container } from './Container';
 
-const FOOTER_SOCIAL_LINKS = [
+type SocialLink = {
+  title: string;
+  icon: IconDefinition;
+  href: string;
+};
+
+const FOOTER_SOCIAL_LINKS: SocialLink[] = [
   {
     title: 'LinkedIn',
     icon: faLinkedin,
@@ -16,6 +26,22 @@ const FOOTER_SOCIAL_LINKS = [
     href: 'https://open.spotify.com/user/22rloqf6zlymfmgdebyhmg2ia',
   },
 ];
+
+function SocialLinkItem({ title, href, icon }: SocialLink) {
+  return (
+    <li
+      key={title}
+      className="font-semibold hover:text-teal-300 active:text-teal-400">
+      <a href={href} title={title} target="_blank" rel="noopener noreferrer">
+        <FontAwesomeIcon icon={icon} size="lg" />
+      </a>
+    </li>
+  );
+}
+
+function renderSocialLink(item: SocialLink) {
+  return <SocialLinkItem key={item.title} {...item} />;
+}
 
 export function Footer() {
   return (
@@ -34,21 +60,7 @@ export function Footer() {
         </div>
         <nav>
           <ul className="flex flex-wrap gap-3">
-            {FOOTER_SOCIAL_LINKS.map((link) => {
-              return (
-                <li
-                  key={link.title}
-                  className="font-semibold hover:text-teal-300 active:text-teal-400">
-                  <a
-                    href={link.href}
-                    title={link.title}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <FontAwesomeIcon icon={link.icon} size="lg" />
-                  </a>
-                </li>
-              );
-            })}
+            {FOOTER_SOCIAL_LINKS.map(renderSocialLink)}
           </ul>
         </nav>
       </div>

@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import { createClient } from '@/prismicio';
 import { FONT_VT_323 } from '@/theme/fonts';
 
+import { Container } from './Container';
 import { NavLink } from './NavLink';
 import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
-import { Container } from '../Container';
 import { Heading } from '../Heading';
 import { DarkModeSetting } from '../settings/DarkModeSetting';
 
@@ -47,7 +47,6 @@ export async function Header() {
               {navigation.data?.links.map(renderNavItem)}
             </ul>
           </nav>
-
           <DarkModeSetting />
         </div>
       </div>

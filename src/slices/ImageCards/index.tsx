@@ -3,8 +3,8 @@ import { PrismicNextLink, PrismicNextImage } from '@prismicio/next';
 import { PrismicText } from '@prismicio/react';
 
 import { ConditionalWrap } from '@/components/ConditionalWrap';
-import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
+import { Container } from '@/components/layout/Container';
 import { PrismicRichText } from '@/components/PrismicRichText';
 
 import type {

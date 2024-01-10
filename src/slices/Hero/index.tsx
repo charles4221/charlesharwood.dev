@@ -2,9 +2,9 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { PrismicRichTextProps } from '@prismicio/react';
 
-import { Button } from '@/components/Button';
-import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
+import { Container } from '@/components/layout/Container';
+import { Button } from '@/components/links/Button';
 import { PrismicRichText } from '@/components/PrismicRichText';
 
 import type { HeroSlice } from '../../../prismicio-types';

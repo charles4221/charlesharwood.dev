@@ -1,17 +1,18 @@
 import { Heading } from '@/components/Heading';
-import { PlainLink } from '@/components/PlainLink';
-
-import { Container } from '@/components/Container';
+import { Container } from '@/components/layout/Container';
+import { PlainLink } from '@/components/links/PlainLink';
 
 export default function NotFound() {
   return (
     <Container as="main">
-      <Heading as="h2" size="xl">
+      <Heading as="h1" size="xl">
         Error 404
       </Heading>
-      <Heading as="h3">Not Found</Heading>
-      <p className="text-lg">Sorry, this page does not seem to exist.</p>
-      <PlainLink href="/">Return Home</PlainLink>
+      <Heading as="h2">Not Found</Heading>
+      <p className="text-lg">
+        Sorry, this is not the page you&apos;re searching for.
+      </p>
+      <PlainLink href="/">Move Along (return home)</PlainLink>
     </Container>
   );
 }

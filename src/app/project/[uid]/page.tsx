@@ -2,9 +2,9 @@ import { asText } from '@prismicio/client';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { Button } from '@/components/Button';
-import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
+import { Container } from '@/components/layout/Container';
+import { Button } from '@/components/links/Button';
 import { PrismicRichText } from '@/components/PrismicRichText';
 import { Hero } from '@/components/project/Hero';
 import { Testimonial } from '@/components/project/Testimonial';

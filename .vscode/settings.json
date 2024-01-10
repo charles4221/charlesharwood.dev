@@ -6,7 +6,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "files.associations": {
-    "*.css": "tailwindcss",
+    "*.css": "tailwindcss"
   },
   "javascript.format.enable": false,
   "javascript.validate.enable": false,

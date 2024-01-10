@@ -2,7 +2,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicText } from '@prismicio/react';
 import clsx from 'clsx';
 
-import { Container } from '@/components/Container';
+import { Container } from '@/components/layout/Container';
 
 import type { QuoteSlice } from '../../../prismicio-types';
 

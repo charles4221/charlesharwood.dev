@@ -7,7 +7,7 @@ import { useBoundStore } from '@/store/bound';
 import { setPreferredTheme } from '@/theme/set-theme';
 
 import { DarkModeIcon } from './DarkModeIcon';
-import { Button } from '../Button';
+import { Button } from '../links/Button';
 
 export function DarkModeSetting() {
   const {
