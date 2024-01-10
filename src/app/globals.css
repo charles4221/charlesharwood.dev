@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .heading {
+    @apply leading-tight tracking-tight text-slate-950 uppercase font-headings;
+    text-shadow: -0.042em 0.042em theme('colors.red.500');
+    -webkit-text-stroke: 0.027em theme('colors.sky.300');
+
+    /* Replace text-stroke with base color for IE10/11 */
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      -webkit-text-stroke: 0;
+
+      .dark & {
+        color: theme('colors.sky.300');
+      }
+    }
+
+    /* Replace text-stroke */
+    @supports (-ms-accelerator: true) {
+      -webkit-text-stroke: 0;
+
+      .dark & {
+        color: theme('colors.sky.300');
+      }
+    }
+
+    &.heading--shadow-transition {
+      transition: all 0.15s ease-in-out;
+
+      &:hover {
+        text-shadow: -0.07em 0.06em theme('colors.red.500');
+      }
+    }
+  }
+
+  .button {
+    @apply inline-block font-headings uppercase text-3xl;
+    transition: all 0.15s ease-in-out;
+
+    &.button--cta {
+      box-shadow: -3px 3px 0 0 theme('colors.red.500');
+
+      &:hover {
+        box-shadow: 0 0 0 5px theme('colors.red.500');
+      }
+    }
+  }
+}
