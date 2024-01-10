@@ -2,7 +2,7 @@ import { asText } from '@prismicio/client';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { LinkButton } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
 import { PrismicRichText } from '@/components/PrismicRichText';
@@ -37,13 +37,13 @@ export default async function ProjectPage({ params }: { params: Params }) {
           </div>
           <div className="lg:w-1/3">
             <PrismicRichText field={project.data.technologies} />
-            <LinkButton
+            <Button
               field={project.data.website_url}
               isCompact
               isCTA
               target="_blank">
               View Project Website
-            </LinkButton>
+            </Button>
           </div>
         </div>
       </Container>

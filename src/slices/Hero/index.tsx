@@ -2,7 +2,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { PrismicRichTextProps } from '@prismicio/react';
 
-import { LinkButton } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
 import { PrismicRichText } from '@/components/PrismicRichText';
@@ -44,9 +44,9 @@ const Hero = ({ slice }: HeroProps) => {
             />
           </div>
           {isFilled.link(slice.primary.buttonLink) ? (
-            <LinkButton field={slice.primary.buttonLink} isCTA>
+            <Button field={slice.primary.buttonLink} isCTA>
               {slice.primary.buttonText || 'Learn More'}
-            </LinkButton>
+            </Button>
           ) : null}
         </div>
       </Container>

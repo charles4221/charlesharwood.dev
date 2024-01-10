@@ -1,3 +1,4 @@
+import { LinkField } from '@prismicio/client';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 import clsx from 'clsx';
 
@@ -23,61 +24,40 @@ const buttonVariantConfig: ButtonVariantConfig = {
   },
 };
 
-type ButtonProps = {
+type ButtonBaseProps = {
   variant?: ButtonVariants;
   isCTA?: boolean;
   isCompact?: boolean;
   isRounded?: boolean;
 };
 
+type RegularButtonProps = JSX.IntrinsicElements['button'] & ButtonBaseProps;
+type LinkButtonProps = PrismicNextLinkProps &
+  ButtonBaseProps & { field: LinkField };
+type ButtonProps = RegularButtonProps | LinkButtonProps;
+
 export function Button({
   variant = 'sky',
   isCTA = false,
   isCompact = false,
-  isRounded,
+  isRounded = false,
   className: classNameFromProps,
   ...props
-}: ButtonProps & JSX.IntrinsicElements['button']) {
+}: ButtonProps) {
   const { className, textColor } = buttonVariantConfig[variant];
-
-  return (
-    <button
-      className={clsx(
-        'button',
-        className,
-        textColor,
-        isCompact ? 'px-2 py-1' : 'px-5 py-3',
-        isCTA && 'button--cta',
-        isRounded && 'rounded',
-        classNameFromProps,
-      )}
-      {...props}
-    />
+  const compiledClassName = clsx(
+    'button',
+    className,
+    textColor,
+    isCompact ? 'px-2 py-1' : 'px-5 py-3',
+    isCTA && 'button--cta',
+    isRounded && 'rounded',
+    classNameFromProps,
   );
-}
 
-export function LinkButton({
-  variant = 'sky',
-  isCTA = false,
-  isCompact = false,
-  isRounded,
-  className: classNameFromProps,
-  ...props
-}: ButtonProps & PrismicNextLinkProps) {
-  const { className, textColor } = buttonVariantConfig[variant];
-
-  return (
-    <PrismicNextLink
-      className={clsx(
-        'button',
-        className,
-        textColor,
-        isCompact ? 'px-2 py-1' : 'px-5 py-3',
-        isCTA && 'button--cta',
-        isRounded && 'rounded',
-        classNameFromProps,
-      )}
-      {...props}
-    />
+  return 'field' in props ? (
+    <PrismicNextLink className={compiledClassName} {...props} />
+  ) : (
+    <button className={compiledClassName} {...props} />
   );
 }
