@@ -8,7 +8,8 @@ jobs:
     name: Lint Code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -16,6 +17,8 @@ jobs:
           node-version: 20
 
       - name: Install Node Dependencies
+        env:
+          NPM_CONFIG_FONT_AWESOME_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
         run: npm install
 
       - name: Lint Code with ESLint
