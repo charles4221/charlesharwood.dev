@@ -17,8 +17,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const client = createClient();
   const project = await client.getByUID('project', params.uid).catch(notFound);
 
-  console.log(project.data);
-
   return (
     <main>
       <Hero
