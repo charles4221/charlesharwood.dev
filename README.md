@@ -1,5 +1,7 @@
 # charlesharwood.dev :australia:
 
+[![.github/workflows/lint.yml](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml)
+
 My name is Charles Harwood and I'm a software engineer from the Gold Coast, Australia. I've been working in the tech industry since 2011, and I've been writing crappy code since MySpace was cool.
 
 I'm currently working at [Entain Australia & New Zealand][entain] as a Staff Engineer, working under the Head of Engineering across all product delivery and engineering teams. My focus is on improving the performance and stability of our apps, the quality of our codebases, and helping our teams deliver great experiences to Entain customers.
