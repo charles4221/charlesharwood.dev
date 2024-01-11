@@ -1,8 +1,8 @@
 import { ImageField, isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 
-import { Heading } from '../Heading';
 import { Container } from '../layout/Container';
+import { Heading } from '../typography/Heading';
 
 type HeroProps = {
   title: string;

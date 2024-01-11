@@ -1,7 +1,7 @@
 import { RTHeading3Node } from '@prismicio/client';
 import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
 
-import { Heading } from '../Heading';
+import { Heading } from '../typography/Heading';
 
 export const Heading3: RichTextMapSerializerFunction<
   JSX.Element,

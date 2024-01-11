@@ -11,8 +11,8 @@ import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
-import { Heading } from '../Heading';
 import { DarkModeSetting } from '../settings/DarkModeSetting';
+import { Heading } from '../typography/Heading';
 
 function renderNavItem(item: Simplify<NavigationDocumentDataLinksItem>) {
   return <NavLink key={asText(item.label)} item={item} />;

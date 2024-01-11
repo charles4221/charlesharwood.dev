@@ -2,10 +2,10 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextLink, PrismicNextImage } from '@prismicio/next';
 import { PrismicText } from '@prismicio/react';
 
-import { ConditionalWrap } from '@/components/ConditionalWrap';
-import { Heading } from '@/components/Heading';
+import { ConditionalWrap } from '@/components/layout/ConditionalWrap';
 import { Container } from '@/components/layout/Container';
 import { PrismicRichText } from '@/components/PrismicRichText';
+import { Heading } from '@/components/typography/Heading';
 
 import type {
   ImageCardsSlice,

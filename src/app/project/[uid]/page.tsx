@@ -1,13 +1,13 @@
-import { asText } from '@prismicio/client';
+import { asText, isFilled } from '@prismicio/client';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { Heading } from '@/components/Heading';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/links/Button';
 import { PrismicRichText } from '@/components/PrismicRichText';
 import { Hero } from '@/components/project/Hero';
 import { Testimonial } from '@/components/project/Testimonial';
+import { Heading } from '@/components/typography/Heading';
 import { createClient } from '@/prismicio';
 import { METADATA_BASE } from '@/utils/constants';
 
@@ -48,16 +48,18 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       </Container>
 
-      <Container as="section" yPadding="sm">
-        <Heading as="h2" className="mb-6">
-          What the client thinks
-        </Heading>
-        <Testimonial
-          quote={project.data.client_testimonial}
-          authorName={project.data.client_name}
-          authorRole={project.data.client_role}
-        />
-      </Container>
+      {isFilled.richText(project.data.client_testimonial) ? (
+        <Container as="section" yPadding="sm">
+          <Heading as="h2" className="mb-6">
+            What the client thinks
+          </Heading>
+          <Testimonial
+            quote={project.data.client_testimonial}
+            authorName={project.data.client_name}
+            authorRole={project.data.client_role}
+          />
+        </Container>
+      ) : null}
     </main>
   );
 }

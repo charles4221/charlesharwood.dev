@@ -1,6 +1,6 @@
-import { Heading } from '@/components/Heading';
 import { Container } from '@/components/layout/Container';
 import { PlainLink } from '@/components/links/PlainLink';
+import { Heading } from '@/components/typography/Heading';
 
 export default function NotFound() {
   return (
