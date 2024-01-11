@@ -2,7 +2,7 @@ import { asText } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
 import clsx from 'clsx';
 
-import { createClient } from '@/prismicio';
+import { createClient } from '@/prismic-config';
 import { FONT_VT_323 } from '@/theme/fonts';
 
 import { Container } from './Container';

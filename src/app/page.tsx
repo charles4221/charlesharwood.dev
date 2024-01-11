@@ -3,7 +3,7 @@ import { SliceZone } from '@prismicio/react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { createClient } from '@/prismicio';
+import { createClient } from '@/prismic-config';
 import { components } from '@/slices';
 import { METADATA_BASE } from '@/utils/constants';
 

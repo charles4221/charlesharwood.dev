@@ -8,7 +8,7 @@ import { PrismicRichText } from '@/components/PrismicRichText';
 import { Hero } from '@/components/project/Hero';
 import { Testimonial } from '@/components/project/Testimonial';
 import { Heading } from '@/components/typography/Heading';
-import { createClient } from '@/prismicio';
+import { createClient } from '@/prismic-config';
 import { METADATA_BASE } from '@/utils/constants';
 
 type Params = { uid: string };
