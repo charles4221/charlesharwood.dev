@@ -1,6 +1,7 @@
 # charlesharwood.dev :australia:
 
 [![.github/workflows/lint.yml](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml)
+[![.github/workflows/build.yml](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml)
 
 My name is Charles Harwood and I'm a software engineer from the Gold Coast, Australia. I've been working in the tech industry since 2011, and I've been writing crappy code since MySpace was cool.
 
