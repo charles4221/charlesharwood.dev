@@ -9,17 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js v20.10.0
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20.10.0'
+          registry-url: https://npm.fontawesome.com/
+          scope: '@fortawesome'
+          cache: 'npm'
 
       - name: Install Node Dependencies
+        run: npm ci
         env:
-          NPM_CONFIG_FONT_AWESOME_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
-        run: npm install
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
 
       - name: Lint Code with ESLint
         run: npm run lint
