@@ -19,7 +19,7 @@ const buttonVariantConfig: ButtonVariantConfig = {
   },
   white: {
     className:
-      'bg-white hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 dark:active:bg-slate-700',
+      'bg-white hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-950 dark:hover:bg-slate-800 dark:active:bg-slate-700',
     textColor: 'text-slate-900 dark:text-white',
   },
 };

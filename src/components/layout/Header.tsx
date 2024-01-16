@@ -11,6 +11,7 @@ import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
+import { SocialLinks } from '../links/SocialLinks';
 import { DarkModeSetting } from '../settings/DarkModeSetting';
 import { Heading } from '../typography/Heading';
 
@@ -27,7 +28,7 @@ export async function Header() {
       as="header"
       yPadding="xs"
       className={clsx(
-        'bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10',
+        'bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10 backdrop-blur-lg bg-opacity-75',
         FONT_VT_323.className,
       )}>
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 leading-none">
@@ -47,6 +48,7 @@ export async function Header() {
               {navigation.data?.links.map(renderNavItem)}
             </ul>
           </nav>
+          <SocialLinks />
           <DarkModeSetting />
         </div>
       </div>
