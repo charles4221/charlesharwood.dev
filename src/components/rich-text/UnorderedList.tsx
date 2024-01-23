@@ -14,5 +14,5 @@ export const UnorderedListItem: RichTextMapSerializerFunction<
   RTListItemNode,
   undefined
 > = function UnorderedListItem({ children }) {
-  return <li className="mb-1 list-disc pl-1 last:mb-0 md:pl-2">{children}</li>;
+  return <li className="mb-3 list-disc pl-1 last:mb-0 md:pl-2">{children}</li>;
 };

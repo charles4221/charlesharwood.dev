@@ -10,7 +10,7 @@ export const Hyperlink: RichTextMapSerializerFunction<
   return (
     <PrismicNextLink
       field={node.data}
-      className="underline decoration-1 underline-offset-2 text-teal-500 hover:text-teal-600 dark:hover:text-teal-400">
+      className="bg-sky-300 hover:bg-teal-300 transition-colors dark:text-slate-950">
       {children}
     </PrismicNextLink>
   );

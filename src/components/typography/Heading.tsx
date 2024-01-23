@@ -29,14 +29,14 @@ type HeadingPropsSans = HeadingPropsBase & {
 type HeadingProps = HeadingPropsDisplay | HeadingPropsSans;
 
 export function Heading<AsComponent extends React.ElementType = 'h1'>({
-  as: As,
+  as,
   size = 'lg',
   children,
   className,
   hasHoverShadowTransition,
   isDisplay = true,
 }: PolymorphicComponentProp<AsComponent, HeadingProps>) {
-  const Component = As || 'h1';
+  const Component = as || 'h1';
 
   return (
     <Component

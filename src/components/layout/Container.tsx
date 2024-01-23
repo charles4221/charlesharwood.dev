@@ -7,30 +7,31 @@ const Y_PADDING_CLASSNAME_MAP: {
 } = {
   xs: 'py-4 md:py-5',
   sm: 'py-8 md:py-10',
-  base: 'py-20 md:py-28',
-  lg: 'py-32 md:py-48',
+  md: 'py-12 md:py-16',
+  lg: 'py-20 md:py-28',
+  xl: 'py-32 md:py-48',
 };
 
 type ContainerProps = {
-  yPadding?: 'xs' | 'sm' | 'base' | 'lg';
+  yPadding?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   collapsible?: boolean;
   className?: string;
 };
 
 export function Container<AsComponent extends React.ElementType = 'div'>({
-  as: As,
-  yPadding = 'base',
+  as,
+  yPadding = 'lg',
   collapsible = true,
   className,
   children,
   ...rest
 }: PolymorphicComponentProp<AsComponent, ContainerProps>) {
-  const Component = As || 'div';
+  const Component = as || 'div';
 
   return (
     <Component
       data-collapsible={collapsible}
-      className={clsx('px-6', Y_PADDING_CLASSNAME_MAP[yPadding], className)}
+      className={clsx('px-10', Y_PADDING_CLASSNAME_MAP[yPadding], className)}
       {...rest}>
       <div className="mx-auto w-full max-w-6xl">{children}</div>
     </Component>

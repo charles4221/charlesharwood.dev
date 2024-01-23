@@ -1,22 +1,19 @@
 'use client';
-import { asLink } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicText } from '@prismicio/react';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+
+import { useIsActivePage } from '@/hooks/useIsActivePage';
 
 import {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
 
-type NavLinkProps = {
-  item: Simplify<NavigationDocumentDataLinksItem>;
-};
+type NavLinkProps = Simplify<NavigationDocumentDataLinksItem>;
 
-export function NavLink({ item }: NavLinkProps) {
-  const pathname = usePathname();
-  const isActivePage = pathname === asLink(item.link);
+export function NavLink({ label, link }: NavLinkProps) {
+  const isActivePage = useIsActivePage(link);
 
   return (
     <li
@@ -24,8 +21,8 @@ export function NavLink({ item }: NavLinkProps) {
         'text-xl tracking-wide hover:text-teal-300 active:text-teal-400',
         isActivePage && 'text-teal-400',
       )}>
-      <PrismicNextLink field={item.link}>
-        <PrismicText field={item.label} />
+      <PrismicNextLink field={link}>
+        <PrismicText field={label} />
       </PrismicNextLink>
     </li>
   );

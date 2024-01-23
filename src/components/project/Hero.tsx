@@ -22,7 +22,7 @@ export function Hero(props: HeroProps) {
           priority
         />
       ) : null}
-      <Container yPadding="lg" className="relative text-center">
+      <Container yPadding="xl" className="relative text-center">
         <Heading as="h1" size="xl" className="mb-4">
           {props.title}
         </Heading>

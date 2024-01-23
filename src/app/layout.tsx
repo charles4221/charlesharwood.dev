@@ -21,7 +21,7 @@ export default async function RootLayout({
     <html
       lang="en"
       className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
-      <body className="overflow-x-hidden antialiased dark:bg-slate-950 dark:text-white">
+      <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
         <Header />
         {children}
         <Footer />

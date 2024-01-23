@@ -6,10 +6,10 @@ import { SocialLinks } from '../links/SocialLinks';
 
 export function Footer() {
   return (
-    <Container as="footer" yPadding="xs" className="bg-sky-950 text-white">
+    <Container as="footer" yPadding="md" className="bg-sky-950 text-white">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 leading-none">
         <div>
-          <p className="mb-7">
+          <p className="mb-3">
             Handcrafted with{' '}
             <FontAwesomeIcon icon={faHeart} className="text-red-500" /> in Gold
             Coast, Australia.

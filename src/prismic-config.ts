@@ -15,6 +15,10 @@ export const repositoryName =
  */
 const routes: ClientConfig['routes'] = [
   {
+    type: 'about',
+    path: '/about',
+  },
+  {
     type: 'page',
     path: '/:uid',
   },

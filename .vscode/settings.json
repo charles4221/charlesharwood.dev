@@ -1,5 +1,5 @@
 {
-  // VSCode Settings
+  // VSCode Core Settings
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -24,8 +24,11 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
   // Extension Settings
   "eslint.enable": true,
-  "eslint.format.enable": false,
+  "eslint.format.enable": false, // formatting is handled by prettier
   "prettier.enable": true
 }

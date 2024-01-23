@@ -1,6 +1,10 @@
+import { ComponentProps } from 'react';
+
 import { LinkField } from '@prismicio/client';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 import clsx from 'clsx';
+
+import { PlainLink } from './PlainLink';
 
 type ButtonVariants = 'teal' | 'sky' | 'white';
 
@@ -32,9 +36,10 @@ type ButtonBaseProps = {
 };
 
 type RegularButtonProps = JSX.IntrinsicElements['button'] & ButtonBaseProps;
+type AnchorButtonProps = ComponentProps<typeof PlainLink> & ButtonBaseProps;
 type LinkButtonProps = PrismicNextLinkProps &
   ButtonBaseProps & { field: LinkField };
-type ButtonProps = RegularButtonProps | LinkButtonProps;
+type ButtonProps = RegularButtonProps | AnchorButtonProps | LinkButtonProps;
 
 export function Button({
   variant = 'sky',
@@ -55,9 +60,13 @@ export function Button({
     classNameFromProps,
   );
 
-  return 'field' in props ? (
-    <PrismicNextLink className={compiledClassName} {...props} />
-  ) : (
-    <button className={compiledClassName} {...props} />
-  );
+  if ('field' in props) {
+    return <PrismicNextLink className={compiledClassName} {...props} />;
+  }
+
+  if ('href' in props) {
+    return <PlainLink className={compiledClassName} {...props} />;
+  }
+
+  return <button className={compiledClassName} {...props} />;
 }

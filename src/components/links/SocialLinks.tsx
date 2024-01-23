@@ -4,7 +4,11 @@ import {
   faLinkedin,
   faSpotify,
 } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import clsx from 'clsx';
+
+import { Button } from './Button';
 
 type SocialLink = {
   title: string;
@@ -14,44 +18,59 @@ type SocialLink = {
 
 const FOOTER_SOCIAL_LINKS: SocialLink[] = [
   {
-    title: 'Charles Harwood on GitHub',
+    title: 'Find me on GitHub',
     icon: faGithub,
     href: 'https://github.com/charles4221',
   },
   {
-    title: 'Charles Harwood on LinkedIn',
+    title: 'Find me on LinkedIn',
     icon: faLinkedin,
     href: 'https://www.linkedin.com/in/charles-harwood-94511b38',
   },
   {
-    title: 'Charles Harwood on Spotify',
+    title: 'Find me on Spotify',
     icon: faSpotify,
     href: 'https://open.spotify.com/user/22rloqf6zlymfmgdebyhmg2ia',
   },
 ];
 
-function SocialLinkItem({ title, href, icon }: SocialLink) {
+function SocialLinkItem({
+  title,
+  href,
+  icon,
+  isExpanded = false,
+}: SocialLink & { isExpanded?: boolean }) {
   return (
-    <li
-      key={title}
-      className="font-semibold hover:text-teal-300 active:text-teal-400">
-      <a href={href} title={title} target="_blank" rel="noopener noreferrer">
-        <FontAwesomeIcon icon={icon} size="xl" />
-      </a>
+    <li key={title}>
+      <span className="hover:text-teal-500 active:text-teal-400 dark:hover:text-teal-300 transition-colors">
+        <a href={href} title={title} target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={icon} width={24} size="xl" />
+          {isExpanded ? <span> {title}</span> : null}
+        </a>
+      </span>
     </li>
   );
 }
 
-function renderSocialLink(item: SocialLink) {
-  return <SocialLinkItem key={item.title} {...item} />;
+function renderSocialLink(item: SocialLink, isExpanded = false) {
+  return <SocialLinkItem key={item.title} isExpanded={isExpanded} {...item} />;
 }
 
-export function SocialLinks() {
+type SocialLinksProps = {
+  isExpanded?: boolean;
+};
+
+export function SocialLinks({ isExpanded = false }: SocialLinksProps) {
   return (
     <nav>
-      <ul className="flex flex-wrap gap-5">
-        {FOOTER_SOCIAL_LINKS.map(renderSocialLink)}
+      <ul className={clsx('flex flex-wrap gap-5', isExpanded && 'flex-col')}>
+        {FOOTER_SOCIAL_LINKS.map((item) => renderSocialLink(item, isExpanded))}
       </ul>
+      {isExpanded ? (
+        <Button variant="sky" isCTA href="/contact" className="mt-10 text-2xl">
+          <FontAwesomeIcon icon={faEnvelope} /> Send me an email
+        </Button>
+      ) : null}
     </nav>
   );
 }

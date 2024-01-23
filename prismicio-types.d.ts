@@ -11,6 +11,17 @@ type AboutDocumentDataSlicesSlice = never;
  */
 interface AboutDocumentData {
   /**
+   * Title field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
    * Content field in *About*
    *
    * - **Field Type**: Rich Text

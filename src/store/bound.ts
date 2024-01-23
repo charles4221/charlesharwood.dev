@@ -8,7 +8,9 @@ import {
 } from './settings';
 
 export type StoreState = SettingsState & SettingsActions;
-export type PersistedStoreState = Pick<StoreState, 'darkModeUserOverride'>;
+export type PersistedStoreState = {
+  state: Pick<StoreState, 'darkModeUserOverride'>;
+};
 
 export const useBoundStore = create<StoreState>()(
   devtools(

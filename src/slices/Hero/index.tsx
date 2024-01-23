@@ -35,7 +35,7 @@ const Hero = ({ slice }: HeroProps) => {
           priority
         />
       ) : null}
-      <Container yPadding="lg" className="relative">
+      <Container yPadding="xl" className="relative">
         <div className="grid justify-items-center gap-8">
           <div className="max-w-2xl text-center">
             <PrismicRichText
