@@ -9,7 +9,7 @@ export default function NotFound() {
         Error 404
       </Heading>
       <Heading as="h2">Not Found</Heading>
-      <p className="text-lg">
+      <p className="text-lg my-10">
         Sorry, this is not the page you&apos;re searching for.
       </p>
       <PlainLink href="/">Move Along (return home)</PlainLink>

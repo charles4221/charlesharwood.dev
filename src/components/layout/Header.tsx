@@ -32,11 +32,11 @@ export async function Header() {
         FONT_VT_323.className,
       )}>
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 leading-none">
-        <PrismicNextLink href="/">
+        <PrismicNextLink href="/" className="group">
           <Heading
             as="h2"
             size="md"
-            className="hover:text-sky-300"
+            className="group-hover:text-sky-300"
             hasHoverShadowTransition>
             Charles Harwood
           </Heading>

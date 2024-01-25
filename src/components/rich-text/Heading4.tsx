@@ -1,18 +1,18 @@
-import { RTHeading3Node } from '@prismicio/client';
+import { RTHeading4Node } from '@prismicio/client';
 import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
 
 import { Heading } from '../typography/Heading';
 
-export const Heading3: RichTextMapSerializerFunction<
+export const Heading4: RichTextMapSerializerFunction<
   JSX.Element,
-  RTHeading3Node,
+  RTHeading4Node,
   undefined
-> = function Heading3({ children }) {
+> = function Heading4({ children }) {
   return (
     <Heading
-      as="h3"
+      as="h4"
       size="sm"
-      className="mb-7 mt-12 first:mt-0 last:mb-0"
+      className="mb-3 mt-12 first:mt-0 last:mb-0"
       isDisplay={false}>
       {children}
     </Heading>

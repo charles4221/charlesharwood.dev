@@ -5,7 +5,7 @@ import NextLink from 'next/link';
 export function PlainLink(props: ComponentProps<typeof NextLink>) {
   return (
     <NextLink
-      className="underline decoration-1 underline-offset-2 text-teal-500 hover:text-teal-600 dark:hover:text-teal-400"
+      className="border-sky-400 border-b-2 hover:border-b-4 transition-all font-semibold"
       {...props}
     />
   );

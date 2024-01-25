@@ -58,6 +58,7 @@ export function Button({
     isCTA && 'button--cta',
     isRounded && 'rounded',
     classNameFromProps,
+    'disabled' in props && props.disabled && 'opacity-50 cursor-not-allowed',
   );
 
   if ('field' in props) {

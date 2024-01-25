@@ -4,33 +4,38 @@
 
 @layer components {
   .heading {
-    @apply leading-tight tracking-tight text-slate-950 uppercase font-headings;
-    text-shadow: -0.042em 0.042em theme('colors.red.500');
-    -webkit-text-stroke: 0.027em theme('colors.sky.300');
+    @apply leading-tight tracking-tight uppercase font-headings;
 
-    /* Replace text-stroke with base colour for IE10/11 */
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      -webkit-text-stroke: 0;
+    &--display {
+      @apply text-slate-950;
+      text-shadow: -0.042em 0.042em theme('colors.red.500');
+      -webkit-text-stroke: 0.027em theme('colors.sky.300');
 
-      .dark & {
-        color: theme('colors.sky.300');
+      /* Replace text-stroke with base colour for IE10/11 */
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        -webkit-text-stroke: 0;
+
+        .dark & {
+          color: theme('colors.sky.300');
+        }
       }
-    }
 
-    /* Replace text-stroke with base colour for pre-Chromium Edge */
-    @supports (-ms-accelerator: true) {
-      -webkit-text-stroke: 0;
+      /* Replace text-stroke with base colour for pre-Chromium Edge */
+      @supports (-ms-accelerator: true) {
+        -webkit-text-stroke: 0;
 
-      .dark & {
-        color: theme('colors.sky.300');
+        .dark & {
+          color: theme('colors.sky.300');
+        }
       }
-    }
 
-    &.heading--shadow-transition {
-      transition: all 0.15s ease-in-out;
+      &.heading--shadow-transition {
+        transition: all 0.15s ease-in-out;
 
-      &:hover {
-        text-shadow: -0.07em 0.06em theme('colors.red.500');
+        &:hover,
+        .group:hover & {
+          text-shadow: -0.07em 0.06em theme('colors.red.500');
+        }
       }
     }
   }

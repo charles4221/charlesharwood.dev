@@ -41,7 +41,7 @@ export function Heading<AsComponent extends React.ElementType = 'h1'>({
   return (
     <Component
       className={clsx(
-        isDisplay ? 'heading' : 'font-sans',
+        isDisplay ? 'heading heading--display' : 'heading',
         SIZE_CLASSNAME_MAP[size],
         hasHoverShadowTransition && 'heading--shadow-transition',
         className,
