@@ -22,7 +22,7 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
 
       - name: Lint Code with ESLint
         run: npm run lint
