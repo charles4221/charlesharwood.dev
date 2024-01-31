@@ -47,7 +47,7 @@ export function DarkModeSetting() {
         onClick={handleUserChange}
         title={`Change colour theme to "${darkMode ? 'light' : 'dark'} mode"`}
         className="text-lg">
-        <DarkModeIcon isDarkMode={darkMode} />
+        <DarkModeIcon isDarkMode={darkMode ?? false} />
       </Button>
     </div>
   );

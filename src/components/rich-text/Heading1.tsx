@@ -1,5 +1,5 @@
-import { RTHeading1Node } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTHeading1Node } from '@prismicio/types';
 
 import { Heading } from '../typography/Heading';
 

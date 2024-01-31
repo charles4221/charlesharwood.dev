@@ -2,35 +2,33 @@
 
 import { useFormState, useFormStatus } from 'react-dom';
 
-import { sendMessage } from '@/app/actions';
+import { sendMessage } from '@/app/contact/actions';
+import {
+  ContactFormResponseMessage,
+  ContactFormState,
+} from '@/app/contact/types';
 
-import { InputWithLabel } from './Input';
+import { InputWithLabel } from './InputWithLabel';
 import { Card } from '../layout/Card';
 import { Button } from '../links/Button';
 
-export type ContactFormFields = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-  website: string;
-  description: string;
-};
-
-export type ContactFormState = {
-  message?: string;
-  success?: boolean;
-};
-
 const initialState: ContactFormState = {};
+
+const ButtonText = {
+  DEFAULT: 'Send Message',
+  PENDING: 'Sending...',
+  SUCCESS: 'Message Sent!',
+};
 
 function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   const formStatus = useFormStatus();
 
   const isDisabled = formStatus.pending || isSuccess;
 
-  const defaultButtonText = formStatus.pending ? 'Sending...' : 'Send Message';
-  const buttonText = isSuccess ? 'Message Sent!' : defaultButtonText;
+  const defaultButtonText = formStatus.pending
+    ? ButtonText.PENDING
+    : ButtonText.DEFAULT;
+  const buttonText = isSuccess ? ButtonText.SUCCESS : defaultButtonText;
 
   return (
     <Button type="submit" disabled={isDisabled} isCTA>
@@ -93,12 +91,12 @@ export function ContactForm() {
         </div>
         {state.success ? (
           <p className="text-green-700 dark:text-green-400 font-semibold mt-10">
-            {state.message || 'Message sent successfully!'}
+            {state.message || ContactFormResponseMessage.SUCCESS}
           </p>
         ) : null}
         {state.success === false ? (
           <p className="text-red-600 font-semibold mt-10">
-            {state.message || 'Message failed to send.'}
+            {state.message || ContactFormResponseMessage.FAILED}
           </p>
         ) : null}
       </form>

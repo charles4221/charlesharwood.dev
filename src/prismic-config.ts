@@ -35,10 +35,6 @@ const routes: ClientConfig['routes'] = [
     type: 'navigation',
     path: '/',
   },
-  {
-    type: 'project',
-    path: '/project/:uid',
-  },
 ];
 
 /**

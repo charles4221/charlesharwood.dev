@@ -2,8 +2,10 @@ import clsx from 'clsx';
 
 import { PolymorphicComponentProp } from '@/utils/type-helpers';
 
+type YPaddingSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
 const Y_PADDING_CLASSNAME_MAP: {
-  [key in ContainerProps['yPadding']]: string;
+  [key in YPaddingSizes]: string;
 } = {
   xs: 'py-4 md:py-5',
   sm: 'py-8 md:py-10',
@@ -13,7 +15,7 @@ const Y_PADDING_CLASSNAME_MAP: {
 };
 
 type ContainerProps = {
-  yPadding?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  yPadding?: YPaddingSizes;
   collapsible?: boolean;
   className?: string;
 };

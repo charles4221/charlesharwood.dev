@@ -2,75 +2,25 @@
 
 import {
   ContactFormFields,
+  ContactFormResponseMessage,
   ContactFormState,
-} from '@/components/forms/ContactForm';
+  MessageBody,
+  MessageResponse,
+} from './types';
 
-const apiUrl = process.env.EMAIL_API_URL;
-const apiKey = process.env.EMAIL_API_KEY;
-
-type SenderOrRecipient = {
-  name: string;
-  email: string;
-};
-
-type Attachment = ({ url: string } | { content: string }) & {
-  name: string;
-};
-
-type MessageBody = {
-  sender: SenderOrRecipient;
-  to: SenderOrRecipient[];
-  bcc?: SenderOrRecipient[];
-  cc?: SenderOrRecipient[];
-  replyTo?: SenderOrRecipient;
-  subject: string;
-  htmlContent: string;
-  textContent: string;
-  attachment?: Attachment[];
-  templateId?: number;
-  params?: { [key: string]: string };
-  tags?: string[];
-  scheduledAt?: string;
-  batchId?: string;
-};
-
-type MessageResponseSuccess = {
-  messageId: string;
-};
-type MessageResponseScheduled = {
-  messageId: string;
-  batchId: string;
-};
-type MessageResponseErrorCode =
-  | 'invalid_parameter'
-  | 'missing_parameter'
-  | 'out_of_range'
-  | 'campaign_processing'
-  | 'campaign_sent'
-  | 'document_not_found'
-  | 'reseller_permission_denied'
-  | 'not_enough_credits'
-  | 'permission_denied'
-  | 'duplicate_parameter'
-  | 'duplicate_request'
-  | 'method_not_allowed'
-  | 'unauthorized'
-  | 'account_under_validation'
-  | 'not_acceptable'
-  | 'bad_request';
-type MessageResponseError = {
-  message: string;
-  code: MessageResponseErrorCode;
-};
-type MessageResponse =
-  | MessageResponseSuccess
-  | MessageResponseScheduled
-  | MessageResponseError;
+const API_URL = process.env.EMAIL_API_URL;
+const API_KEY = process.env.EMAIL_API_KEY;
 
 export async function sendMessage(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
+  if (!API_URL || !API_KEY) {
+    throw new Error(
+      'Missing environment variables for email API. Check .env file.',
+    );
+  }
+
   const {
     firstName,
     lastName,
@@ -112,13 +62,13 @@ export async function sendMessage(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'api-key': apiKey,
+      'api-key': API_KEY,
     },
     body: JSON.stringify(messageBody),
   };
 
   try {
-    const response = await fetch(apiUrl, fetchOptions);
+    const response = await fetch(API_URL, fetchOptions);
     const data: MessageResponse = await response.json();
 
     if ('code' in data) {
@@ -128,15 +78,17 @@ export async function sendMessage(
     }
 
     return {
-      message:
-        'Message sent successfully! I will be in touch as soon as I can.',
+      message: ContactFormResponseMessage.SUCCESS,
       success: true,
     };
   } catch (error) {
     console.error(error);
 
     return {
-      message: error instanceof Error ? error.message : 'Failed to send email',
+      message:
+        error instanceof Error
+          ? error.message
+          : ContactFormResponseMessage.FAILED,
       success: false,
     };
   }

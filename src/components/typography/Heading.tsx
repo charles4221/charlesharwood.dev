@@ -2,8 +2,10 @@ import clsx from 'clsx';
 
 import { PolymorphicComponentProp } from '@/utils/type-helpers';
 
+type HeadingSizes = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+
 const SIZE_CLASSNAME_MAP: {
-  [key in HeadingProps['size']]: string;
+  [key in HeadingSizes]: string;
 } = {
   xl: 'text-6xl md:text-8xl',
   lg: 'text-5xl md:text-6xl',
@@ -13,7 +15,7 @@ const SIZE_CLASSNAME_MAP: {
 };
 
 type HeadingPropsBase = {
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+  size?: HeadingSizes;
   className?: string;
 };
 

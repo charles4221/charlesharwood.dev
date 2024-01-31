@@ -1,5 +1,5 @@
-import { RTPreformattedNode } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTPreformattedNode } from '@prismicio/types';
 
 export const Preformatted: RichTextMapSerializerFunction<
   JSX.Element,

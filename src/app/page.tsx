@@ -12,17 +12,25 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await client.getByUID('page', 'home');
   const settings = await client.getSingle('settings');
 
+  const pageTitle = asText(page.data.title);
+  const siteTitle = asText(settings.data.siteTitle);
+  const title = siteTitle || pageTitle;
+
+  const metaImage = page.data.meta_image.url;
+
   return {
     metadataBase: METADATA_BASE,
-    title: asText(settings.data.siteTitle) || asText(page.data.title),
+    title,
     description: page.data.meta_description,
     openGraph: {
-      title: page.data.meta_title,
-      images: [
-        {
-          url: page.data.meta_image.url,
-        },
-      ],
+      title: page.data.meta_title ?? title,
+      ...(metaImage && {
+        images: [
+          {
+            url: metaImage,
+          },
+        ],
+      }),
     },
   };
 }

@@ -25,13 +25,16 @@ export function useThemeInitialisation() {
     window.__setPreferredTheme = setTheme;
 
     let preferredTheme: 'dark' | 'light' | undefined;
+    const persistedStoreDataString = localStorage.getItem('persisted-store');
 
-    try {
-      preferredTheme = parseJson<PersistedStoreState>(
-        localStorage.getItem('persisted-store'),
-      ).state.darkModeUserOverride;
-    } catch (error) {
-      console.error('could not parse persisted store for theme init', error);
+    if (persistedStoreDataString) {
+      try {
+        preferredTheme = parseJson<PersistedStoreState>(
+          persistedStoreDataString,
+        ).state.darkModeUserOverride;
+      } catch (error) {
+        console.error('could not parse persisted store for theme init', error);
+      }
     }
 
     let initialTheme = preferredTheme;

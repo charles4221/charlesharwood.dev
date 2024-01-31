@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { RTOListItemNode, RTOListNode } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTOListItemNode, RTOListNode } from '@prismicio/types';
 
 export const OrderedList: RichTextMapSerializerFunction<
   JSX.Element,

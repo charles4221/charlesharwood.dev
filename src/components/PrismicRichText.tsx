@@ -1,5 +1,8 @@
-import { PrismicRichText as BasePrismicRichText } from '@prismicio/react';
-import type { JSXMapSerializer, PrismicRichTextProps } from '@prismicio/react';
+import {
+  PrismicRichText as BasePrismicRichText,
+  JSXMapSerializer,
+  PrismicRichTextProps,
+} from '@prismicio/react';
 
 import { Heading1 } from './rich-text/Heading1';
 import { Heading2 } from './rich-text/Heading2';

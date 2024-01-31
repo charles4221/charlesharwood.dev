@@ -6,7 +6,6 @@ export const components = {
   hero: dynamic(() => import('./Hero')),
   image: dynamic(() => import('./Image')),
   image_cards: dynamic(() => import('./ImageCards')),
-  project_grid: dynamic(() => import('./ProjectGrid')),
   quote: dynamic(() => import('./Quote')),
   text: dynamic(() => import('./Text')),
   text_with_image: dynamic(() => import('./TextWithImage')),

@@ -1,5 +1,5 @@
-import { RTStrongNode } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTStrongNode } from '@prismicio/types';
 
 export const Strong: RichTextMapSerializerFunction<
   JSX.Element,

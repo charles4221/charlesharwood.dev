@@ -1,5 +1,5 @@
-import { RTListItemNode, RTListNode } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTListItemNode, RTListNode } from '@prismicio/types';
 
 export const UnorderedList: RichTextMapSerializerFunction<
   JSX.Element,

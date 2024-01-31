@@ -1,5 +1,5 @@
-import { RTParagraphNode } from '@prismicio/client';
-import { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import { RichTextMapSerializerFunction } from '@prismicio/richtext';
+import { RTParagraphNode } from '@prismicio/types';
 
 export const Paragraph: RichTextMapSerializerFunction<
   JSX.Element,

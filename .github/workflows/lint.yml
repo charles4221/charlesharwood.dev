@@ -11,10 +11,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js v20.10.0
+      - name: Setup Node.js v20.11.0
         uses: actions/setup-node@v3
         with:
-          node-version: '20.10.0'
+          node-version: '20.11.0'
           registry-url: https://npm.fontawesome.com/
           scope: '@fortawesome'
           cache: 'npm'
@@ -26,3 +26,6 @@ jobs:
 
       - name: Lint Code with ESLint
         run: npm run lint
+
+      - name: Validate TypeScript
+        run: npm run validate

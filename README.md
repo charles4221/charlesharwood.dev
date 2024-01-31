@@ -1,7 +1,21 @@
 # charlesharwood.dev :australia:
 
-[![.github/workflows/lint.yml](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml)
-[![.github/workflows/build.yml](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml)
+[![Lint](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml/badge.svg?branch=main&label=Hello)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml)
+[![Build](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml)
+[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=charlesharwood)](https://charlesharwood.dev/)
+
+![License](https://img.shields.io/github/license/charles4221/charlesharwood.dev)
+![GitHub last commit](https://img.shields.io/github/last-commit/charles4221/charlesharwood.dev)
+![GitHub issues](https://img.shields.io/github/issues/charles4221/charlesharwood.dev)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/charles4221/charlesharwood.dev)
+
+![Dep version (typescript)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/typescript?logo=typescript)
+![Dep version (react)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/react?logo=react)
+![Dep version (next)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/next?logo=nextdotjs)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/@prismicio/client?logo=prismic)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/@prismicio/next?logo=prismic)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/@prismicio/react?logo=prismic)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/charles4221/charlesharwood.dev/zustand)
 
 My name is Charles Harwood and I'm a software engineer from the Gold Coast, Australia. I've been working in the tech industry since 2011, and I've been writing crappy code since MySpace was cool.
 
@@ -13,7 +27,7 @@ My technical focus since 2021 has been [React Native][react-native] with [TypeSc
 
 This is the source code for my personal website, [charlesharwood.dev][the-site]
 
-After many years of thinking I needed to keep my own website's source code a secret, I've finally realised that _nobody cares_, so I've decided to open source it. I've been inspired by the many open source projects I've used and contributed to over the years, and I want to give back to the community wherever I can.
+After many years of thinking I needed to keep my own website's source code a secret, I've finally realised that :sparkles:_nobody cares_:sparkles:, so I've decided to open source it. I've been inspired by the many open source projects I've used and contributed to over the years, and I want to give back to the community wherever I can.
 
 If my crappy code can help someone else, then I'm happy to share it.
 
@@ -33,21 +47,21 @@ This website was built using everyone and their grandma's favourite tools and li
 
 ## Why I used these technologies
 
-As mentioned above, this website is built using [Prismic][prismic] as a headless CMS, and [Next.js][nextjs] as the core framework. It uses [Slice Machine][slicemachine] to build reusable components that can be used to build pages in Prismic.
+As mentioned above, this website is built using [Prismic][prismic] as a headless CMS, and [Next.js][nextjs] as the core framework. It uses [Slice Machine][slicemachine] to build reusable components that can be used to build dynamic pages in Prismic.
 
 I have built multiple sites (including my old site) using Prismic and Next, however this is the first time I've used Slice Machine. The way it syncs the reusable React components you create with the schema you create in Slice Machine, and then allows you to use those components to build pages in the Prismic CMS itself, all with full built-in TypeScript typing, is incredible. It's a huge time saver, and I'm a big fan.
 
-This is also the first time I've used Tailwind CSS, and I'm enjoying it so far. I've been a big fan of writing only my own custom CSS (usually with SCSS/Sass) for many years, but Tailwind was recently chosen as the CSS framework for a web project at work, so I decided to use it for my own site as a bit of a learning experience, and I'm glad I did.
+This is also the first time I've used Tailwind CSS, and I'm enjoying it so far. I've been a big fan of writing only my own custom CSS (usually with SCSS/Sass) for many years, plus I've used nothing but React Native's `StyleSheet.create` for the last 3 years, but Tailwind was recently chosen as the CSS framework for a web project at work, so I decided to use it for my own site as a bit of a learning experience, and turns out it's pretty cool. The autocomplete via the VSCode Extension is dope too.
 
 Last but definitely not least, we have Zustand for client-side state management. I have used React Context almost exclusively on personal projects, and I'm forced at gunpoint to use Redux at work (I'm kidding, I love my job), but I've been hearing a lot of good things about Zustand, so I decided to give it a go, and it is _awesome_. It's so simple to use, and it's so fast. Thanks to my man [Rhys Geary][rhysgeary] for the recommendation :fire:
 
-(NB: shoutout also to [Tanstack Query][tanstack] which is incredibly sweet for managing server state across larger apps; I haven't used it here as the site doesn't have any client-side data fetching requirements thanks to Next.js and React Server Components, but I still wanted to mention it because of how damn good it has been in my experience using it in a React Native codebase with thousands of components.)
+(NB: shoutout also to [Tanstack Query][tanstack] which is the best thing since sliced bread for managing server state (data fetched from APIs) in client-side javascript apps; I haven't used it here as this site doesn't have any client-side data fetching requirements (thanks to Next.js and React Server Components), but I still wanted to mention it because of how damn good it has been in my experience using it in a React Native codebase with highly complex data requirements across many thousands of components and screens.)
 
-## 🚀 Quick Start
+## 🚀 Quick Start - Build a website like this one
 
 Since I've done all the manual configuration stuff a million times before, this time around I decided I don't need to prove anything to anyone, so why not just use a starter template to take care of all that initial stuff that nobody wants to do? Especially now that I'm a father of two boys, I have a lot less free time and thus I need less reasons to procrastinate on actually building the damn site.
 
-Thankfully since I last used Prismic to build a new site from scratch, they've introduced some great templates to get you started with various framework integrations. I used the [Prismic Next.js Multi-Page Website Starter][starter-docs] as a base, and then added all my own customisations on top of that. It's a great starter, and I highly recommend it for anyone wanting to build a Next.js site with Prismic.
+Thankfully since the last time I used Prismic to build a new site from scratch, they've introduced some great templates to get you started with various framework integrations. I used the [Prismic Next.js Multi-Page Website Starter][starter-docs] as a base, and then added all my own customisations on top of that. It's a great starter, and I highly recommend it for anyone wanting to build a Next.js site with Prismic.
 
 - **Learn more about using Prismic with Next.js**: [Prismic Next.js Documentation][prismic-docs]
 
@@ -80,7 +94,7 @@ To learn more about working with Prismic, [**see the Prismic docs**][prismic-doc
 ## License
 
 ```
-Copyright 2015-2024 Charles Harwood <charles@harwood.digital> (https://charlesharwood.dev)
+Copyright 2015-2024 Charles Harwood <info@charlesharwood.dev> (https://charlesharwood.dev)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

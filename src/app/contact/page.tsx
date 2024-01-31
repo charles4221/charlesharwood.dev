@@ -14,16 +14,14 @@ export default async function ContactPage() {
 
   return (
     <main>
-      <Container as="section" yPadding="sm">
+      <Container as="section" yPadding="lg">
         <Heading as="h1" className="mb-10">
           {asText(page.data.title)}
         </Heading>
-        <p>
+        <p className="mb-10">
           Please fill out the form below to send me a message about your
           project!
         </p>
-      </Container>
-      <Container as="section" yPadding="sm">
         <ContactForm />
       </Container>
     </main>
@@ -35,17 +33,25 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await client.getByUID('page', 'contact').catch(notFound);
   const settings = await client.getSingle('settings');
 
+  const pageTitle = asText(page.data.title);
+  const siteTitle = asText(settings.data.siteTitle);
+  const title = `${pageTitle} | ${siteTitle}`;
+
+  const metaImage = page.data.meta_image.url;
+
   return {
     metadataBase: METADATA_BASE,
-    title: `${asText(page.data.title)} | ${asText(settings.data.siteTitle)}`,
+    title,
     description: page.data.meta_description,
     openGraph: {
-      title: page.data.meta_title,
-      images: [
-        {
-          url: page.data.meta_image.url,
-        },
-      ],
+      title: page.data.meta_title ?? title,
+      ...(metaImage && {
+        images: [
+          {
+            url: metaImage,
+          },
+        ],
+      }),
     },
   };
 }
