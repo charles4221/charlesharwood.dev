@@ -18,6 +18,9 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -30,8 +33,5 @@
   // Extension Settings
   "eslint.enable": true,
   "eslint.format.enable": false, // formatting is handled by prettier
-  "prettier.enable": true,
-  "[svg]": {
-    "editor.defaultFormatter": "jock.svg"
-  }
+  "prettier.enable": true
 }

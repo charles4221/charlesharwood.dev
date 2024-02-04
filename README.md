@@ -61,7 +61,7 @@ Last but definitely not least, we have Zustand for client-side state management.
 
 Since I've done all the manual configuration stuff a million times before, this time around I decided I don't need to prove anything to anyone, so why not just use a starter template to take care of all that initial stuff that nobody wants to do? Especially now that I'm a father of two boys, I have a lot less free time and thus I need less reasons to procrastinate on actually building the damn site.
 
-Thankfully since the last time I used Prismic to build a new site from scratch, they've introduced some great templates to get you started with various framework integrations. I used the [Prismic Next.js Multi-Page Website Starter][starter-docs] as a base, and then added all my own customisations on top of that. It's a great starter, and I highly recommend it for anyone wanting to build a Next.js site with Prismic.
+Thankfully since the last time I used Prismic to build a new site from scratch, they've introduced some great templates to get you started with various framework integrations. I used the [Prismic Next.js Multi-Page Website Starter][starter-docs] as a base, converted the whole thing to TypeScript, and then added all my own customisations on top of that. It's a great starter, and I highly recommend it for anyone wanting to build a Next.js site with Prismic.
 
 - **Learn more about using Prismic with Next.js**: [Prismic Next.js Documentation][prismic-docs]
 

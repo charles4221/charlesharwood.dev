@@ -14,8 +14,6 @@ export type PolymorphicComponentProp<
 declare global {
   interface Window {
     __theme: 'dark' | 'light';
-    __setPreferredTheme: (theme: 'dark' | 'light') => void;
+    __setPreferredTheme?: (theme: 'dark' | 'light') => void;
   }
 }
-
-window.__setPreferredTheme = window.__setPreferredTheme || (() => {});
