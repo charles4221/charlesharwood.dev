@@ -6,11 +6,11 @@ import { createClient } from '@/prismic-config';
 import { FONT_VT_323 } from '@/theme/fonts';
 
 import { Container } from './Container';
-import { NavLink } from './NavLink';
 import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
+import { NavLink } from '../links/NavLink';
 import { SocialLinks } from '../links/SocialLinks';
 import { DarkModeSetting } from '../settings/DarkModeSetting';
 import { Heading } from '../typography/Heading';

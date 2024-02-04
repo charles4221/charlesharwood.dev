@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
+import { IS_DEV } from '@/utils/constants';
+
 import {
   SettingsActions,
   SettingsState,
@@ -20,19 +22,22 @@ export const useBoundStore = create<StoreState>()(
       }),
       {
         name: 'persisted-store',
-        onRehydrateStorage: (state) => {
-          console.log({ stateBeforeHydrate: state });
+        onRehydrateStorage: IS_DEV
+          ? (state) => {
+              console.log({ stateBeforeHydrate: state });
 
-          return (stateAfterHydrate, error) => {
-            if (error) {
-              console.error(error);
-              window.alert('Error: Failed to rehydrate store');
-              return;
+              return (stateAfterHydrate, error) => {
+                console.log({ stateAfterHydrate });
+
+                if (error) {
+                  console.error(error);
+                  window.alert(
+                    'Error: Failed to rehydrate store. Check console for more info.',
+                  );
+                }
+              };
             }
-
-            console.log({ stateAfterHydrate });
-          };
-        },
+          : undefined,
         partialize: (state) => ({
           darkModeUserOverride: state.darkModeUserOverride,
         }),
