@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+      - release/*
+jobs:
+  test:
+    name: Test App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v20.11.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+          registry-url: https://npm.fontawesome.com/
+          scope: '@fortawesome'
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci
+        env:
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
+
+      - name: Run Unit Tests
+        run: npm run test:ci

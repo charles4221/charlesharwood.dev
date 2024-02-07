@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { PolymorphicComponentProp } from '@/utils/type-helpers';
+import { PolymorphicComponentProp } from '@/type-helpers';
 
 type HeadingSizes = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 

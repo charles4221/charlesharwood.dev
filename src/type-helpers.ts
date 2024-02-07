@@ -10,10 +10,3 @@ export type PolymorphicComponentProp<
 > = React.PropsWithChildren<Props> &
   AsProp<C> &
   Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
-
-declare global {
-  interface Window {
-    __theme: 'dark' | 'light';
-    __setPreferredTheme?: (theme: 'dark' | 'light') => void;
-  }
-}

@@ -19,8 +19,6 @@ import { Button } from '../links/Button';
 import { Heading } from '../typography/Heading';
 
 function setThemeOnDocument(newTheme: 'dark' | 'light') {
-  window.__theme = newTheme;
-
   if (newTheme === 'dark') {
     document.documentElement.classList.add('dark');
   } else if (newTheme === 'light') {

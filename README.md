@@ -1,7 +1,7 @@
 # charlesharwood.dev :australia:
 
 [![Lint](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml/badge.svg?branch=main&label=Hello)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/lint.yml)
-[![Build](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/build.yml)
+[![Test](https://github.com/charles4221/charlesharwood.dev/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/charles4221/charlesharwood.dev/actions/workflows/test.yml)
 [![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=charlesharwood)](https://charlesharwood.dev/)
 
 ![License](https://img.shields.io/github/license/charles4221/charlesharwood.dev)
