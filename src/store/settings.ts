@@ -1,42 +1,51 @@
 import { StateCreator } from 'zustand';
 
+import { Theme } from '@/theme/types';
+
 export type SettingsState = {
   /**
-   * Whether the app is in dark mode or not.
+   * Which theme the user has selected.
    */
-  darkMode: boolean | undefined;
+  theme: Theme;
   /**
-   * Whether the user has explicitly set the dark mode setting or not.
-   * If undefined, the user has not set the setting, and we'll rely solely on OS preference.
+   * Whether dark mode should be enabled.
    */
-  darkModeUserOverride: 'dark' | 'light' | undefined;
+  isDarkMode: boolean;
+  /**
+   * Whether the system dark mode setting is enabled.
+   */
+  systemDarkMode: boolean;
 };
 
 export type SettingsActions = {
-  setDarkMode: (darkMode: boolean) => void;
-  setDarkModeUserOverride: (darkModeUserOverride: 'dark' | 'light') => void;
+  setTheme: (theme: Theme) => void;
 };
 
 export const createSettingsStore: StateCreator<
   SettingsState & SettingsActions
 > = (set) => {
   return {
-    darkMode: true,
-    darkModeUserOverride: undefined,
-    setDarkMode: (darkMode: boolean) => set({ darkMode }),
-    setDarkModeUserOverride: (darkModeUserOverride: 'dark' | 'light') =>
-      set({
-        darkMode: darkModeUserOverride === 'dark',
-        darkModeUserOverride,
-      }),
+    theme: 'system',
+    isDarkMode:
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches,
+    systemDarkMode:
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches,
+    setTheme: (theme: Theme) => {
+      let isDarkMode = theme === 'dark';
+
+      if (theme === 'system') {
+        isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      set({ theme, isDarkMode });
+    },
   };
 };
 
 export const SettingsSelectors = {
-  getDarkModeSetting: (state: SettingsState) => state.darkMode,
-  getDarkModeSettingWithSetter: (state: SettingsState & SettingsActions) =>
-    [state.darkMode, state.setDarkMode] as const,
-  getDarkModeUserOverride: (state: SettingsState) => state.darkModeUserOverride,
-  getDarkModeUserOverrideWithSetter: (state: SettingsState & SettingsActions) =>
-    [state.darkModeUserOverride, state.setDarkModeUserOverride] as const,
+  getThemeSetting: (state: SettingsState) => state.theme,
+  getThemeSettingWithSetter: (state: SettingsState & SettingsActions) =>
+    [state.theme, state.setTheme] as const,
 };

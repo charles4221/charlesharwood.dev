@@ -48,7 +48,9 @@ export async function Header() {
               {navigation.data.links.map(renderNavItem)}
             </ul>
           </nav>
-          <SocialLinks />
+          <div className="max-sm:hidden">
+            <SocialLinks />
+          </div>
           <DarkModeSetting />
         </div>
       </div>

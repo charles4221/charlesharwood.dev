@@ -11,7 +11,7 @@ import {
 
 export type StoreState = SettingsState & SettingsActions;
 export type PersistedStoreState = {
-  state: Pick<StoreState, 'darkModeUserOverride'>;
+  state: Pick<StoreState, 'theme' | 'isDarkMode'>;
 };
 
 export const useBoundStore = create<StoreState>()(
@@ -39,7 +39,8 @@ export const useBoundStore = create<StoreState>()(
             }
           : undefined,
         partialize: (state) => ({
-          darkModeUserOverride: state.darkModeUserOverride,
+          theme: state.theme,
+          isDarkMode: state.isDarkMode,
         }),
       },
     ),

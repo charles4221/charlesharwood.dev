@@ -1,12 +1,12 @@
-import { faSunrise, faSunset } from '@fortawesome/pro-light-svg-icons';
+import { faEclipse } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export function DarkModeIcon({ isDarkMode }: { isDarkMode: boolean }) {
+export function DarkModeIcon() {
   return (
     <FontAwesomeIcon
-      icon={isDarkMode ? faSunrise : faSunset}
+      icon={faEclipse}
       size="lg"
-      inverse={isDarkMode}
+      className="text-slate-950 dark:text-white"
     />
   );
 }
