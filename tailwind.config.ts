@@ -1,5 +1,3 @@
-// const {colors} = require('./src/theme/colors');
-
 import pluginAspectRatio from '@tailwindcss/aspect-ratio';
 import type { Config } from 'tailwindcss';
 
@@ -15,12 +13,6 @@ export default {
     './src/utils/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    // colors: {
-    //   ...colors,
-    //   primary: (theme) => theme("colors.cyan"),
-    //   secondary: (theme) => theme("colors.green"),
-
-    // },
     fontFamily: {
       sans: 'var(--font-fira-code), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
       headings:
