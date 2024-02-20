@@ -44,7 +44,7 @@
     @apply inline-block font-headings uppercase text-3xl;
     transition: all 0.15s ease-in-out;
 
-    &.button--cta {
+    &--cta {
       box-shadow: -3px 3px 0 0 theme('colors.red.500');
 
       &:hover {

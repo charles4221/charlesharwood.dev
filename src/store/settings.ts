@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 
+import { detectPrefersDarkMode } from '@/theme/detect-prefers-dark-mode';
 import { Theme } from '@/theme/types';
 
 export type SettingsState = {
@@ -21,22 +22,18 @@ export type SettingsActions = {
   setTheme: (theme: Theme) => void;
 };
 
-export const createSettingsStore: StateCreator<
-  SettingsState & SettingsActions
-> = (set) => {
+export type SettingsStore = SettingsState & SettingsActions;
+
+export const createSettingsStore: StateCreator<SettingsStore> = (set) => {
   return {
     theme: 'system',
-    isDarkMode:
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches,
-    systemDarkMode:
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches,
+    isDarkMode: detectPrefersDarkMode(),
+    systemDarkMode: detectPrefersDarkMode(),
     setTheme: (theme: Theme) => {
       let isDarkMode = theme === 'dark';
 
       if (theme === 'system') {
-        isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        isDarkMode = detectPrefersDarkMode();
       }
 
       set({ theme, isDarkMode });
@@ -45,7 +42,9 @@ export const createSettingsStore: StateCreator<
 };
 
 export const SettingsSelectors = {
-  getThemeSetting: (state: SettingsState) => state.theme,
-  getThemeSettingWithSetter: (state: SettingsState & SettingsActions) =>
+  getTheme: (state: SettingsStore) => state.theme,
+  getThemeWithSetter: (state: SettingsStore) =>
     [state.theme, state.setTheme] as const,
+  getIsDarkMode: (state: SettingsStore) => state.isDarkMode,
+  getSystemDarkMode: (state: SettingsStore) => state.systemDarkMode,
 };

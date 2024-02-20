@@ -18,7 +18,7 @@ const ButtonText = {
   DEFAULT: 'Send Message',
   PENDING: 'Sending...',
   SUCCESS: 'Message Sent!',
-};
+} as const;
 
 function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   const formStatus = useFormStatus();

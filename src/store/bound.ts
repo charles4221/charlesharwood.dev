@@ -3,13 +3,9 @@ import { devtools, persist } from 'zustand/middleware';
 
 import { IS_DEV } from '@/utils/constants';
 
-import {
-  SettingsActions,
-  SettingsState,
-  createSettingsStore,
-} from './settings';
+import { SettingsStore, createSettingsStore } from './settings';
 
-export type StoreState = SettingsState & SettingsActions;
+export type StoreState = SettingsStore;
 export type PersistedStoreState = {
   state: Pick<StoreState, 'theme' | 'isDarkMode'>;
 };
@@ -23,8 +19,8 @@ export const useBoundStore = create<StoreState>()(
       {
         name: 'persisted-store',
         onRehydrateStorage: IS_DEV
-          ? (state) => {
-              console.log({ stateBeforeHydrate: state });
+          ? (stateBeforeHydrate) => {
+              console.log({ stateBeforeHydrate });
 
               return (stateAfterHydrate, error) => {
                 console.log({ stateAfterHydrate });
@@ -38,7 +34,7 @@ export const useBoundStore = create<StoreState>()(
               };
             }
           : undefined,
-        partialize: (state) => ({
+        partialize: (state): PersistedStoreState['state'] => ({
           theme: state.theme,
           isDarkMode: state.isDarkMode,
         }),

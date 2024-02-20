@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
+  IconDefinition,
   faComputer,
   faMoon,
   faSunBright,
@@ -28,16 +29,13 @@ function setThemeOnDocument(newTheme: 'dark' | 'light') {
 
 export function DarkModeSetting() {
   const [isOpen, setIsOpen] = useState(false);
-  const isOpenRef = useRef(() => isOpen);
   const { theme, setTheme, isDarkMode, systemDarkMode } = useBoundStore();
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
-    wrapperRef,
+    popoverRef,
     useCallback(() => {
-      if (isOpenRef.current()) {
-        setIsOpen(false);
-      }
+      setIsOpen(false);
     }, []),
   );
 
@@ -57,9 +55,7 @@ export function DarkModeSetting() {
   }, [isDarkMode]);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="relative flex items-center justify-between">
+    <div className="relative flex items-center justify-between">
       <Button
         variant="white"
         isCompact
@@ -71,54 +67,60 @@ export function DarkModeSetting() {
       </Button>
       {isOpen ? (
         <div
-          className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white"
-          onBlur={() => {
-            if (isOpen) {
-              setIsOpen(false);
-            }
-          }}>
+          ref={popoverRef}
+          className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1">
           <Card>
             <Heading as="h4" size="xs" isDisplay={false}>
               Dark Mode Settings
             </Heading>
-            <Button
-              className="w-full mt-1"
-              isRounded
-              onClick={handleThemeSelect('dark')}
-              disabled={theme === 'dark'}
-              title="Change colour theme to dark mode">
-              <div className="flex justify-between items-center text-left">
-                <p className="text-lg">Dark Theme</p>
-                <FontAwesomeIcon icon={faMoon} />
-              </div>
-            </Button>
-            <Button
-              className="w-full mt-1"
-              isRounded
-              onClick={handleThemeSelect('light')}
-              disabled={theme === 'light'}
-              title="Change colour theme to light mode">
-              <div className="flex justify-between items-center text-left">
-                <p className="text-lg">Light Theme</p>
-                <FontAwesomeIcon icon={faSunBright} />
-              </div>
-            </Button>
-            <Button
-              className="w-full mt-1"
-              isRounded
-              onClick={handleThemeSelect('system')}
-              disabled={theme === 'system'}
-              title="Use system preference for dark mode">
-              <div className="flex justify-between items-center text-left">
-                <p className="text-lg">
-                  Use System Setting ({systemDarkMode ? 'dark' : 'light'})
-                </p>
-                <FontAwesomeIcon icon={faComputer} />
-              </div>
-            </Button>
+            {THEME_OPTIONS.map((option) => (
+              <Button
+                key={option.value}
+                className="w-full mt-1"
+                isRounded
+                onClick={handleThemeSelect(option.value)}
+                disabled={theme === option.value}
+                title={option.ariaTitle}>
+                <div className="flex justify-between items-center text-left">
+                  <p className="text-lg">
+                    {option.label}
+                    {option.value === 'system'
+                      ? ` (${systemDarkMode ? 'dark' : 'light'})`
+                      : ''}
+                  </p>
+                  <FontAwesomeIcon icon={option.icon} />
+                </div>
+              </Button>
+            ))}
           </Card>
         </div>
       ) : null}
     </div>
   );
 }
+
+const THEME_OPTIONS: {
+  label: string;
+  value: Theme;
+  icon: IconDefinition;
+  ariaTitle: string;
+}[] = [
+  {
+    label: 'Dark Theme',
+    value: 'dark',
+    icon: faMoon,
+    ariaTitle: 'Change colour theme to dark mode',
+  },
+  {
+    label: 'Light Theme',
+    value: 'light',
+    icon: faSunBright,
+    ariaTitle: 'Change colour theme to light mode',
+  },
+  {
+    label: 'Use System Setting',
+    value: 'system',
+    icon: faComputer,
+    ariaTitle: 'Use system preference for dark mode',
+  },
+];
