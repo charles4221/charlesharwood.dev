@@ -43,8 +43,8 @@ export function DarkModeSetting() {
     setIsOpen(!isOpen);
   }
 
-  function handleThemeSelect(theme: Theme) {
-    return () => {
+  function makeHandleThemeSelect(theme: Theme) {
+    return function handleThemeSelect() {
       setTheme(theme);
       setIsOpen(false);
     };
@@ -78,7 +78,7 @@ export function DarkModeSetting() {
                 key={option.value}
                 className="w-full mt-1"
                 isRounded
-                onClick={handleThemeSelect(option.value)}
+                onClick={makeHandleThemeSelect(option.value)}
                 disabled={theme === option.value}
                 title={option.ariaTitle}>
                 <div className="flex justify-between items-center text-left">
