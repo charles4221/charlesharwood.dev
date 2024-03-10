@@ -1,9 +1,7 @@
 import { asText } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
-import clsx from 'clsx';
 
 import { createClient } from '@/prismic-config';
-import { FONT_VT_323 } from '@/theme/fonts';
 
 import { Container } from './Container';
 import type {
@@ -27,10 +25,7 @@ export async function Header() {
     <Container
       as="header"
       yPadding="xs"
-      className={clsx(
-        'bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10 dark:backdrop-blur-lg dark:bg-opacity-75',
-        FONT_VT_323.className,
-      )}>
+      className="font-headings bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10 dark:backdrop-blur-lg dark:bg-opacity-75">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 leading-none">
         <PrismicNextLink href="/" className="group">
           <Heading
