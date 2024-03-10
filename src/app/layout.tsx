@@ -4,13 +4,27 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PrismicPreview } from '@prismicio/next';
 import clsx from 'clsx';
+import { Fira_Code, VT323 } from 'next/font/google';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { repositoryName } from '@/prismic-config';
-import { FONT_FIRA_CODE, FONT_VT_323 } from '@/theme/fonts';
 
 config.autoAddCss = false;
+
+const FONT_FIRA_CODE = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-fira-code',
+});
+
+const FONT_VT_323 = VT323({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+  variable: '--font-vt323',
+});
 
 export default async function RootLayout({
   children,
