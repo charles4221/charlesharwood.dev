@@ -68,30 +68,34 @@ export function DarkModeSetting() {
       {isOpen ? (
         <div
           ref={popoverRef}
-          className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1">
+          className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
           <Card>
             <Heading as="h4" size="xs" isDisplay={false}>
               Dark Mode Settings
             </Heading>
-            {THEME_OPTIONS.map((option) => (
-              <Button
-                key={option.value}
-                className="w-full mt-1"
-                isRounded
-                onClick={makeHandleThemeSelect(option.value)}
-                disabled={theme === option.value}
-                title={option.ariaTitle}>
-                <div className="flex justify-between items-center text-left">
-                  <p className="text-lg">
-                    {option.label}
-                    {option.value === 'system'
-                      ? ` (${systemDarkMode ? 'dark' : 'light'})`
-                      : ''}
-                  </p>
-                  <FontAwesomeIcon icon={option.icon} />
-                </div>
-              </Button>
-            ))}
+            {THEME_OPTIONS.map((option) => {
+              const isCurrentOption = theme === option.value;
+
+              return (
+                <Button
+                  key={option.value}
+                  className="w-full mt-1"
+                  variant={isCurrentOption ? 'teal' : 'sky'}
+                  isRounded
+                  onClick={makeHandleThemeSelect(option.value)}
+                  title={option.ariaTitle}>
+                  <div className="flex justify-between items-center text-left">
+                    <p className="text-lg">
+                      {option.label}
+                      {option.value === 'system'
+                        ? ` (${systemDarkMode ? 'dark' : 'light'})`
+                        : ''}
+                    </p>
+                    <FontAwesomeIcon icon={option.icon} />
+                  </div>
+                </Button>
+              );
+            })}
           </Card>
         </div>
       ) : null}

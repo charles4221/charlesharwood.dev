@@ -14,8 +14,8 @@ type ButtonVariantConfig = {
 
 const buttonVariantConfig: ButtonVariantConfig = {
   teal: {
-    className: 'bg-teal-600 hover:bg-teal-700 active:bg-teal-800',
-    textColor: 'text-white',
+    className: 'bg-teal-400 hover:bg-teal-300 active:bg-teal-400',
+    textColor: 'text-slate-900',
   },
   sky: {
     className: 'bg-sky-300 hover:bg-sky-400 active:bg-sky-500',

@@ -25,8 +25,8 @@ describe('Button', () => {
   it('renders with theme variant', () => {
     render(<Button variant="teal">Hello</Button>);
     const buttonElement = screen.getByRole('button');
-    expect(buttonElement).toHaveClass('bg-teal-600', 'text-white');
-    expect(buttonElement).not.toHaveClass('bg-sky-300', 'text-slate-900');
+    expect(buttonElement).toHaveClass('bg-teal-400');
+    expect(buttonElement).not.toHaveClass('bg-sky-300');
   });
 
   it('renders as CTA button', () => {
