@@ -37,6 +37,13 @@ export async function sendMessage(
     description: formData.get('description') as string,
   };
 
+  if (!firstName || !lastName || !email || !description) {
+    return {
+      message: ContactFormResponseMessage.INVALID,
+      success: false,
+    };
+  }
+
   const messageBody: MessageBody = {
     sender: {
       name: 'charlesharwood.dev',
@@ -72,11 +79,21 @@ export async function sendMessage(
     const data: MessageResponse = await response.json();
 
     if ('code' in data) {
+      // Handle specific error codes with custom messaging.
+      if (data.code === 'invalid_parameter' && data.message.includes('email')) {
+        return {
+          message: ContactFormResponseMessage.INVALID_EMAIL,
+          success: false,
+        };
+      }
+
+      // Throw any other error codes out to the catch block for generic failure messaging.
       throw new Error(data.message, {
         cause: data.code,
       });
     }
 
+    // Success!
     return {
       message: ContactFormResponseMessage.SUCCESS,
       success: true,

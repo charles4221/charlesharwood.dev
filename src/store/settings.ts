@@ -24,19 +24,25 @@ export type SettingsActions = {
 
 export type SettingsStore = SettingsState & SettingsActions;
 
-export const createSettingsStore: StateCreator<SettingsStore> = (set) => {
+export const createSettingsStore: StateCreator<
+  SettingsStore,
+  [['zustand/devtools', never]]
+> = (set) => {
   return {
     theme: 'system',
     isDarkMode: detectPrefersDarkMode(),
     systemDarkMode: detectPrefersDarkMode(),
-    setTheme: (theme: Theme) => {
+    setTheme: function setTheme(theme: Theme) {
       let isDarkMode = theme === 'dark';
 
       if (theme === 'system') {
         isDarkMode = detectPrefersDarkMode();
       }
 
-      set({ theme, isDarkMode });
+      set({ theme, isDarkMode }, false, {
+        type: 'settings/setTheme',
+        payload: theme,
+      });
     },
   };
 };
