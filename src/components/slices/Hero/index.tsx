@@ -7,7 +7,7 @@ import { Button } from '@/components/links/Button';
 import { PrismicRichText } from '@/components/PrismicRichText';
 import { Heading } from '@/components/typography/Heading';
 
-import type { HeroSlice } from '../../../prismicio-types';
+import type { HeroSlice } from '../../../../prismicio-types';
 
 const components: PrismicRichTextProps['components'] = {
   heading1: ({ children }) => (

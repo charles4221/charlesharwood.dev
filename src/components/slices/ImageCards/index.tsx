@@ -12,7 +12,7 @@ import type {
   ImageCardsSlice,
   ImageCardsSliceDefaultItem,
   Simplify,
-} from '../../../prismicio-types';
+} from '../../../../prismicio-types';
 
 type ImageCardProps = Simplify<ImageCardsSliceDefaultItem>;
 

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Container } from '@/components/layout/Container';
 import { PrismicRichText } from '@/components/PrismicRichText';
 
-import type { TextSlice } from '../../../prismicio-types';
+import type { TextSlice } from '../../../../prismicio-types';
 
 type TextProps = {
   slice: TextSlice;

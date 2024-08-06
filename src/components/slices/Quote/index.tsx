@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Container } from '@/components/layout/Container';
 
-import type { QuoteSlice } from '../../../prismicio-types';
+import type { QuoteSlice } from '../../../../prismicio-types';
 
 type QuoteProps = {
   slice: QuoteSlice;

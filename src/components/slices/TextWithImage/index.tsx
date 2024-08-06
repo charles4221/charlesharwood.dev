@@ -4,7 +4,7 @@ import { PrismicNextImage } from '@prismicio/next';
 import { Container } from '@/components/layout/Container';
 import { PrismicRichText } from '@/components/PrismicRichText';
 
-import type { TextWithImageSlice } from '../../../prismicio-types';
+import type { TextWithImageSlice } from '../../../../prismicio-types';
 
 type TextWithImageProps = {
   slice: TextWithImageSlice;

@@ -1,5 +1,5 @@
 {
-  "libraries": ["./src/slices"],
+  "libraries": ["./src/components/slices"],
   "adapter": "@slicemachine/adapter-next",
   "repositoryName": "charlesharwood",
   "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"

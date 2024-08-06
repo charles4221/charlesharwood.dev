@@ -3,7 +3,7 @@ import { PrismicNextImage } from '@prismicio/next';
 
 import { Container } from '@/components/layout/Container';
 
-import type { ImageSlice } from '../../../prismicio-types';
+import type { ImageSlice } from '../../../../prismicio-types';
 
 type ImageProps = {
   slice: ImageSlice;

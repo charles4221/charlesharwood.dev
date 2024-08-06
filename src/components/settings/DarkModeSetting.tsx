@@ -55,7 +55,9 @@ export function DarkModeSetting() {
   }, [isDarkMode]);
 
   return (
-    <div className="relative flex items-center justify-between">
+    <div
+      ref={popoverRef}
+      className="relative flex items-center justify-between">
       <Button
         variant="white"
         isCompact
@@ -66,9 +68,7 @@ export function DarkModeSetting() {
         <DarkModeIcon />
       </Button>
       {isOpen ? (
-        <div
-          ref={popoverRef}
-          className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
+        <div className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
           <Card>
             <Heading as="h4" size="xs" isDisplay={false}>
               Dark Mode Settings
