@@ -1,0 +1,31 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "tip",
+				"type": "Text"
+			},
+			"subheading": {
+				"__TYPE__": "FieldContent",
+				"value": "especially",
+				"type": "Text"
+			},
+			"buttonText": {
+				"__TYPE__": "FieldContent",
+				"value": "planning",
+				"type": "Text"
+			},
+			"buttonLink": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com"
+				}
+			}
+		},
+		"items": []
+	}
+]
