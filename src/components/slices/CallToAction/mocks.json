@@ -5,18 +5,18 @@
 		"primary": {
 			"heading": {
 				"__TYPE__": "FieldContent",
-				"value": "tip",
-				"type": "Text"
+				"type": "Text",
+				"value": "Heading"
 			},
 			"subheading": {
 				"__TYPE__": "FieldContent",
-				"value": "especially",
-				"type": "Text"
+				"type": "Text",
+				"value": "Subheading"
 			},
 			"buttonText": {
 				"__TYPE__": "FieldContent",
-				"value": "planning",
-				"type": "Text"
+				"type": "Text",
+				"value": "Button Text"
 			},
 			"buttonLink": {
 				"__TYPE__": "LinkContent",
