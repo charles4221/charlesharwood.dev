@@ -40,6 +40,10 @@
     }
   }
 
+  .link {
+    @apply border-sky-400 border-b-2 hover:border-b-4 transition-all font-semibold;
+  }
+
   .button {
     @apply inline-block font-headings uppercase text-3xl;
     transition: all 0.15s ease-in-out;

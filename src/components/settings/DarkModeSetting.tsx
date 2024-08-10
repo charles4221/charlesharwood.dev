@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import {
   IconDefinition,
@@ -19,17 +19,8 @@ import { Card } from '../layout/Card';
 import { Button } from '../links/Button';
 import { Heading } from '../typography/Heading';
 
-function setThemeOnDocument(newTheme: 'dark' | 'light') {
-  if (newTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-  } else if (newTheme === 'light') {
-    document.documentElement.classList.remove('dark');
-  }
-}
-
 export function DarkModeSetting() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme, isDarkMode, systemDarkMode } = useBoundStore();
 
   const popoverRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
@@ -42,17 +33,6 @@ export function DarkModeSetting() {
   function toggleOpen() {
     setIsOpen(!isOpen);
   }
-
-  function makeHandleThemeSelect(theme: Theme) {
-    return function handleThemeSelect() {
-      setTheme(theme);
-      setIsOpen(false);
-    };
-  }
-
-  useEffect(() => {
-    setThemeOnDocument(isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
 
   return (
     <div
@@ -71,31 +51,9 @@ export function DarkModeSetting() {
         <div className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
           <Card>
             <Heading as="h4" size="xs" isDisplay={false}>
-              Dark Mode Settings
+              Theme Settings
             </Heading>
-            {THEME_OPTIONS.map((option) => {
-              const isCurrentOption = theme === option.value;
-
-              return (
-                <Button
-                  key={option.value}
-                  className="w-full mt-1"
-                  variant={isCurrentOption ? 'teal' : 'sky'}
-                  isRounded
-                  onClick={makeHandleThemeSelect(option.value)}
-                  title={option.ariaTitle}>
-                  <div className="flex justify-between items-center text-left">
-                    <p className="text-lg">
-                      {option.label}
-                      {option.value === 'system'
-                        ? ` (${systemDarkMode ? 'dark' : 'light'})`
-                        : ''}
-                    </p>
-                    <FontAwesomeIcon icon={option.icon} />
-                  </div>
-                </Button>
-              );
-            })}
+            {THEME_OPTIONS.map(renderThemeSettingItem)}
           </Card>
         </div>
       ) : null}
@@ -103,12 +61,14 @@ export function DarkModeSetting() {
   );
 }
 
-const THEME_OPTIONS: {
+type ThemeOption = {
   label: string;
   value: Theme;
   icon: IconDefinition;
   ariaTitle: string;
-}[] = [
+};
+
+const THEME_OPTIONS: ThemeOption[] = [
   {
     label: 'Dark Theme',
     value: 'dark',
@@ -125,6 +85,36 @@ const THEME_OPTIONS: {
     label: 'Use System Setting',
     value: 'system',
     icon: faComputer,
-    ariaTitle: 'Use system preference for dark mode',
+    ariaTitle: 'Use your system preference for dark mode',
   },
 ];
+
+const ThemeSettingItem = function ThemeSettingItem({
+  label,
+  value,
+  icon,
+  ariaTitle,
+}: ThemeOption) {
+  const { theme, setTheme, systemDarkMode } = useBoundStore();
+
+  return (
+    <Button
+      className="w-full mt-1"
+      variant={theme === value ? 'teal' : 'sky'}
+      isRounded
+      onClick={() => setTheme(value)}
+      title={ariaTitle}>
+      <div className="flex justify-between items-center text-left">
+        <p className="text-lg">
+          {label}
+          {value === 'system' ? ` (${systemDarkMode ? 'dark' : 'light'})` : ''}
+        </p>
+        <FontAwesomeIcon icon={icon} />
+      </div>
+    </Button>
+  );
+};
+
+function renderThemeSettingItem(option: ThemeOption) {
+  return <ThemeSettingItem key={option.value} {...option} />;
+}

@@ -8,9 +8,7 @@ export const Hyperlink: RichTextMapSerializerFunction<
   string
 > = function Hyperlink({ children, node }) {
   return (
-    <PrismicNextLink
-      field={node.data}
-      className="border-sky-400 border-b-2 hover:border-b-4 transition-all font-semibold">
+    <PrismicNextLink field={node.data} className="link">
       {children}
     </PrismicNextLink>
   );
