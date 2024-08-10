@@ -25,7 +25,10 @@ const Hero = ({ slice }: HeroProps) => {
   const backgroundImage = slice.primary.backgroundImage;
 
   return (
-    <section className="relative bg-slate-900 text-white">
+    <section
+      className="relative bg-slate-900 text-white"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       {isFilled.image(backgroundImage) ? (
         <PrismicNextImage
           field={backgroundImage}

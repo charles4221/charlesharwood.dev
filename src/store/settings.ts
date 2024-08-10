@@ -1,6 +1,7 @@
 import { StateCreator } from 'zustand';
 
 import { detectPrefersDarkMode } from '@/theme/detect-prefers-dark-mode';
+import { setThemeOnDocument } from '@/theme/set-theme-on-document';
 import { Theme } from '@/theme/types';
 
 export type SettingsState = {
@@ -43,6 +44,8 @@ export const createSettingsStore: StateCreator<
         type: 'settings/setTheme',
         payload: theme,
       });
+
+      setThemeOnDocument(isDarkMode ? 'dark' : 'light');
     },
   };
 };

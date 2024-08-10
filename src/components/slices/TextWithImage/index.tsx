@@ -14,7 +14,10 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
   const image = slice.primary.image;
 
   return (
-    <Container as="section">
+    <Container
+      as="section"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
         <div>
           <PrismicRichText field={slice.primary.text} />

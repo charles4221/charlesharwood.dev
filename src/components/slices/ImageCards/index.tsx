@@ -63,7 +63,10 @@ type ImageCardsProps = {
 
 const ImageCards = ({ slice }: ImageCardsProps) => {
   return (
-    <Container as="section">
+    <Container
+      as="section"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       <div className="grid gap-12 text-center">
         {isFilled.richText(slice.primary.heading) ? (
           <Heading as="h2">

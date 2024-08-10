@@ -12,7 +12,10 @@ type QuoteProps = {
 
 const Quote = ({ slice }: QuoteProps) => {
   return (
-    <Container as="section">
+    <Container
+      as="section"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       {isFilled.richText(slice.primary.quote) ? (
         <figure className="grid gap-6">
           <blockquote>

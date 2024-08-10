@@ -11,7 +11,11 @@ type TextProps = {
 
 const Text = ({ slice }: TextProps) => {
   return (
-    <Container as="section" className="leading-relaxed">
+    <Container
+      as="section"
+      className="leading-relaxed"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       <div
         className={clsx(
           slice.variation === 'twoColumns' && 'md:columns-2 md:gap-6',

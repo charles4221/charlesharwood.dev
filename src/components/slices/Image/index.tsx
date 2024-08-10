@@ -16,7 +16,9 @@ const Image = ({ slice, index }: ImageProps) => {
   return (
     <Container
       as="section"
-      className={index === 0 ? 'pt-0 md:pt-0' : undefined}>
+      className={index === 0 ? 'pt-0 md:pt-0' : undefined}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}>
       {isFilled.image(image) ? (
         <div className="bg-gray-100">
           <PrismicNextImage
