@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useBoundStore } from '@/store/bound';
+import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
 import { Theme } from '@/theme/types';
 
 import { DarkModeIcon } from './DarkModeIcon';
@@ -57,6 +58,7 @@ export function DarkModeSetting() {
           </Card>
         </div>
       ) : null}
+      <SetThemeOnDocument />
     </div>
   );
 }
@@ -95,12 +97,16 @@ const ThemeSettingItem = function ThemeSettingItem({
   icon,
   ariaTitle,
 }: ThemeOption) {
-  const { theme, setTheme, systemDarkMode } = useBoundStore();
+  const { isActive, setTheme, systemDarkMode } = useBoundStore((state) => ({
+    isActive: state.theme === value,
+    setTheme: state.setTheme,
+    systemDarkMode: state.systemDarkMode,
+  }));
 
   return (
     <Button
       className="w-full mt-1"
-      variant={theme === value ? 'teal' : 'sky'}
+      variant={isActive ? 'teal' : 'sky'}
       isRounded
       onClick={() => setTheme(value)}
       title={ariaTitle}>

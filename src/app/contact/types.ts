@@ -7,9 +7,18 @@ export type ContactFormFields = {
   description: string;
 };
 
+export type ContactFormRequiredFields =
+  | 'firstName'
+  | 'lastName'
+  | 'email'
+  | 'description';
+
 export type ContactFormState = {
   message?: string | ContactFormResponseMessage;
   success?: boolean;
+  validFields?: {
+    [key in keyof ContactFormFields]: boolean;
+  };
 };
 
 type SenderOrRecipient = {

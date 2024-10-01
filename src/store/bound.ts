@@ -6,7 +6,6 @@ import {
   persist,
 } from 'zustand/middleware';
 
-import { setThemeOnDocument } from '@/theme/set-theme-on-document';
 import { IS_DEV } from '@/utils/constants';
 
 import { SettingsStore, createSettingsStore } from './settings';
@@ -25,26 +24,22 @@ const devtoolsOptions: DevtoolsOptions = {
 
 const persistOptions: PersistOptions<StoreState, PersistedStoreState> = {
   name: 'persisted-store',
-  onRehydrateStorage: (stateBeforeHydrate) => {
-    if (IS_DEV) {
-      console.log({ stateBeforeHydrate });
-    }
+  onRehydrateStorage: IS_DEV
+    ? (stateBeforeHydrate) => {
+        console.log({ stateBeforeHydrate });
 
-    return (stateAfterHydrate, error) => {
-      setThemeOnDocument(stateAfterHydrate?.isDarkMode ? 'dark' : 'light');
+        return (stateAfterHydrate, error) => {
+          console.log({ stateAfterHydrate });
 
-      if (!IS_DEV) return;
-
-      console.log({ stateAfterHydrate });
-
-      if (error) {
-        console.error(error);
-        window.alert(
-          'Error: Failed to rehydrate store. Check console for more info.',
-        );
+          if (error) {
+            console.error(error);
+            window.alert(
+              'Error: Failed to rehydrate store. Check console for more info.',
+            );
+          }
+        };
       }
-    };
-  },
+    : undefined,
   partialize: getPersistedState,
 };
 

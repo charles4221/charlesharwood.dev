@@ -9,6 +9,7 @@ export function useOutsideClick(
    */
   ref: RefObject<HTMLElement>,
   /**
+   * The callback function to run when the click occurs.
    * Ensure the callback is memoised to prevent triggering the effect on every render.
    */
   callback: () => void,

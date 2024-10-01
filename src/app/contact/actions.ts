@@ -41,6 +41,14 @@ export async function sendMessage(
     return {
       message: ContactFormResponseMessage.INVALID,
       success: false,
+      validFields: {
+        firstName: !!firstName,
+        lastName: !!lastName,
+        email: !!email,
+        description: !!description,
+        company: true,
+        website: true,
+      },
     };
   }
 
@@ -78,8 +86,17 @@ export async function sendMessage(
     const response = await fetch(API_URL, fetchOptions);
     const data: MessageResponse = await response.json();
 
+    console.log(data);
+
     if ('code' in data) {
       // Handle specific error codes with custom messaging.
+      if (data.code === 'permission_denied') {
+        return {
+          message: ContactFormResponseMessage.FAILED,
+          success: false,
+        };
+      }
+
       if (data.code === 'invalid_parameter' && data.message.includes('email')) {
         return {
           message: ContactFormResponseMessage.INVALID_EMAIL,

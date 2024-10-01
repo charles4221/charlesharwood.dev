@@ -42,6 +42,10 @@ export default async function Page({ params }: Props) {
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
 
+  if (!page) {
+    notFound();
+  }
+
   return <SliceZone slices={page.data.slices} components={components} />;
 }
 

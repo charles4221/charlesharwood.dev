@@ -15,6 +15,7 @@ const components: PrismicRichTextProps['components'] = {
       {children}
     </Heading>
   ),
+  paragraph: ({ children }) => <p className="text-lg">{children}</p>,
 };
 
 type HeroProps = {

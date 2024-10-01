@@ -62,7 +62,14 @@ export function Button({
   );
 
   if ('field' in props) {
-    return <PrismicNextLink className={compiledClassName} {...props} />;
+    return (
+      <PrismicNextLink
+        className={compiledClassName}
+        {...props}
+        // narrow away the `null` type on `prefetch` prop until Prismic updates it to match the updated type from Next.js
+        prefetch={props.prefetch ?? undefined}
+      />
+    );
   }
 
   if ('href' in props) {
