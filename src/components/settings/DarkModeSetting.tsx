@@ -9,6 +9,7 @@ import {
   faSunBright,
 } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useShallow } from 'zustand/shallow';
 
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useBoundStore } from '@/store/bound';
@@ -97,11 +98,13 @@ const ThemeSettingItem = function ThemeSettingItem({
   icon,
   ariaTitle,
 }: ThemeOption) {
-  const { isActive, setTheme, systemDarkMode } = useBoundStore((state) => ({
-    isActive: state.theme === value,
-    setTheme: state.setTheme,
-    systemDarkMode: state.systemDarkMode,
-  }));
+  const { isActive, setTheme, systemDarkMode } = useBoundStore(
+    useShallow((state) => ({
+      isActive: state.theme === value,
+      setTheme: state.setTheme,
+      systemDarkMode: state.systemDarkMode,
+    })),
+  );
 
   return (
     <Button

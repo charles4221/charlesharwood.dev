@@ -26,14 +26,20 @@ const persistOptions: PersistOptions<StoreState, PersistedStoreState> = {
   name: 'persisted-store',
   onRehydrateStorage: IS_DEV
     ? (stateBeforeHydrate) => {
-        console.log({ stateBeforeHydrate });
+        console.log(
+          'onRehydrateStorage:stateBeforeHydrate',
+          stateBeforeHydrate,
+        );
 
         return (stateAfterHydrate, error) => {
-          console.log({ stateAfterHydrate });
+          console.log(
+            'onRehydrateStorage:stateAfterHydrate',
+            stateAfterHydrate,
+          );
 
           if (error) {
             console.error(error);
-            window.alert(
+            globalThis.alert(
               'Error: Failed to rehydrate store. Check console for more info.',
             );
           }
