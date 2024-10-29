@@ -29,6 +29,7 @@
     "@prismicio/react": "2.9.0",
     "clsx": "2.1.1",
     "next": "14.2.16",
+    "node-mailjet": "6.0.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "swiper": "11.1.14",
@@ -36,12 +37,12 @@
     "zustand": "5.0.0"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "0.3.53",
+    "@slicemachine/adapter-next": "0.3.54",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@testing-library/jest-dom": "6.6.2",
     "@testing-library/react": "16.0.1",
     "@types/jest": "29.5.14",
-    "@types/node": "20.17.1",
+    "@types/node": "20.17.2",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "autoprefixer": "10.4.20",
@@ -60,7 +61,7 @@
     "postcss": "8.4.47",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "0.6.8",
-    "slice-machine-ui": "2.9.1",
+    "slice-machine-ui": "2.10.0",
     "tailwindcss": "3.4.14",
     "ts-node": "10.9.2"
   }

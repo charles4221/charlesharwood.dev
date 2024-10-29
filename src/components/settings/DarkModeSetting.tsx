@@ -92,12 +92,7 @@ const THEME_OPTIONS: ThemeOption[] = [
   },
 ];
 
-const ThemeSettingItem = function ThemeSettingItem({
-  label,
-  value,
-  icon,
-  ariaTitle,
-}: ThemeOption) {
+function ThemeSettingItem({ label, value, icon, ariaTitle }: ThemeOption) {
   const { isActive, setTheme, systemDarkMode } = useBoundStore(
     useShallow((state) => ({
       isActive: state.theme === value,
@@ -122,7 +117,7 @@ const ThemeSettingItem = function ThemeSettingItem({
       </div>
     </Button>
   );
-};
+}
 
 function renderThemeSettingItem(option: ThemeOption) {
   return <ThemeSettingItem key={option.value} {...option} />;

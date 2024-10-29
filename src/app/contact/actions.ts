@@ -1,26 +1,23 @@
 'use server';
 
+import type { LibraryResponse, SendEmailV3_1 } from 'node-mailjet';
+
+import {
+  INVALID_EMAIL_ERROR_CODE,
+  INVALID_ERROR_CODES,
+  mailjetClient,
+} from '@/plugins/mailjet';
+
 import {
   ContactFormFields,
   ContactFormResponseMessage,
   ContactFormState,
-  MessageBody,
-  MessageResponse,
 } from './types';
-
-const API_URL = process.env.EMAIL_API_URL;
-const API_KEY = process.env.EMAIL_API_KEY;
 
 export async function sendMessage(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  if (!API_URL || !API_KEY) {
-    throw new Error(
-      'Missing environment variables for email API. Check .env file.',
-    );
-  }
-
   const {
     firstName,
     lastName,
@@ -52,69 +49,70 @@ export async function sendMessage(
     };
   }
 
-  const messageBody: MessageBody = {
-    sender: {
-      name: 'charlesharwood.dev',
-      email: 'no-reply@charlesharwood.dev',
-    },
-    to: [
+  const messageBody: SendEmailV3_1.Body = {
+    Messages: [
       {
-        email: 'info@charlesharwood.dev',
-        name: 'Charles Harwood',
+        From: {
+          Email: 'no-reply@charlesharwood.dev',
+          Name: 'charlesharwood.dev',
+        },
+        To: [
+          {
+            Email: 'info@charlesharwood.dev',
+            Name: 'Charles Harwood',
+          },
+        ],
+        ReplyTo: {
+          Email: email,
+          Name: `${firstName} ${lastName}`,
+        },
+        Subject: 'New enquiry from charlesharwood.dev',
+        HTMLPart: `<h1>You've received a new enquiry from https://charlesharwood.dev:</h1><p>First Name: ${firstName}</p><p>Last Name: ${lastName}</p><p>Email: ${email}</p><p>Company: ${company}</p><p>Website: ${website}</p><p>Message: ${description}</p>`,
+        TextPart: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nCompany: ${company}\nWebsite: ${website}\nMessage: ${description}`,
       },
     ],
-    replyTo: {
-      email,
-      name: `${firstName} ${lastName}`,
-    },
-    subject: 'New enquiry from charlesharwood.dev',
-    htmlContent: `<!DOCTYPE html><html><head></head><body><h1>You've received a new enquiry from https://charlesharwood.dev:</h1><p>First Name: ${firstName}</p><p>Last Name: ${lastName}</p><p>Email: ${email}</p><p>Company: ${company}</p><p>Website: ${website}</p><p>Message: ${description}</p></body></html>`,
-    textContent: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nCompany: ${company}\nWebsite: ${website}\nMessage: ${description}`,
-  };
-
-  const fetchOptions: RequestInit = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'api-key': API_KEY,
-    },
-    body: JSON.stringify(messageBody),
   };
 
   try {
-    const response = await fetch(API_URL, fetchOptions);
-    const data: MessageResponse = await response.json();
+    const response: LibraryResponse<SendEmailV3_1.Response> =
+      await mailjetClient
+        .post('send', { version: 'v3.1' })
+        .request(messageBody);
 
+    const data = response.body.Messages[0];
     console.log(data);
 
-    if ('code' in data) {
-      // Handle specific error codes with custom messaging.
-      if (data.code === 'permission_denied') {
-        return {
-          message: ContactFormResponseMessage.FAILED,
-          success: false,
-        };
-      }
+    if (data.Status === 'success') {
+      return {
+        message: ContactFormResponseMessage.SUCCESS,
+        success: true,
+      };
+    }
 
-      if (data.code === 'invalid_parameter' && data.message.includes('email')) {
+    if (data.Errors.length > 0) {
+      if (
+        data.Errors.some(
+          (error) => error.ErrorCode === INVALID_EMAIL_ERROR_CODE,
+        )
+      ) {
         return {
           message: ContactFormResponseMessage.INVALID_EMAIL,
           success: false,
         };
       }
 
-      // Throw any other error codes out to the catch block for generic failure messaging.
-      throw new Error(data.message, {
-        cause: data.code,
-      });
+      if (
+        data.Errors.some((error) => INVALID_ERROR_CODES.has(error.ErrorCode))
+      ) {
+        return {
+          message: ContactFormResponseMessage.INVALID,
+          success: false,
+        };
+      }
     }
 
-    // Success!
-    return {
-      message: ContactFormResponseMessage.SUCCESS,
-      success: true,
-    };
+    // Throw any other error codes out to the catch block for generic failure messaging.
+    throw new Error(ContactFormResponseMessage.FAILED);
   } catch (error) {
     console.error(error);
 
