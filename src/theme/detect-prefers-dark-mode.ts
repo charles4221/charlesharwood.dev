@@ -6,8 +6,5 @@
  * we will use this function to determine which theme to apply.
  */
 export function detectPrefersDarkMode() {
-  return (
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
+  return globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches;
 }

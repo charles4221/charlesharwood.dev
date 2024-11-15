@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await client.getByUID('page', 'contact').catch(notFound);
   const settings = await client.getSingle('settings');
 
-  const pageTitle = asText(page.data.title);
+  const pageTitle = page.data.meta_title || asText(page.data.title);
   const siteTitle = asText(settings.data.siteTitle);
   const title = `${pageTitle} | ${siteTitle}`;
 
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description: page.data.meta_description,
     openGraph: {
-      title: page.data.meta_title ?? title,
+      title,
       ...(metaImage && {
         images: [
           {

@@ -1,5 +1,6 @@
 import { memo, useEffect } from 'react';
 
+import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
 import { useBoundStore } from '@/store/bound';
 import { SettingsSelectors } from '@/store/settings';
 
@@ -27,10 +28,14 @@ export function setThemeOnDocument(newTheme: 'dark' | 'light') {
 
 /**
  * Pure Component that wraps a hook that sets the theme on the document when the dark mode setting changes.
- * This enables reacting to the change of `isDarkMode`'s value without re-rendering any components.
+ * This enables reacting to the change of `theme` or `systemPrefersDarkMode` without re-rendering any components.
  */
 export const SetThemeOnDocument = memo(function SetThemeOnDocument() {
-  const isDarkMode = useBoundStore(SettingsSelectors.getIsDarkMode);
+  const theme = useBoundStore(SettingsSelectors.getTheme);
+  const systemPrefersDarkMode = usePrefersDarkMode();
+
+  const isDarkMode =
+    theme === 'dark' || (theme === 'system' && systemPrefersDarkMode);
 
   useEffect(() => {
     setThemeOnDocument(isDarkMode ? 'dark' : 'light');

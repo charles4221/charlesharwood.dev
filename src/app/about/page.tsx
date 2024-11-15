@@ -47,8 +47,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await client.getSingle('about').catch(notFound);
   const settings = await client.getSingle('settings');
 
+  const pageTitle = page.data.meta_title || page.data.title;
   const siteTitle = asText(settings.data.siteTitle);
-  const title = `${page.data.title} | ${siteTitle}`;
+  const title = `${pageTitle} | ${siteTitle}`;
 
   const metaImage = page.data.meta_image.url;
 

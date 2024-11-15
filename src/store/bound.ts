@@ -11,11 +11,10 @@ import { IS_DEV } from '@/utils/constants';
 import { SettingsStore, createSettingsStore } from './settings';
 
 export type StoreState = SettingsStore;
-export type PersistedStoreState = Pick<StoreState, 'theme' | 'isDarkMode'>;
+export type PersistedStoreState = Pick<StoreState, 'theme'>;
 
 const getPersistedState = (state: StoreState): PersistedStoreState => ({
   theme: state.theme,
-  isDarkMode: state.isDarkMode,
 });
 
 const devtoolsOptions: DevtoolsOptions = {

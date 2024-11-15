@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useShallow } from 'zustand/shallow';
 
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
 import { useBoundStore } from '@/store/bound';
 import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
 import { Theme } from '@/theme/types';
@@ -93,11 +94,11 @@ const THEME_OPTIONS: ThemeOption[] = [
 ];
 
 function ThemeSettingItem({ label, value, icon, ariaTitle }: ThemeOption) {
-  const { isActive, setTheme, systemDarkMode } = useBoundStore(
+  const systemPrefersDarkMode = usePrefersDarkMode();
+  const { isActive, setTheme } = useBoundStore(
     useShallow((state) => ({
       isActive: state.theme === value,
       setTheme: state.setTheme,
-      systemDarkMode: state.systemDarkMode,
     })),
   );
 
@@ -111,7 +112,9 @@ function ThemeSettingItem({ label, value, icon, ariaTitle }: ThemeOption) {
       <div className="flex justify-between items-center text-left">
         <p className="text-lg">
           {label}
-          {value === 'system' ? ` (${systemDarkMode ? 'dark' : 'light'})` : ''}
+          {value === 'system'
+            ? ` (${systemPrefersDarkMode ? 'dark' : 'light'})`
+            : ''}
         </p>
         <FontAwesomeIcon icon={icon} />
       </div>
