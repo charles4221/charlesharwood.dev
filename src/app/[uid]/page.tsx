@@ -10,7 +10,8 @@ import { METADATA_BASE } from '@/utils/constants';
 type Params = { uid: string };
 type Props = { params: Params };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
   const settings = await client.getSingle('settings');
@@ -38,7 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
 

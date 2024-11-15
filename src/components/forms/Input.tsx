@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 type InputProps = JSX.IntrinsicElements['input'];
 type TextAreaProps = JSX.IntrinsicElements['textarea'] & { isTextArea: true };
 

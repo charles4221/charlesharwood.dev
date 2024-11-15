@@ -1,10 +1,10 @@
 'use client';
 
-import { HTMLInputTypeAttribute } from 'react';
+import { HTMLInputTypeAttribute, useActionState } from 'react';
 
 import { faSpinner } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 
 import { sendMessage } from '@/app/contact/actions';
 import { ContactFormFields, ContactFormState } from '@/app/contact/types';
@@ -106,7 +106,7 @@ const CONTACT_FORM_FIELDS: ContactFormFieldConfig[] = [
 ];
 
 export function ContactForm() {
-  const [state, formAction] = useFormState(sendMessage, initialState);
+  const [state, formAction] = useActionState(sendMessage, initialState);
 
   return (
     <Card>

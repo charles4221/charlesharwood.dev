@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 import { RichTextMapSerializerFunction } from '@prismicio/richtext';
 import { RTHeading1Node } from '@prismicio/types';
 

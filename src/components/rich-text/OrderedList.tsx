@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, type JSX } from 'react';
 
 import { RichTextMapSerializerFunction } from '@prismicio/richtext';
 import { RTOListItemNode, RTOListNode } from '@prismicio/types';

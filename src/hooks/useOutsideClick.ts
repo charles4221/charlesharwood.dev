@@ -7,7 +7,7 @@ export function useOutsideClick(
   /**
    * The HTML Element to watch for clicks outside of.
    */
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   /**
    * The callback function to run when the click occurs.
    * Ensure the callback is memoised to prevent triggering the effect on every render.

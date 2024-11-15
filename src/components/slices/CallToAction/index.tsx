@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 import { Content, isFilled } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 

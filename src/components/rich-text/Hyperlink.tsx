@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 import { PrismicNextLink } from '@prismicio/next';
 import { RichTextMapSerializerFunction } from '@prismicio/richtext';
 import { RTLinkNode } from '@prismicio/types';
