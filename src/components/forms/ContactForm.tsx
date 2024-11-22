@@ -1,20 +1,37 @@
 'use client';
 
-import { HTMLInputTypeAttribute, useActionState } from 'react';
+import { useActionState } from 'react';
 
 import { faSpinner } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFormStatus } from 'react-dom';
 
 import { sendMessage } from '@/app/contact/actions';
-import { ContactFormFields, ContactFormState } from '@/app/contact/types';
+import { ContactFormState } from '@/app/contact/types';
 
+import { Checkbox } from './Checkbox';
 import { ContactFormResponse } from './ContactFormResponse';
 import { InputWithLabel } from './InputWithLabel';
 import { Card } from '../layout/Card';
 import { Button } from '../links/Button';
 
 const initialState: ContactFormState = {};
+
+type ProjectOption = {
+  id: string;
+  label: string;
+};
+
+const PROJECT_OPTIONS: ProjectOption[] = [
+  { id: 'mobile', label: 'Mobile App (iPhone, iPad, Android)' },
+  { id: 'vision', label: 'VR App (Vision Pro, Xreal)' },
+  { id: 'tv', label: 'TV App (Apple TV, Android/Google TV)' },
+  { id: 'shop', label: 'e-Commerce / Online Store' },
+  { id: 'website', label: 'Website' },
+  { id: 'webapp', label: 'Web App' },
+  { id: 'hosting', label: 'Web Hosting' },
+  { id: 'domain', label: 'Domain Registration' },
+];
 
 const ButtonText = {
   DEFAULT: 'Send Message',
@@ -46,85 +63,79 @@ function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
   );
 }
 
-type ContactFormFieldConfig = {
-  type: HTMLInputTypeAttribute;
-  id: keyof ContactFormFields;
-  label: string;
-  placeholder: string;
-  isTextArea?: boolean;
-  rows?: number;
-  required?: boolean;
-  colSpan?: 1 | 2;
-};
-
-const CONTACT_FORM_FIELDS: ContactFormFieldConfig[] = [
-  {
-    type: 'text',
-    id: 'firstName',
-    label: 'First Name',
-    placeholder: 'John',
-    required: true,
-  },
-  {
-    type: 'text',
-    id: 'lastName',
-    label: 'Last Name',
-    placeholder: 'Bacon',
-    required: true,
-  },
-  {
-    type: 'email',
-    id: 'email',
-    label: 'Email Address',
-    placeholder: 'bacon@sandwich.com.au',
-    required: true,
-  },
-  {
-    type: 'text',
-    id: 'company',
-    label: 'Company',
-    placeholder: 'Bacon Company Pty Ltd',
-  },
-  {
-    type: 'url',
-    id: 'website',
-    label: 'Website',
-    placeholder: 'https://en.wikipedia.org/wiki/Bacon',
-    colSpan: 2,
-  },
-  {
-    type: 'text',
-    id: 'description',
-    label: 'Your Message',
-    placeholder:
-      'Hey Charles, just wanted to write to let you know that I love bacon!',
-    isTextArea: true,
-    rows: 4,
-    required: true,
-    colSpan: 2,
-  },
-];
-
 export function ContactForm() {
   const [state, formAction] = useActionState(sendMessage, initialState);
 
   return (
     <Card>
-      <form action={formAction}>
-        <div className="grid grid-cols-2 gap-3">
-          {CONTACT_FORM_FIELDS.map((field) => (
-            <InputWithLabel
-              key={field.id}
-              wrapperClassName={
-                field.colSpan === 2 ? 'col-span-2' : 'col-span-1'
-              }
-              isValid={state.validFields?.[field.id]}
-              {...field}
-            />
-          ))}
+      <form noValidate action={formAction}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-6">
+          <InputWithLabel
+            type="text"
+            id="firstName"
+            label="First Name"
+            placeholder="John"
+            required
+            defaultValue={state.data?.firstName}
+            invalidMessage={state.invalidFieldMessages?.firstName}
+          />
+          <InputWithLabel
+            type="text"
+            id="lastName"
+            label="Last Name"
+            placeholder="Bacon"
+            required
+            defaultValue={state.data?.lastName}
+            invalidMessage={state.invalidFieldMessages?.lastName}
+          />
+          <InputWithLabel
+            type="email"
+            id="email"
+            label="Email Address"
+            placeholder="bacon@sandwich.com"
+            required
+            defaultValue={state.data?.email}
+            invalidMessage={state.invalidFieldMessages?.email}
+          />
+          <InputWithLabel
+            type="text"
+            id="company"
+            label="Company (optional)"
+            placeholder="Bacon Company Pty Ltd"
+            defaultValue={state.data?.company}
+            invalidMessage={state.invalidFieldMessages?.company}
+          />
+          <div className="md:col-span-2">
+            <p>What can I help you with?</p>
+            {PROJECT_OPTIONS.map(({ id, label }) => (
+              <div key={id}>
+                <Checkbox
+                  id={id}
+                  label={label}
+                  name="projectType"
+                  defaultChecked={state.data?.projectType.includes(id)}
+                />
+              </div>
+            ))}
+          </div>
+          <InputWithLabel
+            type="text"
+            id="description"
+            label="Your Message"
+            placeholder="Hey Charles, just wanted to write to let you know that I love bacon!"
+            isTextArea
+            rows={4}
+            required
+            wrapperClassName="md:col-span-2"
+            defaultValue={state.data?.description}
+            invalidMessage={state.invalidFieldMessages?.description}
+          />
           <SubmitButton isSuccess={state.success === true} />
         </div>
-        <ContactFormResponse success={state.success} message={state.message} />
+        <ContactFormResponse
+          isSuccess={state.success}
+          message={state.message}
+        />
       </form>
     </Card>
   );

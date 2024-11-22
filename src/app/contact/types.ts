@@ -3,7 +3,7 @@ export type ContactFormFields = {
   lastName: string;
   email: string;
   company: string;
-  website: string;
+  projectType: string;
   description: string;
 };
 
@@ -14,10 +14,11 @@ export type ContactFormRequiredFields =
   | 'description';
 
 export type ContactFormState = {
+  data?: ContactFormFields;
   message?: string | ContactFormResponseMessage;
   success?: boolean;
-  validFields?: {
-    [key in keyof ContactFormFields]: boolean;
+  invalidFieldMessages?: {
+    [key in keyof ContactFormFields]?: string;
   };
 };
 

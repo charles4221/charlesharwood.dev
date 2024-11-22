@@ -6,12 +6,12 @@ import { Label } from './Label';
 export function InputWithLabel({
   label,
   wrapperClassName,
-  isValid,
+  invalidMessage,
   ...props
 }: ComponentProps<typeof Input> & {
   label: string;
   wrapperClassName?: string;
-  isValid?: boolean;
+  invalidMessage?: string;
 }) {
   return (
     <div className={wrapperClassName}>
@@ -24,12 +24,8 @@ export function InputWithLabel({
         ) : null}
       </Label>
       <Input name={props.id} {...props} />
-      {isValid === false ? (
-        <span className="text-red-600 font-semibold">
-          {'type' in props && props.type === 'email'
-            ? 'Please enter a valid email address.'
-            : 'This field is required.'}
-        </span>
+      {invalidMessage ? (
+        <span className="text-red-600 font-semibold">{invalidMessage}</span>
       ) : null}
     </div>
   );

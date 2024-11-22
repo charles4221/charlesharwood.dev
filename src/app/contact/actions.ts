@@ -7,6 +7,7 @@ import {
   INVALID_ERROR_CODES,
   mailjetClient,
 } from '@/plugins/mailjet';
+import { isEmailValid } from '@/utils/is-email-valid';
 
 import {
   ContactFormFields,
@@ -23,28 +24,39 @@ export async function sendMessage(
     lastName,
     email,
     company,
-    website,
+    projectType,
     description,
   }: ContactFormFields = {
     firstName: formData.get('firstName') as string,
     lastName: formData.get('lastName') as string,
     email: formData.get('email') as string,
     company: formData.get('company') as string,
-    website: formData.get('website') as string,
+    projectType: formData.getAll('projectType').join(', '),
     description: formData.get('description') as string,
   };
 
   if (!firstName || !lastName || !email || !description) {
+    const emailIsValid = isEmailValid(email);
+    const emailValidationMessage = emailIsValid
+      ? ''
+      : 'Please check that you have entered a valid email address.';
+
     return {
+      data: {
+        firstName,
+        lastName,
+        email,
+        company,
+        projectType,
+        description,
+      },
       message: ContactFormResponseMessage.INVALID,
       success: false,
-      validFields: {
-        firstName: !!firstName,
-        lastName: !!lastName,
-        email: !!email,
-        description: !!description,
-        company: true,
-        website: true,
+      invalidFieldMessages: {
+        firstName: firstName ? '' : 'First Name is required.',
+        lastName: lastName ? '' : 'Last Name is required.',
+        email: email ? emailValidationMessage : 'Email is required.',
+        description: description ? '' : 'Message is required.',
       },
     };
   }
@@ -58,7 +70,7 @@ export async function sendMessage(
         },
         To: [
           {
-            Email: 'info@charlesharwood.dev',
+            Email: process.env.EMAIL_TO_ADDRESS as string,
             Name: 'Charles Harwood',
           },
         ],
@@ -67,8 +79,8 @@ export async function sendMessage(
           Name: `${firstName} ${lastName}`,
         },
         Subject: 'New enquiry from charlesharwood.dev',
-        HTMLPart: `<h1>You've received a new enquiry from https://charlesharwood.dev:</h1><p>First Name: ${firstName}</p><p>Last Name: ${lastName}</p><p>Email: ${email}</p><p>Company: ${company}</p><p>Website: ${website}</p><p>Message: ${description}</p>`,
-        TextPart: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nCompany: ${company}\nWebsite: ${website}\nMessage: ${description}`,
+        HTMLPart: `<h1>You've received a new enquiry from https://charlesharwood.dev:</h1><p>First Name: ${firstName}</p><p>Last Name: ${lastName}</p><p>Email: ${email}</p><p>Company: ${company}</p><p>Project Type: ${projectType}</p><p>Message: ${description}</p>`,
+        TextPart: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nCompany: ${company}\nProject Type: ${projectType}\nMessage: ${description}`,
       },
     ],
   };

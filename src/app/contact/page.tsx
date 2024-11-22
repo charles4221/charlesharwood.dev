@@ -13,18 +13,18 @@ export default async function ContactPage() {
   const page = await client.getByUID('page', 'contact');
 
   return (
-    <main>
-      <Container as="section" yPadding="lg">
-        <Heading as="h1" className="mb-10">
-          {asText(page.data.title)}
-        </Heading>
-        <p className="mb-10">
-          Please fill out the form below to send me a message about your
-          project!
-        </p>
-        <ContactForm />
-      </Container>
-    </main>
+    <Container as="section" yPadding="lg">
+      <Heading as="h1" className="mb-10">
+        {asText(page.data.title)}
+      </Heading>
+      <Heading as="h3" size="sm" isDisplay={false} className="mb-10">
+        {`Let's build your next project together!`}
+      </Heading>
+      <p className="mb-10">
+        {`Fill out the form below to send me a message about how I can help you. I'll get back to you as soon as I can.`}
+      </p>
+      <ContactForm />
+    </Container>
   );
 }
 
