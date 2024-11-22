@@ -6,7 +6,7 @@ import {
   persist,
 } from 'zustand/middleware';
 
-import { IS_DEV } from '@/utils/constants';
+import { IS_DEV, IS_TEST } from '@/utils/constants';
 
 import { SettingsStore, createSettingsStore } from './settings';
 
@@ -23,28 +23,29 @@ const devtoolsOptions: DevtoolsOptions = {
 
 const persistOptions: PersistOptions<StoreState, PersistedStoreState> = {
   name: 'persisted-store',
-  onRehydrateStorage: IS_DEV
-    ? (stateBeforeHydrate) => {
-        console.log(
-          'onRehydrateStorage:stateBeforeHydrate',
-          stateBeforeHydrate,
-        );
-
-        return (stateAfterHydrate, error) => {
+  onRehydrateStorage:
+    IS_DEV && !IS_TEST
+      ? (stateBeforeHydrate) => {
           console.log(
-            'onRehydrateStorage:stateAfterHydrate',
-            stateAfterHydrate,
+            'onRehydrateStorage:stateBeforeHydrate',
+            stateBeforeHydrate,
           );
 
-          if (error) {
-            console.error(error);
-            globalThis.alert(
-              'Error: Failed to rehydrate store. Check console for more info.',
+          return (stateAfterHydrate, error) => {
+            console.log(
+              'onRehydrateStorage:stateAfterHydrate',
+              stateAfterHydrate,
             );
-          }
-        };
-      }
-    : undefined,
+
+            if (error) {
+              console.error(error);
+              globalThis.alert(
+                'Error: Failed to rehydrate store. Check console for more info.',
+              );
+            }
+          };
+        }
+      : undefined,
   partialize: getPersistedState,
 };
 

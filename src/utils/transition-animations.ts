@@ -1,7 +1,6 @@
 import { gsap } from 'gsap';
 
 export function transitionAnimationLeave(next: () => void) {
-  console.log('TRANSITION: leaving');
   const tween = gsap.fromTo(
     'main',
     { autoAlpha: 1, y: 0 },
@@ -12,7 +11,6 @@ export function transitionAnimationLeave(next: () => void) {
 }
 
 export function transitionAnimationEnter(next: () => void) {
-  console.log('TRANSITION: entering');
   const tween = gsap.fromTo(
     'main',
     { autoAlpha: 0, y: -20 },
