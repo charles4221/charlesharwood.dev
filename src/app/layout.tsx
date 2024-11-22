@@ -3,6 +3,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PrismicPreview } from '@prismicio/next';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import clsx from 'clsx';
 import { Fira_Code, VT323 } from 'next/font/google';
 
@@ -43,6 +45,8 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
           <PrismicPreview repositoryName={repositoryName} />
+          <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </Providers>
