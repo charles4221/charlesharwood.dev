@@ -27,6 +27,9 @@ jobs:
         env:
           FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
 
+      - name: Check Code Formatting with Prettier
+        run: npm run format:check
+
       - name: Lint Code with ESLint
         run: npm run lint
 
