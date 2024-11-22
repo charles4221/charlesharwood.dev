@@ -33,5 +33,6 @@
   // Extension Settings
   "eslint.enable": true,
   "eslint.format.enable": false, // formatting is handled by prettier
-  "prettier.enable": true
+  "prettier.enable": true,
+  "cSpell.words": ["gsap", "mailjet"]
 }

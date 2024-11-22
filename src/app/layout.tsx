@@ -10,6 +10,8 @@ import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { repositoryName } from '@/prismic-config';
 
+import { Providers } from './providers';
+
 config.autoAddCss = false;
 
 const FONT_FIRA_CODE = Fira_Code({
@@ -32,15 +34,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
-      <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
-        <Header />
-        {children}
-        <Footer />
-        <PrismicPreview repositoryName={repositoryName} />
-      </body>
-    </html>
+    <Providers>
+      <html
+        lang="en"
+        className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
+        <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <PrismicPreview repositoryName={repositoryName} />
+        </body>
+      </html>
+    </Providers>
   );
 }

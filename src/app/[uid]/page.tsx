@@ -8,7 +8,7 @@ import { createClient } from '@/prismic-config';
 import { METADATA_BASE } from '@/utils/constants';
 
 type Params = { uid: string };
-type Props = { params: Params };
+type Props = { params: Promise<Params> };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
