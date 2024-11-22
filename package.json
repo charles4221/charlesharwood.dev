@@ -41,6 +41,7 @@
   "devDependencies": {
     "@slicemachine/adapter-next": "0.3.57",
     "@tailwindcss/aspect-ratio": "0.4.2",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.0.1",
     "@types/jest": "29.5.14",
