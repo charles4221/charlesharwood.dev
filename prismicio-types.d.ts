@@ -621,7 +621,7 @@ export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: quote.default.primary.testimonials[].quote
+   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   quote: prismic.RichTextField;
@@ -631,7 +631,7 @@ export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: quote.default.primary.testimonials[].source
+   * - **API ID Path**: testimonials.default.primary.testimonials[].source
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   source: prismic.KeyTextField;
@@ -646,7 +646,7 @@ export interface TestimonialsSliceDefaultPrimary {
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: quote.default.primary.testimonials[]
+   * - **API ID Path**: testimonials.default.primary.testimonials[]
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   testimonials: prismic.GroupField<
@@ -658,7 +658,7 @@ export interface TestimonialsSliceDefaultPrimary {
  * Default variation for Testimonials Slice
  *
  * - **API ID**: `default`
- * - **Description**: Quote
+ * - **Description**: Testimonials
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type TestimonialsSliceDefault = prismic.SharedSliceVariation<
@@ -675,12 +675,12 @@ type TestimonialsSliceVariation = TestimonialsSliceDefault;
 /**
  * Testimonials Shared Slice
  *
- * - **API ID**: `quote`
- * - **Description**: Quote
+ * - **API ID**: `testimonials`
+ * - **Description**: Testimonials
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type TestimonialsSlice = prismic.SharedSlice<
-  'quote',
+  'testimonials',
   TestimonialsSliceVariation
 >;
 

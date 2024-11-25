@@ -3,7 +3,6 @@
 import { isFilled } from '@prismicio/client';
 
 import { Container } from '@/components/layout/Container';
-import { Slider, SliderProps } from '@/components/layout/Slider';
 import { Quote } from '@/components/typography/Quote';
 
 import type {
@@ -11,30 +10,40 @@ import type {
   TestimonialsSliceDefaultPrimaryTestimonialsItem,
 } from '../../../../prismicio-types';
 
-const keyExtractor: SliderProps<TestimonialsSliceDefaultPrimaryTestimonialsItem>['keyExtractor'] =
-  (item, index) => (isFilled.keyText(item.source) ? item.source : index);
-const renderTestimonialItem: SliderProps<TestimonialsSliceDefaultPrimaryTestimonialsItem>['renderItem'] =
-  (item) => {
-    return <Quote quote={item.quote} source={item.source} />;
-  };
+const keyExtractor = (
+  item: TestimonialsSliceDefaultPrimaryTestimonialsItem,
+  index: number,
+) => (isFilled.keyText(item.source) ? item.source : index);
+
+const renderTestimonialItem = (
+  item: TestimonialsSliceDefaultPrimaryTestimonialsItem,
+  index: number,
+) => {
+  return (
+    <Quote
+      key={keyExtractor(item, index)}
+      quote={item.quote}
+      source={item.source}
+    />
+  );
+};
 
 type TestimonialsProps = {
   slice: TestimonialsSlice;
 };
 
 const Testimonials = ({ slice }: TestimonialsProps) => {
+  if (slice.primary.testimonials.length === 0) {
+    return null;
+  }
+
   return (
     <Container
       as="section"
       data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}>
-      <Slider
-        data={slice.primary.testimonials}
-        renderItem={renderTestimonialItem}
-        keyExtractor={keyExtractor}
-        slidesPerView={1}
-        loop
-      />
+      data-slice-variation={slice.variation}
+      yPadding="xs">
+      {slice.primary.testimonials.map(renderTestimonialItem)}
     </Container>
   );
 };

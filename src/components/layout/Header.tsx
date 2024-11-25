@@ -35,7 +35,7 @@ export async function Header() {
             hasHoverShadowTransition>
             Charles Harwood
           </Heading>
-          <p className="text-lg">Gold Coast web and mobile app developer</p>
+          <p className="text-lg">Gold Coast mobile apps and websites</p>
         </PrismicNextLink>
         <div className="flex flex-grow lg:flex-grow-0 items-center justify-between gap-x-6">
           <nav>
