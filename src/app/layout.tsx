@@ -36,19 +36,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Providers>
-      <html
-        lang="en"
-        className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
-        <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
+    <html
+      lang="en"
+      className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
+      <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
+        <Providers>
           <Header />
           <main>{children}</main>
           <Footer />
-          <PrismicPreview repositoryName={repositoryName} />
-          <Analytics />
-          <SpeedInsights />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+        <PrismicPreview repositoryName={repositoryName} />
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

@@ -1,21 +1,7 @@
-'use client';
-
 import { PropsWithChildren } from 'react';
 
-import { TransitionRouter } from 'next-transition-router';
-
-import {
-  transitionAnimationEnter,
-  transitionAnimationLeave,
-} from '@/utils/transition-animations';
+import { TransitionProvider } from '@/providers/TransitionProvider';
 
 export function Providers({ children }: PropsWithChildren) {
-  return (
-    <TransitionRouter
-      auto
-      leave={transitionAnimationLeave}
-      enter={transitionAnimationEnter}>
-      {children}
-    </TransitionRouter>
-  );
+  return <TransitionProvider>{children}</TransitionProvider>;
 }

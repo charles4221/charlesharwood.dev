@@ -1,3 +1,6 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 const prismic = require('@prismicio/client');
 
 const sm = require('./slicemachine.config.json');
@@ -30,4 +33,4 @@ const nextConfig = async () => {
   };
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
