@@ -23,8 +23,8 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
       data-slice-variation={slice.variation}>
       <Container yPadding="xl" className="relative">
         <div className="grid justify-items-center gap-8">
-          <div className="max-w-2xl text-center">
-            <Heading as="h2" size="lg">
+          <div className="max-w-3xl text-center">
+            <Heading as="h2" size="xl">
               {slice.primary.heading}
             </Heading>
           </div>

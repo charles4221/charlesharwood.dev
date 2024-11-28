@@ -6,7 +6,7 @@ describe('Heading component', () => {
   it('renders with default props', () => {
     render(<Heading>Test Heading</Heading>);
     expect(screen.getByRole('heading')).toHaveClass(
-      'heading heading--display text-5xl md:text-6xl',
+      'heading heading--display text-4xl md:text-6xl',
     );
   });
 

@@ -8,9 +8,9 @@ const SIZE_CLASSNAME_MAP: {
   [key in HeadingSizes]: string;
 } = {
   xl: 'text-6xl md:text-8xl',
-  lg: 'text-5xl md:text-6xl',
-  md: 'text-4xl md:text-5xl',
-  sm: 'text-3xl md:text-4xl',
+  lg: 'text-4xl md:text-6xl',
+  md: 'text-3xl md:text-5xl',
+  sm: 'text-2xl md:text-4xl',
   xs: 'text-xl md:text-2xl',
 };
 
