@@ -1,6 +1,13 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import {
+  memo,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   IconDefinition,
@@ -9,10 +16,14 @@ import {
   faSunBright,
 } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
 import { useShallow } from 'zustand/shallow';
 
+import { useEvent } from '@/hooks/useEvent';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { useBoundStore } from '@/store/bound';
 import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
 import { Theme } from '@/theme/types';
@@ -22,44 +33,106 @@ import { Card } from '../layout/Card';
 import { Button } from '../links/Button';
 import { Heading } from '../typography/Heading';
 
+gsap.registerPlugin(useGSAP);
+
+type AnimationConfig = Record<
+  'out' | 'in',
+  Record<'from' | 'to', gsap.TweenVars>
+>;
+const exitedState: gsap.TweenVars = {
+  opacity: 0,
+  y: 32,
+};
+const enteredState: gsap.TweenVars = {
+  opacity: 1,
+  y: 16,
+};
+const ANIMATION_CONFIG: AnimationConfig = {
+  out: {
+    from: enteredState,
+    to: exitedState,
+  },
+  in: {
+    from: exitedState,
+    to: enteredState,
+  },
+};
+
+const DarkModeSettingPopover = memo(function DarkModeSettingPopover() {
+  return (
+    <div className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
+      <Card>
+        <Heading as="h4" size="xs" isDisplay={false}>
+          Theme Settings
+        </Heading>
+        {THEME_OPTIONS.map(renderThemeSettingItem)}
+      </Card>
+    </div>
+  );
+});
+
 export function DarkModeSetting() {
   const [isOpen, setIsOpen] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  const popoverRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(
-    popoverRef,
-    useCallback(() => {
-      setIsOpen(false);
-    }, []),
+  const containerRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLSpanElement>(null);
+
+  const { contextSafe } = useGSAP({ scope: containerRef });
+
+  const togglePopover = useEvent(
+    contextSafe((setExplicitValue?: boolean | MouseEvent) => {
+      let isOpening = !isOpen;
+      if (typeof setExplicitValue === 'boolean') {
+        isOpening = setExplicitValue;
+      }
+
+      // If the user prefers reduced motion, don't animate the popover,
+      // just set the state directly and bail early.
+      if (prefersReducedMotion) {
+        setIsOpen(isOpening);
+        return;
+      }
+
+      if (isOpening) {
+        setIsOpen(true);
+      }
+
+      const direction = isOpening ? 'in' : 'out';
+
+      gsap.fromTo(popoverRef.current, ANIMATION_CONFIG[direction].from, {
+        ...ANIMATION_CONFIG[direction].to,
+        duration: 0.2,
+        onComplete: isOpening
+          ? undefined
+          : () => {
+              setIsOpen(false);
+            },
+      });
+    }),
   );
 
-  function toggleOpen() {
-    setIsOpen(!isOpen);
-  }
+  useOutsideClick(
+    containerRef,
+    useCallback(() => {
+      togglePopover(false);
+    }, [togglePopover]),
+  );
 
   return (
     <div
-      ref={popoverRef}
+      ref={containerRef}
       className="relative flex items-center justify-between">
       <Button
         variant="white"
         isCompact
         isRounded
-        onClick={toggleOpen}
+        onClick={togglePopover}
         title="Change colour theme"
         className="text-lg">
         <DarkModeIcon />
       </Button>
-      {isOpen ? (
-        <div className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
-          <Card>
-            <Heading as="h4" size="xs" isDisplay={false}>
-              Theme Settings
-            </Heading>
-            {THEME_OPTIONS.map(renderThemeSettingItem)}
-          </Card>
-        </div>
-      ) : null}
+      <span ref={popoverRef}>{isOpen ? <DarkModeSettingPopover /> : null}</span>
       <SetThemeOnDocument />
     </div>
   );
