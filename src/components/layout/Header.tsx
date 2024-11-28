@@ -35,15 +35,15 @@ export async function Header() {
             hasHoverShadowTransition>
             Charles Harwood
           </Heading>
-          <p className="text-lg">Gold Coast mobile apps and websites</p>
+          <p className="text-lg">Australian-made mobile apps and websites</p>
         </PrismicNextLink>
         <div className="flex flex-grow lg:flex-grow-0 items-center justify-between gap-x-6">
           <nav>
-            <ul className="flex flex-wrap gap-6 md:gap-10">
+            <ul className="flex flex-wrap gap-4 sm:gap-6 md:gap-10">
               {navigation.data.links.map(renderNavItem)}
             </ul>
           </nav>
-          <div className="max-sm:hidden">
+          <div className="max-md:hidden">
             <SocialLinks />
           </div>
           <DarkModeSetting />

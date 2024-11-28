@@ -12,8 +12,8 @@ export function Footer() {
         <div>
           <p className="mb-3">
             Handcrafted with{' '}
-            <FontAwesomeIcon icon={faHeart} className="text-red-600" /> in Gold
-            Coast, Australia.
+            <FontAwesomeIcon icon={faHeart} className="text-red-600" /> on the
+            Gold Coast, Australia 🇦🇺
           </p>
           <p className="mb-3">
             &copy; {new Date().getFullYear()} Charles Harwood. All rights
