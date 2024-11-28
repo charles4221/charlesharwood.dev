@@ -2,7 +2,10 @@ on:
   push:
     branches:
       - main
+      - develop
       - release/*
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   lint:
     name: Lint Code
@@ -11,18 +14,21 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js v20.11.0
+      - name: Setup Node.js v22.10.0
         uses: actions/setup-node@v3
         with:
-          node-version: '20.11.0'
+          node-version: '22.10.0'
           registry-url: https://npm.fontawesome.com/
           scope: '@fortawesome'
           cache: 'npm'
 
       - name: Install Node Dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
         env:
           FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
+
+      - name: Check Code Formatting with Prettier
+        run: npm run format:check
 
       - name: Lint Code with ESLint
         run: npm run lint

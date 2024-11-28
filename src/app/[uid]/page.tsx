@@ -8,14 +8,15 @@ import { createClient } from '@/prismic-config';
 import { METADATA_BASE } from '@/utils/constants';
 
 type Params = { uid: string };
-type Props = { params: Params };
+type Props = { params: Promise<Params> };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
   const settings = await client.getSingle('settings');
 
-  const pageTitle = asText(page.data.title);
+  const pageTitle = page.data.meta_title || asText(page.data.title);
   const siteTitle = asText(settings.data.siteTitle);
   const title = `${pageTitle} | ${siteTitle}`;
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description: page.data.meta_description,
     openGraph: {
-      title: page.data.meta_title ?? title,
+      title,
       ...(metaImage && {
         images: [
           {
@@ -38,9 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
+
+  if (!page) {
+    notFound();
+  }
 
   return <SliceZone slices={page.data.slices} components={components} />;
 }

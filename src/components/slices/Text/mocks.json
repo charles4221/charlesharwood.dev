@@ -13,6 +13,11 @@
 						}
 					}
 				]
+			},
+			"alignment": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
 			}
 		},
 		"items": [
@@ -36,6 +41,11 @@
 						}
 					}
 				]
+			},
+			"alignment": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
 			}
 		},
 		"items": [

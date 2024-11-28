@@ -5,6 +5,13 @@ import { PrismicRichText } from '@/components/PrismicRichText';
 
 import type { TextSlice } from '../../../../prismicio-types';
 
+// Tailwind can't generate these classes if we just use `text-${alignment}` so we need to map them manually.
+const ALIGNMENT_CLASSES = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right',
+};
+
 type TextProps = {
   slice: TextSlice;
 };
@@ -18,6 +25,7 @@ const Text = ({ slice }: TextProps) => {
       data-slice-variation={slice.variation}>
       <div
         className={clsx(
+          ALIGNMENT_CLASSES[slice.primary.alignment],
           slice.variation === 'twoColumns' && 'md:columns-2 md:gap-6',
         )}>
         <PrismicRichText field={slice.primary.text} />

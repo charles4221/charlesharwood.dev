@@ -3,12 +3,16 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PrismicPreview } from '@prismicio/next';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import clsx from 'clsx';
 import { Fira_Code, VT323 } from 'next/font/google';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { repositoryName } from '@/prismic-config';
+
+import { Providers } from './providers';
 
 config.autoAddCss = false;
 
@@ -36,10 +40,14 @@ export default async function RootLayout({
       lang="en"
       className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
       <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
         <PrismicPreview repositoryName={repositoryName} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

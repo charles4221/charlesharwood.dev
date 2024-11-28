@@ -24,11 +24,11 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
         </div>
         <div>
           {isFilled.image(image) ? (
-            <div className="bg-gray-100 dark:bg-slate-700">
+            <div className="bg-gray-100 dark:bg-slate-700 overflow-hidden">
               <PrismicNextImage
                 field={image}
                 sizes="100vw"
-                className="w-full"
+                className="w-full hover:scale-105 transition-transform"
                 fallbackAlt=""
               />
             </div>

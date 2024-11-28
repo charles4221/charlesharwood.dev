@@ -5,10 +5,16 @@ import { Label } from './Label';
 
 export function InputWithLabel({
   label,
+  wrapperClassName,
+  invalidMessage,
   ...props
-}: ComponentProps<typeof Input> & { label: string }) {
+}: ComponentProps<typeof Input> & {
+  label: string;
+  wrapperClassName?: string;
+  invalidMessage?: string;
+}) {
   return (
-    <div>
+    <div className={wrapperClassName}>
       <Label
         htmlFor={props.id}
         aria-required={props.required ? 'true' : 'false'}>
@@ -18,6 +24,9 @@ export function InputWithLabel({
         ) : null}
       </Label>
       <Input name={props.id} {...props} />
+      {invalidMessage ? (
+        <span className="text-red-600 font-semibold">{invalidMessage}</span>
+      ) : null}
     </div>
   );
 }

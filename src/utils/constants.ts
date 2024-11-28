@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 export const IS_DEV = process.env.NODE_ENV !== 'production';
+export const IS_TEST = process.env.NODE_ENV === 'test';
 
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ||

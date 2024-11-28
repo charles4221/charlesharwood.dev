@@ -6,17 +6,15 @@ import {
   persist,
 } from 'zustand/middleware';
 
-import { setThemeOnDocument } from '@/theme/set-theme-on-document';
-import { IS_DEV } from '@/utils/constants';
+import { IS_DEV, IS_TEST } from '@/utils/constants';
 
 import { SettingsStore, createSettingsStore } from './settings';
 
 export type StoreState = SettingsStore;
-export type PersistedStoreState = Pick<StoreState, 'theme' | 'isDarkMode'>;
+export type PersistedStoreState = Pick<StoreState, 'theme'>;
 
 const getPersistedState = (state: StoreState): PersistedStoreState => ({
   theme: state.theme,
-  isDarkMode: state.isDarkMode,
 });
 
 const devtoolsOptions: DevtoolsOptions = {
@@ -25,26 +23,29 @@ const devtoolsOptions: DevtoolsOptions = {
 
 const persistOptions: PersistOptions<StoreState, PersistedStoreState> = {
   name: 'persisted-store',
-  onRehydrateStorage: (stateBeforeHydrate) => {
-    if (IS_DEV) {
-      console.log({ stateBeforeHydrate });
-    }
+  onRehydrateStorage:
+    IS_DEV && !IS_TEST
+      ? (stateBeforeHydrate) => {
+          console.log(
+            'onRehydrateStorage:stateBeforeHydrate',
+            stateBeforeHydrate,
+          );
 
-    return (stateAfterHydrate, error) => {
-      setThemeOnDocument(stateAfterHydrate?.isDarkMode ? 'dark' : 'light');
+          return (stateAfterHydrate, error) => {
+            console.log(
+              'onRehydrateStorage:stateAfterHydrate',
+              stateAfterHydrate,
+            );
 
-      if (!IS_DEV) return;
-
-      console.log({ stateAfterHydrate });
-
-      if (error) {
-        console.error(error);
-        window.alert(
-          'Error: Failed to rehydrate store. Check console for more info.',
-        );
-      }
-    };
-  },
+            if (error) {
+              console.error(error);
+              globalThis.alert(
+                'Error: Failed to rehydrate store. Check console for more info.',
+              );
+            }
+          };
+        }
+      : undefined,
   partialize: getPersistedState,
 };
 

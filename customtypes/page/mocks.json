@@ -86,8 +86,8 @@
           }
         },
         {
-          "key": "quote$6e8fb18a-3fe5-4a3b-9925-6499eff63b8e",
-          "name": "quote",
+          "key": "testimonials$6e8fb18a-3fe5-4a3b-9925-6499eff63b8e",
+          "name": "testimonials",
           "widget": {
             "__TYPE__": "SharedSliceContent",
             "variation": "default",

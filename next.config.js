@@ -1,8 +1,11 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 const prismic = require('@prismicio/client');
 
 const sm = require('./slicemachine.config.json');
 
-/** @type {import('next').NextConfig} */
+/** @type {() => Promise<import('next').NextConfig>} */
 const nextConfig = async () => {
   const client = prismic.createClient(sm.repositoryName);
 
@@ -19,7 +22,15 @@ const nextConfig = async () => {
       // a non-locale prefixed path e.g. `/hello`
       defaultLocale: locales[0],
     },
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '**.prismic.io',
+        },
+      ],
+    },
   };
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

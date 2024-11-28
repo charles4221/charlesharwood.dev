@@ -158,7 +158,7 @@ export type NavigationDocument<Lang extends string = string> =
 type PageDocumentDataSlicesSlice =
   | CallToActionSlice
   | HeroSlice
-  | QuoteSlice
+  | TestimonialsSlice
   | TextSlice
   | ImageSlice
   | ImageCardsSlice
@@ -613,56 +613,76 @@ export type ImageCardsSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *Quote → Default → Primary*
+ * Item in *Testimonials → Default → Primary → Testimonials*
  */
-export interface QuoteSliceDefaultPrimary {
+export interface TestimonialsSliceDefaultPrimaryTestimonialsItem {
   /**
-   * Quote field in *Quote → Default → Primary*
+   * Quote field in *Testimonials → Default → Primary → Testimonials*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: quote.default.primary.quote
+   * - **API ID Path**: testimonials.default.primary.testimonials[].quote
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   quote: prismic.RichTextField;
 
   /**
-   * Source field in *Quote → Default → Primary*
+   * Source field in *Testimonials → Default → Primary → Testimonials*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: quote.default.primary.source
+   * - **API ID Path**: testimonials.default.primary.testimonials[].source
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   source: prismic.KeyTextField;
 }
 
 /**
- * Default variation for Quote Slice
+ * Primary content in *Testimonials → Default → Primary*
+ */
+export interface TestimonialsSliceDefaultPrimary {
+  /**
+   * Testimonials field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.testimonials[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  testimonials: prismic.GroupField<
+    Simplify<TestimonialsSliceDefaultPrimaryTestimonialsItem>
+  >;
+}
+
+/**
+ * Default variation for Testimonials Slice
  *
  * - **API ID**: `default`
- * - **Description**: Quote
+ * - **Description**: Testimonials
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type QuoteSliceDefault = prismic.SharedSliceVariation<
+export type TestimonialsSliceDefault = prismic.SharedSliceVariation<
   'default',
-  Simplify<QuoteSliceDefaultPrimary>,
+  Simplify<TestimonialsSliceDefaultPrimary>,
   never
 >;
 
 /**
- * Slice variation for *Quote*
+ * Slice variation for *Testimonials*
  */
-type QuoteSliceVariation = QuoteSliceDefault;
+type TestimonialsSliceVariation = TestimonialsSliceDefault;
 
 /**
- * Quote Shared Slice
+ * Testimonials Shared Slice
  *
- * - **API ID**: `quote`
- * - **Description**: Quote
+ * - **API ID**: `testimonials`
+ * - **Description**: Testimonials
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type QuoteSlice = prismic.SharedSlice<'quote', QuoteSliceVariation>;
+export type TestimonialsSlice = prismic.SharedSlice<
+  'testimonials',
+  TestimonialsSliceVariation
+>;
 
 /**
  * Primary content in *Text → Default → Primary*
@@ -677,6 +697,17 @@ export interface TextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Alignment field in *Text → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: left
+   * - **API ID Path**: text.default.primary.alignment
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  alignment: prismic.SelectField<'left' | 'center' | 'right', 'filled'>;
 }
 
 /**
@@ -705,6 +736,17 @@ export interface TextSliceTwoColumnsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Alignment field in *Text → Two Columns → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: left
+   * - **API ID Path**: text.twoColumns.primary.alignment
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  alignment: prismic.SelectField<'left' | 'center' | 'right', 'filled'>;
 }
 
 /**
@@ -857,6 +899,17 @@ declare module '@prismicio/client' {
     ): prismic.Client<AllDocumentTypes>;
   }
 
+  interface CreateWriteClient {
+    (
+      repositoryNameOrEndpoint: string,
+      options: prismic.WriteClientConfig,
+    ): prismic.WriteClient<AllDocumentTypes>;
+  }
+
+  interface CreateMigration {
+    (): prismic.Migration<AllDocumentTypes>;
+  }
+
   namespace Content {
     export type {
       AboutDocument,
@@ -890,10 +943,11 @@ declare module '@prismicio/client' {
       ImageCardsSliceDefaultItem,
       ImageCardsSliceVariation,
       ImageCardsSliceDefault,
-      QuoteSlice,
-      QuoteSliceDefaultPrimary,
-      QuoteSliceVariation,
-      QuoteSliceDefault,
+      TestimonialsSlice,
+      TestimonialsSliceDefaultPrimaryTestimonialsItem,
+      TestimonialsSliceDefaultPrimary,
+      TestimonialsSliceVariation,
+      TestimonialsSliceDefault,
       TextSlice,
       TextSliceDefaultPrimary,
       TextSliceTwoColumnsPrimary,

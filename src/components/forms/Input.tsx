@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 type InputProps = JSX.IntrinsicElements['input'];
 type TextAreaProps = JSX.IntrinsicElements['textarea'] & { isTextArea: true };
 
@@ -8,7 +9,7 @@ function isTextAreaProps(
 }
 
 const inputClassName =
-  'block w-full rounded p-3 mb-6 bg-slate-100 text-slate-950';
+  'block w-full rounded p-3 mb-2 bg-slate-100 text-slate-950';
 
 export function Input(props: InputProps | TextAreaProps) {
   if (isTextAreaProps(props)) {

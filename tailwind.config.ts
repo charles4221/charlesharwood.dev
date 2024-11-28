@@ -3,15 +3,7 @@ import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: 'class',
-  content: [
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/slices/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/store/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/theme/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/utils/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
       sans: 'var(--font-fira-code), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',

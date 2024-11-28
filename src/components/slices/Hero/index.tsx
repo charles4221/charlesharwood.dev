@@ -11,7 +11,7 @@ import type { HeroSlice } from '../../../../prismicio-types';
 
 const components: PrismicRichTextProps['components'] = {
   heading1: ({ children }) => (
-    <Heading as="h2" size="xl" className="mb-4 mt-12 first:mt-0 last:mb-0">
+    <Heading as="h1" size="lg" className="mb-4 mt-12 first:mt-0 last:mb-0">
       {children}
     </Heading>
   ),
@@ -40,7 +40,7 @@ const Hero = ({ slice }: HeroProps) => {
       ) : null}
       <Container yPadding="xl" className="relative">
         <div className="grid justify-items-center gap-8">
-          <div className="max-w-2xl text-center">
+          <div className="max-w-6xl text-center">
             <PrismicRichText
               field={slice.primary.text}
               components={components}
