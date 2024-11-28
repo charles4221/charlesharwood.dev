@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  memo,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { memo, MouseEvent, useCallback, useRef, useState } from 'react';
 
 import {
   IconDefinition,
