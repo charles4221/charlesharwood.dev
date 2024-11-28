@@ -4,8 +4,7 @@ export const IS_DEV = process.env.NODE_ENV !== 'production';
 export const IS_TEST = process.env.NODE_ENV === 'test';
 
 export const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  `http://localhost:${process.env.PORT || 3000}`;
+  process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`;
 
 export const METADATA_BASE: Metadata['metadataBase'] = new URL(BASE_URL);
 
