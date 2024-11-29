@@ -9,8 +9,16 @@ export const Hyperlink: RichTextMapSerializerFunction<
   RTLinkNode,
   string
 > = function Hyperlink({ children, node }) {
+  const eventProperties =
+    node.data.link_type === 'Web'
+      ? {
+          'data-umami-event': 'External link',
+          'data-umami-event-title': node.data.url,
+        }
+      : undefined;
+
   return (
-    <PrismicNextLink field={node.data} className="link">
+    <PrismicNextLink field={node.data} className="link" {...eventProperties}>
       {children}
     </PrismicNextLink>
   );

@@ -34,5 +34,5 @@
   "eslint.enable": true,
   "eslint.format.enable": false, // formatting is handled by prettier
   "prettier.enable": true,
-  "cSpell.words": ["gsap", "mailjet"]
+  "cSpell.words": ["gsap", "mailjet", "umami"]
 }

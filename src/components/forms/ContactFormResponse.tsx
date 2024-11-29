@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import clsx from 'clsx';
 
 import { ContactFormResponseMessage } from '@/app/contact/types';
+import { UmamiPlugin } from '@/plugins/umami';
 
 type ContactFormResponseProps = {
   isSuccess: boolean | undefined;
@@ -11,6 +14,12 @@ export function ContactFormResponse({
   isSuccess,
   message,
 }: ContactFormResponseProps) {
+  useEffect(() => {
+    if (isSuccess) {
+      UmamiPlugin()?.track('Contact Form Submitted');
+    }
+  }, [isSuccess]);
+
   if (isSuccess === undefined) {
     return null;
   }

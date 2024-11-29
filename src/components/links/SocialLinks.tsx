@@ -43,7 +43,13 @@ function SocialLinkItem({
   return (
     <li key={title}>
       <span className="hover:text-teal-500 active:text-teal-400 dark:hover:text-teal-300 transition-colors">
-        <a href={href} title={title} target="_blank" rel="noopener noreferrer">
+        <a
+          href={href}
+          title={title}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-umami-event="Social link"
+          data-umami-event-title={title}>
           <FontAwesomeIcon icon={icon} width={24} size="xl" />
           {isExpanded ? <span> {title}</span> : null}
         </a>

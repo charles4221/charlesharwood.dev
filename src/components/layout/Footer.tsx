@@ -26,7 +26,8 @@ export function Footer() {
         <p>
           <PlainLink
             href="https://github.com/charles4221/charlesharwood.dev"
-            target="_blank">
+            target="_blank"
+            data-umami-event="Source code link">
             View this website&rsquo;s source code!
           </PlainLink>
         </p>

@@ -1,30 +1,19 @@
 'use client';
 
-import { memo, MouseEvent, useCallback, useRef, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 
-import {
-  IconDefinition,
-  faComputer,
-  faMoon,
-  faSunBright,
-} from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { useShallow } from 'zustand/shallow';
 
 import { useEvent } from '@/hooks/useEvent';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
-import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
-import { useBoundStore } from '@/store/bound';
+import { UmamiPlugin } from '@/plugins/umami';
 import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
-import { Theme } from '@/theme/types';
 
 import { DarkModeIcon } from './DarkModeIcon';
-import { Card } from '../layout/Card';
+import { DarkModeSettingPopover } from './DarkModeSettingPopover';
 import { Button } from '../links/Button';
-import { Heading } from '../typography/Heading';
 
 gsap.registerPlugin(useGSAP);
 
@@ -50,19 +39,6 @@ const ANIMATION_CONFIG: AnimationConfig = {
     to: enteredState,
   },
 };
-
-const DarkModeSettingPopover = memo(function DarkModeSettingPopover() {
-  return (
-    <div className="absolute top-full right-0 left-auto w-72 text-slate-950 dark:text-white mt-1 rounded-lg shadow-2xl dark:shadow-2xl dark:shadow-sky-900">
-      <Card>
-        <Heading as="h4" size="xs" isDisplay={false}>
-          Theme Settings
-        </Heading>
-        {THEME_OPTIONS.map(renderThemeSettingItem)}
-      </Card>
-    </div>
-  );
-});
 
 export function DarkModeSetting() {
   const [isOpen, setIsOpen] = useState(false);
@@ -112,6 +88,12 @@ export function DarkModeSetting() {
     }, [togglePopover]),
   );
 
+  useEffect(() => {
+    if (isOpen) {
+      UmamiPlugin()?.track('Opened Theme Settings');
+    }
+  }, [isOpen]);
+
   return (
     <div
       ref={containerRef}
@@ -129,65 +111,4 @@ export function DarkModeSetting() {
       <SetThemeOnDocument />
     </div>
   );
-}
-
-type ThemeOption = {
-  label: string;
-  value: Theme;
-  icon: IconDefinition;
-  ariaTitle: string;
-};
-
-const THEME_OPTIONS: ThemeOption[] = [
-  {
-    label: 'Dark Theme',
-    value: 'dark',
-    icon: faMoon,
-    ariaTitle: 'Change colour theme to dark mode',
-  },
-  {
-    label: 'Light Theme',
-    value: 'light',
-    icon: faSunBright,
-    ariaTitle: 'Change colour theme to light mode',
-  },
-  {
-    label: 'Use System Setting',
-    value: 'system',
-    icon: faComputer,
-    ariaTitle: 'Use your system preference for dark mode',
-  },
-];
-
-function ThemeSettingItem({ label, value, icon, ariaTitle }: ThemeOption) {
-  const systemPrefersDarkMode = usePrefersDarkMode();
-  const { isActive, setTheme } = useBoundStore(
-    useShallow((state) => ({
-      isActive: state.theme === value,
-      setTheme: state.setTheme,
-    })),
-  );
-
-  return (
-    <Button
-      className="w-full mt-1"
-      variant={isActive ? 'teal' : 'sky'}
-      isRounded
-      onClick={() => setTheme(value)}
-      title={ariaTitle}>
-      <div className="flex justify-between items-center text-left">
-        <p className="text-lg">
-          {label}
-          {value === 'system'
-            ? ` (${systemPrefersDarkMode ? 'dark' : 'light'})`
-            : ''}
-        </p>
-        <FontAwesomeIcon icon={icon} />
-      </div>
-    </Button>
-  );
-}
-
-function renderThemeSettingItem(option: ThemeOption) {
-  return <ThemeSettingItem key={option.value} {...option} />;
 }

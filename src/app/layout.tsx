@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import clsx from 'clsx';
 import { Fira_Code, VT323 } from 'next/font/google';
+import Script from 'next/script';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -48,6 +49,11 @@ export default async function RootLayout({
         <PrismicPreview repositoryName={repositoryName} />
         <Analytics />
         <SpeedInsights />
+        <Script
+          defer
+          src="https://umami.charlesharwood.dev/script.js"
+          data-website-id="fd44e4d7-5935-4ef6-b888-4bdf25990f4e"
+        />
       </body>
     </html>
   );
