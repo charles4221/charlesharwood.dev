@@ -15,15 +15,17 @@ export function InputWithLabel({
 }) {
   return (
     <div className={wrapperClassName}>
-      <Label
-        htmlFor={props.id}
-        aria-required={props.required ? 'true' : 'false'}>
+      <Label htmlFor={props.id}>
         {label}
         {props.required ? (
           <span className="text-red-600 font-semibold"> *</span>
         ) : null}
       </Label>
-      <Input name={props.id} {...props} />
+      <Input
+        name={props.id}
+        aria-required={props.required ? 'true' : 'false'}
+        {...props}
+      />
       {invalidMessage ? (
         <span className="text-red-600 font-semibold">{invalidMessage}</span>
       ) : null}

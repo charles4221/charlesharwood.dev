@@ -160,7 +160,7 @@ function renderSkillItem(skill: SkillItemProps) {
 export function Skills() {
   return (
     <section className="text-center my-10">
-      <Heading as="h3" size="md" className="mb-6">
+      <Heading as="h2" size="md" className="mb-6">
         Skills
       </Heading>
       <ul className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-3">

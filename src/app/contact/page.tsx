@@ -17,7 +17,7 @@ export default async function ContactPage() {
       <Heading as="h1" className="mb-10">
         {asText(page.data.title)}
       </Heading>
-      <Heading as="h3" size="sm" isDisplay={false} className="mb-10">
+      <Heading as="h2" size="sm" isDisplay={false} className="mb-10">
         {`Let's build your next project together!`}
       </Heading>
       <p className="mb-10">
