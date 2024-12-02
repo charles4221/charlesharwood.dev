@@ -39,7 +39,6 @@
     "node-mailjet": "6.0.6",
     "react": "19.0.0-rc.1",
     "react-dom": "19.0.0-rc.1",
-    "swiper": "11.1.15",
     "typescript": "5.7.2",
     "zustand": "5.0.1"
   },

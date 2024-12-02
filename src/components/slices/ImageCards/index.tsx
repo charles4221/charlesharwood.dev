@@ -5,7 +5,7 @@ import { PrismicText } from '@prismicio/react';
 import { Card } from '@/components/layout/Card';
 import { ConditionalWrap } from '@/components/layout/ConditionalWrap';
 import { Container } from '@/components/layout/Container';
-import { PrismicRichText } from '@/components/PrismicRichText';
+import { PrismicRichText } from '@/components/rich-text/PrismicRichText';
 import { Heading } from '@/components/typography/Heading';
 
 import type {

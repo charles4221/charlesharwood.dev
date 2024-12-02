@@ -34,6 +34,7 @@ export function Container<AsComponent extends React.ElementType = 'div'>({
     <Component
       data-collapsible={collapsible}
       className={clsx('px-10', Y_PADDING_CLASSNAME_MAP[yPadding], className)}
+      data-testid="container-test-id"
       {...rest}>
       <div className="mx-auto w-full max-w-6xl">{children}</div>
     </Component>

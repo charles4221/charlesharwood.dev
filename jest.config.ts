@@ -36,6 +36,7 @@ const config: Config = {
     '!src/**/constants.ts',
     '!src/**/*.d.ts',
     '!src/**/types.ts',
+    '!src/components/rich-text/*',
     '!src/components/typography/icons/*',
   ],
 
