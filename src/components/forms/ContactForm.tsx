@@ -2,18 +2,14 @@
 
 import { useActionState } from 'react';
 
-import { faSpinner } from '@fortawesome/pro-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useFormStatus } from 'react-dom';
-
 import { sendMessage } from '@/app/contact/actions';
 import { ContactFormState } from '@/app/contact/types';
 
 import { Checkbox } from './Checkbox';
 import { ContactFormResponse } from './ContactFormResponse';
+import { ContactFormSubmitButton } from './ContactFormSubmitButton';
 import { InputWithLabel } from './InputWithLabel';
 import { Card } from '../layout/Card';
-import { Button } from '../links/Button';
 
 const initialState: ContactFormState = {};
 
@@ -22,7 +18,7 @@ type ProjectOption = {
   label: string;
 };
 
-const PROJECT_OPTIONS: ProjectOption[] = [
+export const PROJECT_OPTIONS: ProjectOption[] = [
   { id: 'mobile', label: 'Mobile App (iPhone, iPad, Android)' },
   { id: 'vision', label: 'VR App (Vision Pro, Xreal)' },
   { id: 'tv', label: 'TV App (Apple TV, Android/Google TV)' },
@@ -32,36 +28,6 @@ const PROJECT_OPTIONS: ProjectOption[] = [
   { id: 'hosting', label: 'Web Hosting' },
   { id: 'domain', label: 'Domain Registration' },
 ];
-
-const ButtonText = {
-  DEFAULT: 'Send Message',
-  PENDING: 'Sending',
-  SUCCESS: 'Message Sent!',
-} as const;
-
-function SubmitButton({ isSuccess }: { isSuccess: boolean }) {
-  const formStatus = useFormStatus();
-  const isPending = formStatus.pending;
-
-  const isDisabled = isPending || isSuccess;
-
-  const defaultButtonText = isPending ? ButtonText.PENDING : ButtonText.DEFAULT;
-  const buttonText = isSuccess ? ButtonText.SUCCESS : defaultButtonText;
-
-  return (
-    <Button type="submit" disabled={isDisabled} isCTA>
-      {buttonText}
-      {isPending ? (
-        <FontAwesomeIcon
-          icon={faSpinner}
-          className="text-slate-900 ml-3"
-          spin
-          size="xs"
-        />
-      ) : null}
-    </Button>
-  );
-}
 
 export function ContactForm() {
   const [state, formAction] = useActionState(sendMessage, initialState);
@@ -130,7 +96,7 @@ export function ContactForm() {
             defaultValue={state.data?.description}
             invalidMessage={state.invalidFieldMessages?.description}
           />
-          <SubmitButton isSuccess={state.success === true} />
+          <ContactFormSubmitButton isSuccess={state.success === true} />
         </div>
         <ContactFormResponse
           isSuccess={state.success}

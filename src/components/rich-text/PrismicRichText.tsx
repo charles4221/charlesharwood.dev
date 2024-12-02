@@ -4,17 +4,17 @@ import {
   PrismicRichTextProps,
 } from '@prismicio/react';
 
-import { Heading1 } from './rich-text/Heading1';
-import { Heading2 } from './rich-text/Heading2';
-import { Heading3 } from './rich-text/Heading3';
-import { Heading4 } from './rich-text/Heading4';
-import { Heading5 } from './rich-text/Heading5';
-import { Hyperlink } from './rich-text/Hyperlink';
-import { OrderedList, OrderedListItem } from './rich-text/OrderedList';
-import { Paragraph } from './rich-text/Paragraph';
-import { Preformatted } from './rich-text/Preformatted';
-import { Strong } from './rich-text/Strong';
-import { UnorderedList, UnorderedListItem } from './rich-text/UnorderedList';
+import { Heading1 } from './Heading1';
+import { Heading2 } from './Heading2';
+import { Heading3 } from './Heading3';
+import { Heading4 } from './Heading4';
+import { Heading5 } from './Heading5';
+import { Hyperlink } from './Hyperlink';
+import { OrderedList, OrderedListItem } from './OrderedList';
+import { Paragraph } from './Paragraph';
+import { Preformatted } from './Preformatted';
+import { Strong } from './Strong';
+import { UnorderedList, UnorderedListItem } from './UnorderedList';
 
 const defaultComponents: JSXMapSerializer = {
   heading1: Heading1,

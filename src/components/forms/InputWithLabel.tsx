@@ -14,7 +14,9 @@ export function InputWithLabel({
   invalidMessage?: string;
 }) {
   return (
-    <div className={wrapperClassName}>
+    <div
+      className={wrapperClassName}
+      data-testid="input-with-label-wrapper-test-id">
       <Label htmlFor={props.id}>
         {label}
         {props.required ? (

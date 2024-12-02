@@ -2,18 +2,16 @@ import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
-import { PrismicPreview } from '@prismicio/next';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import clsx from 'clsx';
+import { Metadata } from 'next';
 import { Fira_Code, VT323 } from 'next/font/google';
-import Script from 'next/script';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { repositoryName } from '@/prismic-config';
+import { IS_PROD } from '@/utils/constants';
 
 import { Providers } from './providers';
+import { Tracking } from './tracking';
 
 config.autoAddCss = false;
 
@@ -31,6 +29,13 @@ const FONT_VT_323 = VT323({
   variable: '--font-vt323',
 });
 
+export const metadata: Metadata = {
+  robots: {
+    index: IS_PROD,
+    follow: IS_PROD,
+  },
+};
+
 export default async function RootLayout({
   children,
 }: {
@@ -46,14 +51,7 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
-        <PrismicPreview repositoryName={repositoryName} />
-        <Analytics />
-        <SpeedInsights />
-        <Script
-          defer
-          src="https://umami.charlesharwood.dev/script.js"
-          data-website-id="fd44e4d7-5935-4ef6-b888-4bdf25990f4e"
-        />
+        <Tracking />
       </body>
     </html>
   );

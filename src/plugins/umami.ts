@@ -12,7 +12,7 @@ interface CustomEventPayload {
   [key: string]: unknown;
 }
 
-interface IUmamiPlugin {
+export interface IUmamiPlugin {
   /** Sends a pageview event with auto-collected pageview data */
   track(): void;
   /** Sends a pageview event with custom pageview data */

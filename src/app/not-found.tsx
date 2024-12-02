@@ -1,6 +1,15 @@
+import { Metadata } from 'next';
+
 import { Container } from '@/components/layout/Container';
 import { PlainLink } from '@/components/links/PlainLink';
 import { Heading } from '@/components/typography/Heading';
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function NotFound() {
   return (

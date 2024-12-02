@@ -2,7 +2,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 
 import { Container } from '@/components/layout/Container';
-import { PrismicRichText } from '@/components/PrismicRichText';
+import { PrismicRichText } from '@/components/rich-text/PrismicRichText';
 
 import type { TextWithImageSlice } from '../../../../prismicio-types';
 

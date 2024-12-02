@@ -1,7 +1,7 @@
 import { cloneElement, type JSX } from 'react';
 
-import { Card } from './layout/Card';
-import { Heading } from './typography/Heading';
+import { Card } from '../layout/Card';
+import { Heading } from '../typography/Heading';
 import {
   CSSIcon,
   GitHubIcon,
@@ -23,7 +23,7 @@ import {
   TanstackIcon,
   TypeScriptIcon,
   WebpackIcon,
-} from './typography/icons/CustomIcons';
+} from '../typography/icons/CustomIcons';
 
 type SkillItemProps = {
   name: string;
@@ -31,7 +31,7 @@ type SkillItemProps = {
   href: string;
 };
 
-const SKILLS: SkillItemProps[] = [
+export const SKILLS: SkillItemProps[] = [
   {
     name: 'TypeScript',
     icon: TypeScriptIcon,

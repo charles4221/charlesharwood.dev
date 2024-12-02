@@ -4,9 +4,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { Container } from '@/components/layout/Container';
+import { Skills } from '@/components/links/Skills';
 import { SocialLinks } from '@/components/links/SocialLinks';
-import { PrismicRichText } from '@/components/PrismicRichText';
-import { Skills } from '@/components/Skills';
+import { PrismicRichText } from '@/components/rich-text/PrismicRichText';
 import { Heading } from '@/components/typography/Heading';
 import { createClient } from '@/prismic-config';
 import { METADATA_BASE } from '@/utils/constants';
