@@ -30,6 +30,20 @@ const nextConfig = async () => {
         },
       ],
     },
+    redirects: async () => {
+      return [
+        {
+          source: '/portfolio',
+          destination: '/about',
+          permanent: true,
+        },
+        {
+          source: '/project/:slug',
+          destination: '/about',
+          permanent: true,
+        },
+      ];
+    },
   };
 };
 
