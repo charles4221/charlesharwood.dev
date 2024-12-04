@@ -7,7 +7,7 @@ import { init as SentryInit, replayIntegration } from '@sentry/nextjs';
 import { IS_DEV } from '@/utils/constants';
 
 SentryInit({
-  dsn: process.env.SENTRY_DSN,
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
   // Add optional integrations for additional features
   integrations: [replayIntegration()],
