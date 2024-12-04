@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/links/Button';
 import { Heading } from '@/components/typography/Heading';
-import { UmamiPlugin } from '@/plugins/umami';
+import { useCaptureException } from '@/hooks/useCaptureException';
 
 type ErrorProps = {
   error: Error & { digest?: string };
@@ -13,13 +11,7 @@ type ErrorProps = {
 };
 
 export default function Error({ error, reset }: ErrorProps) {
-  useEffect(() => {
-    if (error) {
-      UmamiPlugin()?.track('Error', {
-        message: error.message,
-      });
-    }
-  }, [error]);
+  useCaptureException(error);
 
   return (
     <Container as="main">

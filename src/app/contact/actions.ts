@@ -92,7 +92,6 @@ export async function sendMessage(
         .request(messageBody);
 
     const data = response.body.Messages[0];
-    console.log(data);
 
     if (data.Status === 'success') {
       return {
@@ -126,8 +125,6 @@ export async function sendMessage(
     // Throw any other error codes out to the catch block for generic failure messaging.
     throw new Error(ContactFormResponseMessage.FAILED);
   } catch (error) {
-    console.error(error);
-
     return {
       message:
         error instanceof Error
