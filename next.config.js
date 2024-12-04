@@ -80,6 +80,11 @@ module.exports = withSentryConfig(nextConfigWithBundleAnalyzer, {
   // Hides source maps from generated client bundles
   hideSourceMaps: true,
 
+  // Disable source map uploads when building locally
+  sourcemaps: {
+    disable: process.env.DISABLE_SOURCEMAP_UPLOAD === 'true',
+  },
+
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
 

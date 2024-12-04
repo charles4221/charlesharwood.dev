@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/nextjs';
+import { captureException } from '@sentry/nextjs';
 import { renderHook } from '@testing-library/react';
 
 import { useCaptureException } from '../useCaptureException';
@@ -9,14 +9,14 @@ describe('useCaptureException', () => {
   it('should call captureException with the provided error', () => {
     const error = new Error('Test error');
     renderHook(() => useCaptureException(error));
-    expect(Sentry.captureException).toHaveBeenCalledWith(error);
+    expect(captureException).toHaveBeenCalledWith(error);
   });
 
   it('should not call captureException if error is the same', () => {
     const error = new Error('Test error');
     const { rerender } = renderHook(() => useCaptureException(error));
     rerender();
-    expect(Sentry.captureException).toHaveBeenCalledTimes(1);
+    expect(captureException).toHaveBeenCalledTimes(1);
   });
 
   it('should call captureException again if error changes', () => {
@@ -26,7 +26,7 @@ describe('useCaptureException', () => {
       initialProps: { error: error1 },
     });
     rerender({ error: error2 });
-    expect(Sentry.captureException).toHaveBeenCalledTimes(2);
-    expect(Sentry.captureException).toHaveBeenCalledWith(error2);
+    expect(captureException).toHaveBeenCalledTimes(2);
+    expect(captureException).toHaveBeenCalledWith(error2);
   });
 });
