@@ -11,6 +11,8 @@ import { Heading } from '@/components/typography/Heading';
 import { createClient } from '@/prismic-config';
 import { METADATA_BASE } from '@/utils/constants';
 
+import { AboutPageSchemaMarkup } from './schema-markup';
+
 export default async function AboutPage() {
   const client = createClient();
   const page = await client.getSingle('about');
@@ -36,6 +38,7 @@ export default async function AboutPage() {
           <SocialLinks isExpanded />
         </div>
       </div>
+      <AboutPageSchemaMarkup image={page.data.headshot.url} />
     </Container>
   );
 }
