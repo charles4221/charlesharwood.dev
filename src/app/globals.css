@@ -63,8 +63,3 @@
     }
   }
 }
-
-/* Adjust alignment of font-awesome icons */
-.svg-inline--fa {
-  vertical-align: text-bottom;
-}

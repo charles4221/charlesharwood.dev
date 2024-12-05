@@ -5,7 +5,10 @@ import { notFound } from 'next/navigation';
 
 import { components } from '@/components/slices';
 import { createClient } from '@/prismic-config';
-import { METADATA_BASE } from '@/utils/constants';
+import {
+  METADATA_BASE,
+  PAGES_WITH_CUSTOM_ROUTE_HANDLERS,
+} from '@/utils/constants';
 
 type Params = { uid: string };
 type Props = { params: Promise<Params> };
@@ -51,15 +54,13 @@ export default async function Page(props: Props) {
   return <SliceZone slices={page.data.slices} components={components} />;
 }
 
-const pagesHandledInOtherRoutes = new Set(['home', 'contact']);
-
 export async function generateStaticParams() {
   const client = createClient();
 
   const pages = await client.getAllByType('page');
 
   return pages
-    .filter((page) => !pagesHandledInOtherRoutes.has(page.uid))
+    .filter((page) => !PAGES_WITH_CUSTOM_ROUTE_HANDLERS.has(page.uid))
     .map((page) => {
       return { uid: page.uid };
     });

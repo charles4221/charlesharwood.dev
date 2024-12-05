@@ -8,7 +8,7 @@ import { SocialLinks } from '../links/SocialLinks';
 export function Footer() {
   return (
     <Container as="footer" yPadding="md" className="bg-sky-950 text-white">
-      <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-10 leading-none">
+      <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-10 leading-tight">
         <div>
           <p className="mb-3">
             Handcrafted with{' '}
@@ -18,6 +18,9 @@ export function Footer() {
           <p className="mb-3">
             &copy; {new Date().getFullYear()} Charles Harwood. All rights
             reserved.
+          </p>
+          <p>
+            <PlainLink href="/privacy-policy">Privacy Policy</PlainLink>
           </p>
         </div>
 
