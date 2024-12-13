@@ -1,5 +1,5 @@
 import { createClient as createPrismicClient } from '@prismicio/client';
-import type { ClientConfig } from '@prismicio/client';
+import type { ClientConfig, Route } from '@prismicio/client';
 import { enableAutoPreviews } from '@prismicio/next';
 
 import config from '../slicemachine.config.json';
@@ -14,7 +14,7 @@ export const repositoryName =
 /**
  * The project's Prismic Route Resolvers. This list determines a Prismic document's URL.
  */
-const routes: ClientConfig['routes'] = [
+export const ROUTES: Route[] = [
   {
     type: 'about',
     path: '/about',
@@ -50,7 +50,7 @@ const routes: ClientConfig['routes'] = [
 export const createClient = (config?: ClientConfig) => {
   const client = createPrismicClient(repositoryName, {
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-    routes,
+    routes: ROUTES,
     fetchOptions: IS_PROD
       ? { next: { tags: ['prismic'] }, cache: 'force-cache' }
       : { next: { revalidate: 5 } },

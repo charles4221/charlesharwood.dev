@@ -31,6 +31,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     description: page.data.meta_description,
     openGraph: {
       title,
+      description: page.data.meta_description ?? '',
+      url: new URL(`/${params.uid}`, METADATA_BASE),
       ...(metaImage && {
         images: [
           {

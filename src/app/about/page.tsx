@@ -60,6 +60,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description: page.data.meta_description,
     openGraph: {
       title: page.data.meta_title ?? title,
+      description: page.data.meta_description ?? '',
+      url: new URL('/about', METADATA_BASE),
       ...(metaImage && {
         images: [
           {
