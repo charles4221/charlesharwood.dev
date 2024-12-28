@@ -1,5 +1,6 @@
 'use server';
 
+import { captureException } from '@sentry/nextjs';
 import type { LibraryResponse, SendEmailV3_1 } from 'node-mailjet';
 
 import {
@@ -26,14 +27,24 @@ export async function sendMessage(
     company,
     projectType,
     description,
-  }: ContactFormFields = {
+    honeypot,
+  }: ContactFormFields & { honeypot?: string } = {
     firstName: formData.get('firstName') as string,
     lastName: formData.get('lastName') as string,
     email: formData.get('email') as string,
     company: formData.get('company') as string,
     projectType: formData.getAll('projectType').join(', '),
     description: formData.get('description') as string,
+    honeypot: formData.get('address') as string,
   };
+
+  // Honeypot field is filled in, so this is likely a bot.
+  if (honeypot) {
+    return {
+      message: ContactFormResponseMessage.FAILED,
+      success: false,
+    };
+  }
 
   if (!firstName || !lastName || !email || !description) {
     const emailIsValid = isEmailValid(email);
@@ -122,9 +133,20 @@ export async function sendMessage(
       }
     }
 
+    // Capture data response errors that haven't been handled above and send to Sentry.
+    captureException(JSON.stringify(data.Errors));
+
     // Throw any other error codes out to the catch block for generic failure messaging.
     throw new Error(ContactFormResponseMessage.FAILED);
   } catch (error) {
+    // Capture unhandled exceptions and send to Sentry.
+    if (
+      error instanceof Error &&
+      error.message !== ContactFormResponseMessage.FAILED
+    ) {
+      captureException(error);
+    }
+
     return {
       message:
         error instanceof Error

@@ -96,6 +96,13 @@ export function ContactForm() {
             defaultValue={state.data?.description}
             invalidMessage={state.invalidFieldMessages?.description}
           />
+          <InputWithLabel
+            type="text"
+            id="address"
+            label="Address"
+            placeholder="123 Bacon St, Baconville, Baconland"
+            wrapperClassName="hidden"
+          />
           <ContactFormSubmitButton isSuccess={state.success === true} />
         </div>
         <ContactFormResponse
