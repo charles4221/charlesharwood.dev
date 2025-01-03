@@ -9,6 +9,7 @@ import {
   METADATA_BASE,
   PAGES_WITH_CUSTOM_ROUTE_HANDLERS,
 } from '@/utils/constants';
+import { isUidValid } from '@/utils/is-uid-valid';
 
 type Params = { uid: string };
 type Props = { params: Promise<Params> };
@@ -46,6 +47,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params;
+
+  // Skip attempting to get the page from Prismic if the UID is invalid
+  if (!isUidValid(params.uid)) {
+    notFound();
+  }
+
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
 
