@@ -9,7 +9,6 @@ import { useEvent } from '@/hooks/useEvent';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { UmamiPlugin } from '@/plugins/umami';
-import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
 
 import { DarkModeIcon } from './DarkModeIcon';
 import { DarkModeSettingPopover } from './DarkModeSettingPopover';
@@ -108,7 +107,6 @@ export function DarkModeSetting() {
         <DarkModeIcon />
       </Button>
       <span ref={popoverRef}>{isOpen ? <DarkModeSettingPopover /> : null}</span>
-      <SetThemeOnDocument />
     </div>
   );
 }

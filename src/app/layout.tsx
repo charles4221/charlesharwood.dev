@@ -8,6 +8,7 @@ import { Fira_Code, VT323 } from 'next/font/google';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { SetThemeOnDocument } from '@/theme/set-theme-on-document';
 import { IS_PROD } from '@/utils/constants';
 
 import { Providers } from './providers';
@@ -51,6 +52,7 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
+        <SetThemeOnDocument />
         <Tracking />
       </body>
     </html>

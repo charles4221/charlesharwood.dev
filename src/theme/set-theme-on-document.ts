@@ -1,3 +1,5 @@
+'use client';
+
 import { memo, useEffect } from 'react';
 
 import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
