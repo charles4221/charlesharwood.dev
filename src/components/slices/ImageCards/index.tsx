@@ -18,32 +18,32 @@ type ImageCardProps = Simplify<ImageCardsSliceDefaultItem>;
 
 const ImageCard = ({ buttonLink, buttonText, image, text }: ImageCardProps) => {
   return (
-    <li className="grid gap-8">
+    <li className="grid gap-8 h-full">
       <Card>
         {isFilled.image(image) ? (
-          <div className="bg-gray-100 mb-5">
-            <ConditionalWrap
-              condition={isFilled.link(buttonLink)}
-              wrap={({ children }) => (
-                <PrismicNextLink field={buttonLink} tabIndex={-1}>
-                  {children}
-                </PrismicNextLink>
-              )}>
+          <ConditionalWrap
+            condition={isFilled.link(buttonLink)}
+            wrap={({ children }) => (
+              <PrismicNextLink field={buttonLink} tabIndex={-1}>
+                {children}
+              </PrismicNextLink>
+            )}>
+            <div className="bg-gray-100 h-40 mb-5 p-8 rounded-lg flex items-center justify-center">
               <PrismicNextImage
                 field={image}
                 sizes="100vw"
-                className="w-full"
+                className="w-auto max-w-full max-h-full"
                 fallbackAlt=""
               />
-            </ConditionalWrap>
-          </div>
+            </div>
+          </ConditionalWrap>
         ) : null}
         <div className="leading-relaxed text-lg">
           <PrismicRichText field={text} />
         </div>
         {isFilled.link(buttonLink) ? (
-          <div>
-            <PrismicNextLink field={buttonLink} className="font-semibold">
+          <div className="mt-2">
+            <PrismicNextLink field={buttonLink} className="link font-semibold">
               {buttonText || 'More Info'}
             </PrismicNextLink>
           </div>
