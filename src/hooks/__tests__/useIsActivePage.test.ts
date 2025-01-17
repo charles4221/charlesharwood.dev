@@ -1,3 +1,4 @@
+import { LinkField } from '@prismicio/client';
 import { renderHook } from '@testing-library/react';
 
 import { useIsActivePage } from '../useIsActivePage';
@@ -9,7 +10,7 @@ jest.mock('next/navigation', () => ({
 describe('useIsActivePage', () => {
   it('should return true when the link is the current page', () => {
     const { result } = renderHook(() =>
-      useIsActivePage({ link_type: 'Document', url: '/path' }),
+      useIsActivePage({ link_type: 'Document', url: '/path' } as LinkField),
     );
 
     expect(result.current).toBe(true);
@@ -17,7 +18,10 @@ describe('useIsActivePage', () => {
 
   it('should return false when the link is not the current page', () => {
     const { result } = renderHook(() =>
-      useIsActivePage({ link_type: 'Document', url: '/other-path' }),
+      useIsActivePage({
+        link_type: 'Document',
+        url: '/other-path',
+      } as LinkField),
     );
 
     expect(result.current).toBe(false);

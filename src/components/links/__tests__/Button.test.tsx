@@ -1,3 +1,4 @@
+import { LinkField } from '@prismicio/client';
 import { render, screen } from '@testing-library/react';
 
 import { Button } from '../Button';
@@ -74,7 +75,7 @@ describe('Button', () => {
     const field = {
       link_type: 'Web',
       url: 'https://example.com',
-    };
+    } as LinkField;
     render(<Button field={field}>Hello</Button>);
     const buttonElement = screen.queryByRole('button');
     const prismicLinkElement = screen.getByRole('link');
