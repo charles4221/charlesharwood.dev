@@ -18,6 +18,8 @@ export const Hyperlink: RichTextMapSerializerFunction<
       : undefined;
 
   return (
+    // TODO: remove this ts-expect-error once the types are updated correctly in `@prismicio/client`
+    // @ts-expect-error - after updating `@primicio/client` to v7.14.0 and above, there's a mismatch in the types here
     <PrismicNextLink field={node.data} className="link" {...eventProperties}>
       {children}
     </PrismicNextLink>
