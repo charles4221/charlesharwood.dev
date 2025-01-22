@@ -11,7 +11,9 @@ jest.mock('@/prismic-config', () => ({
 }));
 
 jest.mock('@prismicio/next', () => ({
-  PrismicNextLink: ({ children }: PropsWithChildren) => <a>{children}</a>,
+  PrismicNextLink: ({ children }: PropsWithChildren) => (
+    <a href="https://example.com">{children}</a>
+  ),
 }));
 
 jest.mock('../../links/SocialLinks', () => ({

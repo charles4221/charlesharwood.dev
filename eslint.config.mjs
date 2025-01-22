@@ -18,6 +18,7 @@ const FlatConfig = [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
+    'plugin:jsx-a11y/strict',
     'next/core-web-vitals',
     'prettier',
   ),
@@ -50,6 +51,16 @@ const FlatConfig = [
             order: 'asc',
             caseInsensitive: true,
           },
+        },
+      ],
+
+      'jsx-a11y/label-has-associated-control': [
+        'error',
+        {
+          labelComponents: ['Label'],
+          labelAttributes: ['label'],
+          controlComponents: ['Input'],
+          depth: 3,
         },
       ],
 
