@@ -1,14 +1,13 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-const prismic = require('@prismicio/client');
-const { withSentryConfig } = require('@sentry/nextjs');
+import bundleAnalyzer from '@next/bundle-analyzer';
+import { createClient as createPrismicClient } from '@prismicio/client';
+import { type SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
+import type { NextConfig } from 'next';
 
-const sm = require('./slicemachine.config.json');
+import { repositoryName } from '@/prismic-config';
+import { IS_DEV } from '@/utils/constants';
 
-/** @type {() => Promise<import('next').NextConfig>} */
-const nextConfig = async () => {
-  const client = prismic.createClient(sm.repositoryName);
+const nextConfig = async (): Promise<NextConfig> => {
+  const client = createPrismicClient(repositoryName);
 
   const repository = await client.getRepository();
   const locales = repository.languages.map((lang) => lang.id);
@@ -48,9 +47,13 @@ const nextConfig = async () => {
   };
 };
 
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfigWithBundleAnalyzer = withBundleAnalyzer(nextConfig);
 
-module.exports = withSentryConfig(nextConfigWithBundleAnalyzer, {
+const sentryBuildOptions: SentryBuildOptions = {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
@@ -88,9 +91,24 @@ module.exports = withSentryConfig(nextConfigWithBundleAnalyzer, {
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
 
+  // Optimizes bundle size by removing unnecessary code
+  bundleSizeOptimizations: {
+    excludeDebugStatements: !IS_DEV,
+    excludeReplayIframe: true,
+    excludeReplayShadowDom: true,
+    excludeReplayWorker: true,
+  },
+
   // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
   // See the following for more information:
   // https://docs.sentry.io/product/crons/
   // https://vercel.com/docs/cron-jobs
-  automaticVercelMonitors: true,
-});
+  automaticVercelMonitors: false, // change to true if using Vercel Cron Jobs
+};
+
+const finalConfig = withSentryConfig(
+  nextConfigWithBundleAnalyzer,
+  sentryBuildOptions,
+);
+
+export default finalConfig;

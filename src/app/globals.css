@@ -41,7 +41,7 @@
   }
 
   .link {
-    @apply border-sky-400 border-b hover:border-b-4 transition-all duration-100;
+    @apply border-sky-400 border-b hover:border-b-4 transition-all duration-100 font-medium;
   }
 
   .button {
