@@ -12,7 +12,7 @@ export default function GlobalError({
   useCaptureException(error);
 
   return (
-    <html lang="en">
+    <html lang="en-AU">
       <body>
         <NextError statusCode={0} />
       </body>

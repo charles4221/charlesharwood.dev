@@ -44,7 +44,7 @@ export default async function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="en-AU"
       className={clsx(FONT_FIRA_CODE.variable, FONT_VT_323.variable)}>
       <body className="overflow-x-hidden antialiased text-slate-950 dark:bg-slate-950 dark:text-white">
         <Providers>
