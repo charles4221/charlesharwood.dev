@@ -47,7 +47,7 @@ const Hero = ({ slice }: HeroProps) => {
             />
           </div>
           {isFilled.link(slice.primary.buttonLink) ? (
-            <Button field={slice.primary.buttonLink} isCTA>
+            <Button role="button" field={slice.primary.buttonLink} isCTA>
               {slice.primary.buttonText || 'Learn More'}
             </Button>
           ) : null}
