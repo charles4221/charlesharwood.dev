@@ -20,7 +20,7 @@ describe('Heading component', () => {
     expect(screen.getByRole('heading')).toHaveClass('custom-class');
   });
 
-  it('renders with hover shadow transition', () => {
+  it('renders with hover shadow-sm transition', () => {
     render(<Heading hasHoverShadowTransition>Test Heading</Heading>);
     expect(screen.getByRole('heading')).toHaveClass(
       'heading--shadow-transition',
