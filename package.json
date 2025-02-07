@@ -1,6 +1,6 @@
 {
   "name": "charlesharwood",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "license": "Apache-2.0",
   "author": "Charles Harwood <info@charlesharwood.dev> (https://charlesharwood.dev)",
@@ -29,8 +29,8 @@
     "@gsap/react": "2.1.2",
     "@next/bundle-analyzer": "15.2.3",
     "@prismicio/client": "7.17.0",
-    "@prismicio/next": "1.7.2",
-    "@prismicio/react": "2.9.2",
+    "@prismicio/next": "2.0.0",
+    "@prismicio/react": "3.0.0",
     "@sentry/nextjs": "8.55.0",
     "@vercel/analytics": "1.5.0",
     "@vercel/speed-insights": "1.2.0",
