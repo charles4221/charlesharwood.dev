@@ -1,6 +1,7 @@
+import { ComponentProps } from 'react';
+
 import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import type { PrismicRichTextProps } from '@prismicio/react';
 
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/links/Button';
@@ -9,7 +10,7 @@ import { Heading } from '@/components/typography/Heading';
 
 import type { HeroSlice } from '../../../../prismicio-types';
 
-const components: PrismicRichTextProps['components'] = {
+const components: ComponentProps<typeof PrismicRichText>['components'] = {
   heading1: ({ children }) => (
     <Heading as="h1" size="lg" className="mb-4 mt-12 first:mt-0 last:mb-0">
       {children}
