@@ -1,12 +1,12 @@
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTHeading5Node } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTHeading5Node } from '@prismicio/client/types';
 
 import { Heading } from '../typography/Heading';
 
 export const Heading5: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTHeading5Node,
   undefined
 > = function Heading5({ children }) {

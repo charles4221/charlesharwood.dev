@@ -1,10 +1,10 @@
-import { ReactNode, type JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTOListItemNode, RTOListNode } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTOListItemNode, RTOListNode } from '@prismicio/client/types';
 
 export const OrderedList: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTOListNode,
   undefined
 > = function OrderedList({ children }) {
@@ -12,7 +12,7 @@ export const OrderedList: RichTextMapSerializerFunction<
 };
 
 export const OrderedListItem: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTOListItemNode,
   undefined
 > = function OrderedListItem({ children }: { children: ReactNode }) {
