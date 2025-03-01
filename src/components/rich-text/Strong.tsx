@@ -1,10 +1,10 @@
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTStrongNode } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTStrongNode } from '@prismicio/client/types';
 
 export const Strong: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTStrongNode,
   string
 > = function Strong({ children }) {

@@ -1,10 +1,10 @@
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTParagraphNode } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTParagraphNode } from '@prismicio/client/types';
 
 export const Paragraph: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTParagraphNode,
   undefined
 > = function Paragraph({ children }) {

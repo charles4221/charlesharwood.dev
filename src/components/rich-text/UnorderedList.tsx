@@ -1,10 +1,10 @@
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTListItemNode, RTListNode } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTListItemNode, RTListNode } from '@prismicio/client/types';
 
 export const UnorderedList: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTListNode,
   undefined
 > = function UnorderedList({ children }) {
@@ -12,7 +12,7 @@ export const UnorderedList: RichTextMapSerializerFunction<
 };
 
 export const UnorderedListItem: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTListItemNode,
   undefined
 > = function UnorderedListItem({ children }) {
