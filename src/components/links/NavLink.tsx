@@ -7,7 +7,7 @@ import clsx from 'clsx';
 
 import { useIsActivePage } from '@/hooks/useIsActivePage';
 
-import {
+import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';

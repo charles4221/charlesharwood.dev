@@ -1,9 +1,9 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 import { createClient } from '@/prismic-config';
 import { BASE_URL, PAGES_WITH_CUSTOM_ROUTE_HANDLERS } from '@/utils/constants';
 
-import { PageDocument } from '../../prismicio-types';
+import type { PageDocument } from '../../prismicio-types';
 
 const STATIC_PAGES: MetadataRoute.Sitemap = [
   {
