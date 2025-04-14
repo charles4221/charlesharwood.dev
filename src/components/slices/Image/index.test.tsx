@@ -3,7 +3,7 @@ import { FilledImageFieldImage } from '@prismicio/client';
 import { render, screen } from '@testing-library/react';
 
 import Image from './index';
-import { ImageSlice, Simplify } from '../../../../prismicio-types';
+import type { ImageSlice, Simplify } from '../../../../prismicio-types';
 
 jest.mock('@prismicio/next', () => ({
   PrismicNextImage: jest.fn(

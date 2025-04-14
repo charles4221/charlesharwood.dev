@@ -1,18 +1,20 @@
 'use client';
+import { memo } from 'react';
+
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicText } from '@prismicio/react';
 import clsx from 'clsx';
 
 import { useIsActivePage } from '@/hooks/useIsActivePage';
 
-import {
+import type {
   NavigationDocumentDataLinksItem,
   Simplify,
 } from '../../../prismicio-types';
 
 type NavLinkProps = Simplify<NavigationDocumentDataLinksItem>;
 
-export function NavLink({ label, link }: NavLinkProps) {
+export const NavLink = memo(function NavLink({ label, link }: NavLinkProps) {
   const isActivePage = useIsActivePage(link);
 
   return (
@@ -26,4 +28,4 @@ export function NavLink({ label, link }: NavLinkProps) {
       </PrismicNextLink>
     </li>
   );
-}
+});

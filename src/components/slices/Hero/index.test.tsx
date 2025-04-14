@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import Hero from './index';
-import { HeroSlice } from '../../../../prismicio-types';
+import type { HeroSlice } from '../../../../prismicio-types';
 
 const mockSlice: HeroSlice = {
   slice_type: 'hero',

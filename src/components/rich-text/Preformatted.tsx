@@ -1,10 +1,10 @@
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 
-import { RichTextMapSerializerFunction } from '@prismicio/richtext';
-import { RTPreformattedNode } from '@prismicio/types';
+import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
+import type { RTPreformattedNode } from '@prismicio/client/types';
 
 export const Preformatted: RichTextMapSerializerFunction<
-  JSX.Element,
+  ReactNode,
   RTPreformattedNode,
   undefined
 > = function Preformatted({ children }) {

@@ -2,7 +2,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicText } from '@prismicio/react';
 import clsx from 'clsx';
 
-import { TestimonialsSliceDefaultPrimaryTestimonialsItem } from '../../../prismicio-types';
+import type { TestimonialsSliceDefaultPrimaryTestimonialsItem } from '../../../prismicio-types';
 
 type QuoteProps = TestimonialsSliceDefaultPrimaryTestimonialsItem;
 

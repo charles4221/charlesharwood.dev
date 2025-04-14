@@ -30,6 +30,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                 sizes="100vw"
                 className="w-full hover:scale-105 transition-transform"
                 fallbackAlt=""
+                priority={false}
+                fetchPriority="low"
               />
             </div>
           ) : null}
