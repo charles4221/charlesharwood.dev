@@ -1,7 +1,7 @@
 'use server';
 
 import { captureException } from '@sentry/nextjs';
-import type { LibraryResponse, SendEmailV3_1 } from 'node-mailjet';
+import { LibraryResponse, SendEmailV3_1 } from 'node-mailjet';
 
 import {
   INVALID_EMAIL_ERROR_CODE,
@@ -33,7 +33,7 @@ export async function sendMessage(
     lastName: formData.get('lastName') as string,
     email: formData.get('email') as string,
     company: formData.get('company') as string,
-    projectType: formData.getAll('projectType').join(', '),
+    projectType: (formData.getAll('projectType') as string[]).join(', '),
     description: formData.get('description') as string,
     honeypot: formData.get('address') as string,
   };
@@ -104,7 +104,7 @@ export async function sendMessage(
 
     const data = response.body.Messages[0];
 
-    if (data.Status === 'success') {
+    if (data.Status === SendEmailV3_1.ResponseStatus.Success) {
       return {
         message: ContactFormResponseMessage.SUCCESS,
         success: true,
@@ -142,7 +142,7 @@ export async function sendMessage(
     // Capture unhandled exceptions and send to Sentry.
     if (
       error instanceof Error &&
-      error.message !== ContactFormResponseMessage.FAILED
+      error.message !== ContactFormResponseMessage.FAILED.toString()
     ) {
       captureException(error);
     }

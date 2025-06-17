@@ -12,12 +12,12 @@ describe('ContactForm', () => {
   it('renders the form with all fields', () => {
     render(<ContactForm />);
 
-    expect(screen.getByLabelText(/First Name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Last Name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Company \(optional\)/i)).toBeInTheDocument();
-    expect(screen.getByText(/What can I help you with\?/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Your Message/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/first name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/last name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/company \(optional\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/what can i help you with\?/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/your message/i)).toBeInTheDocument();
   });
 
   it('displays validation messages when required fields are empty', async () => {
@@ -33,16 +33,16 @@ describe('ContactForm', () => {
 
     render(<ContactForm />);
 
-    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }));
 
     expect(
-      await screen.findByText(/First Name is required/i),
+      await screen.findByText(/first name is required/i),
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/Last Name is required/i),
+      await screen.findByText(/last name is required/i),
     ).toBeInTheDocument();
-    expect(await screen.findByText(/Email is required/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Message is required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/email is required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/message is required/i)).toBeInTheDocument();
   });
 
   it('submits the form with valid data', async () => {
@@ -53,20 +53,20 @@ describe('ContactForm', () => {
 
     render(<ContactForm />);
 
-    fireEvent.change(screen.getByLabelText(/First Name/i), {
+    fireEvent.change(screen.getByLabelText(/first name/i), {
       target: { value: 'John' },
     });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), {
+    fireEvent.change(screen.getByLabelText(/last name/i), {
       target: { value: 'Doe' },
     });
-    fireEvent.change(screen.getByLabelText(/Email Address/i), {
+    fireEvent.change(screen.getByLabelText(/email address/i), {
       target: { value: 'john.doe@example.com' },
     });
-    fireEvent.change(screen.getByLabelText(/Your Message/i), {
+    fireEvent.change(screen.getByLabelText(/your message/i), {
       target: { value: 'Hello, this is a test message.' },
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }));
 
     expect(
       await screen.findByText('Thanks for your message!'),
@@ -85,7 +85,7 @@ describe('ContactForm', () => {
     render(<ContactForm />);
 
     const checkbox = screen.getByLabelText(
-      /Mobile App \(iPhone, iPad, Android\)/i,
+      /mobile app \(iphone, ipad, android\)/i,
     );
     fireEvent.click(checkbox);
 

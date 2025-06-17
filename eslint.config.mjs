@@ -1,34 +1,38 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import prettier from 'eslint-plugin-prettier';
+import eslint from '@eslint/js';
+import eslintPluginJest from 'eslint-plugin-jest';
+import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
+  baseDirectory: import.meta.dirname,
+  recommendedConfig: eslint.configs.recommended,
+  allConfig: eslint.configs.all,
 });
 
-const FlatConfig = [
-  ...compat.extends(
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:unicorn/recommended',
-    'plugin:jsx-a11y/strict',
-    'next/core-web-vitals',
-    'prettier',
-  ),
+const FlatConfig = tseslint.config(
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  eslint.configs.recommended,
+  tseslint.configs.eslintRecommended,
+  tseslint.configs.recommendedTypeChecked,
+  eslintPluginPrettierRecommended,
+  eslintPluginUnicorn.configs.all,
   {
-    plugins: {
-      prettier,
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
-
+  },
+  {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     rules: {
-      'prettier/prettier': 'error',
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ...eslintPluginJsxA11y.flatConfigs.strict.rules,
       'no-nested-ternary': 'error',
 
       'import/order': [
@@ -65,6 +69,7 @@ const FlatConfig = [
       ],
 
       'unicorn/no-array-callback-reference': 'off',
+      'unicorn/no-keyword-prefix': 'off',
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prevent-abbreviations': 'off',
 
@@ -128,23 +133,25 @@ const FlatConfig = [
       ],
     },
   },
-  ...compat
-    .extends(
-      'plugin:jest/recommended',
-      'plugin:jest-formatting/recommended',
-      'plugin:testing-library/react',
-    )
-    .map((config) => ({
-      ...config,
-      files: ['**/*.test.{js,jsx,ts,tsx}', '**/__mocks__/**/*.{js,jsx,ts,tsx}'],
-    })),
   {
     files: ['**/*.test.{js,jsx,ts,tsx}', '**/__mocks__/**/*.{js,jsx,ts,tsx}'],
 
+    plugins: {
+      jest: eslintPluginJest,
+      'testing-library': eslintPluginTestingLibrary,
+    },
+
     rules: {
+      ...eslintPluginJest.configs['flat/recommended'].rules,
+      ...eslintPluginTestingLibrary.configs['flat/react'].rules,
       'unicorn/filename-case': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/unbound-method': 'off',
     },
   },
-];
+);
 
 export default FlatConfig;
