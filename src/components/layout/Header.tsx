@@ -25,7 +25,7 @@ export async function Header() {
     <Container
       as="header"
       yPadding="xs"
-      className="font-headings bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10 dark:backdrop-blur-lg dark:bg-opacity-75">
+      className="font-headings bg-sky-950 text-white uppercase shadow-2xl sticky top-0 z-10 dark:backdrop-blur-lg dark:bg-sky-950/75">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 leading-none">
         <PrismicNextLink href="/" className="group">
           <Heading
@@ -37,7 +37,7 @@ export async function Header() {
           </Heading>
           <p className="text-lg">Australian-made mobile apps and websites</p>
         </PrismicNextLink>
-        <div className="flex flex-grow lg:flex-grow-0 items-center justify-between gap-x-6">
+        <div className="flex grow lg:grow-0 items-center justify-between gap-x-6">
           <nav>
             <ul className="flex flex-wrap gap-4 sm:gap-6 md:gap-10">
               {navigation.data.links.map(renderNavItem)}

@@ -1,22 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/aspect-ratio';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-*: initial;
+  --font-sans:
+    var(--font-fira-code), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-headings:
+    var(--font-vt323), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  /** Tailwind no longer sets pointer cursor by default, so we add it here. */
+  button,
+  [role='button'] {
+    @apply cursor-pointer;
+  }
+}
 
 @layer components {
   .heading {
     @apply leading-tight tracking-tight uppercase font-headings;
 
-    &--display {
+    &.heading--display {
       @apply text-slate-950;
-      text-shadow: -0.042em 0.042em theme('colors.red.500');
-      -webkit-text-stroke: 0.027em theme('colors.sky.300');
+      text-shadow: -0.042em 0.042em var(--color-red-500);
+      -webkit-text-stroke: 0.027em var(--color-sky-300);
 
       /* Replace text-stroke with base colour for IE10/11 */
       @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
         -webkit-text-stroke: 0;
 
-        .dark & {
-          color: theme('colors.sky.300');
+        @variant dark {
+          color: var(--color-sky-300);
         }
       }
 
@@ -24,8 +62,8 @@
       @supports (-ms-accelerator: true) {
         -webkit-text-stroke: 0;
 
-        .dark & {
-          color: theme('colors.sky.300');
+        @variant dark {
+          color: var(--color-sky-300);
         }
       }
 
@@ -34,7 +72,7 @@
 
         &:hover,
         .group:hover & {
-          text-shadow: -0.07em 0.06em theme('colors.red.500');
+          text-shadow: -0.07em 0.06em var(--color-red-500);
         }
       }
     }
@@ -48,18 +86,18 @@
     @apply inline-block font-headings uppercase text-3xl;
     transition: all 0.15s ease-in-out;
 
-    &--cta {
-      box-shadow: -3px 3px 0 0 theme('colors.red.500');
+    &.button--cta {
+      box-shadow: -3px 3px 0 0 var(--color-red-500);
 
-      &:hover {
-        box-shadow: 0 0 0 5px theme('colors.red.500');
+      @variant hover {
+        box-shadow: 0 0 0 5px var(--color-red-500);
       }
     }
   }
+}
 
-  .text-center {
-    ul {
-      @apply list-inside;
-    }
+@utility text-center {
+  ul {
+    @apply list-inside;
   }
 }

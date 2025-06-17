@@ -5,10 +5,10 @@ import { Footer } from '../Footer';
 describe('Footer', () => {
   it('renders the footer text', () => {
     render(<Footer />);
-    expect(screen.getByText(/Handcrafted with/i)).toBeInTheDocument();
-    expect(screen.getByText(/Gold Coast, Australia/i)).toBeInTheDocument();
+    expect(screen.getByText(/handcrafted with/i)).toBeInTheDocument();
+    expect(screen.getByText(/gold coast, australia/i)).toBeInTheDocument();
     expect(
-      screen.getByText(/Charles Harwood. All rights reserved./i),
+      screen.getByText(/charles harwood. all rights reserved./i),
     ).toBeInTheDocument();
   });
 
@@ -25,7 +25,7 @@ describe('Footer', () => {
   it('renders the social links', () => {
     render(<Footer />);
     expect(
-      screen.getByRole('link', { name: /View this website’s source code!/i }),
+      screen.getByRole('link', { name: /view this website’s source code!/i }),
     ).toBeInTheDocument();
   });
 

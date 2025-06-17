@@ -8,7 +8,7 @@ describe('DarkModeSettingPopover', () => {
   it('renders the heading', () => {
     render(<DarkModeSettingPopover />);
     expect(
-      screen.getByRole('heading', { name: /Theme Settings/i }),
+      screen.getByRole('heading', { name: /theme settings/i }),
     ).toBeInTheDocument();
   });
 
@@ -16,7 +16,7 @@ describe('DarkModeSettingPopover', () => {
     render(<DarkModeSettingPopover />);
     expect(screen.getByText('Dark Theme')).toBeInTheDocument();
     expect(screen.getByText('Light Theme')).toBeInTheDocument();
-    expect(screen.getByText(/Use System Setting/i)).toBeInTheDocument();
+    expect(screen.getByText(/use system setting/i)).toBeInTheDocument();
   });
 
   it('renders the correct icons for each theme option', () => {
