@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { startTransition, useActionState, useCallback, useState } from 'react';
 
 import { sendMessage } from '@/app/contact/actions';
 import {
@@ -39,47 +39,53 @@ export function ContactForm() {
   const [clientValidationErrors, setClientValidationErrors] =
     useState<Record<ContactFormRequiredFields, string>>();
 
-  const validateBeforeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const validateBeforeSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    // Check if the form is valid before submitting
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+      // Check if the form is valid before submitting
+      const form = e.currentTarget;
+      const formData = new FormData(form);
 
-    const firstName = formData.get('firstName') as string;
-    const lastName = formData.get('lastName') as string;
-    const email = formData.get('email') as string;
-    const description = formData.get('description') as string;
+      const firstName = formData.get('firstName') as string;
+      const lastName = formData.get('lastName') as string;
+      const email = formData.get('email') as string;
+      const description = formData.get('description') as string;
 
-    const emailIsValid = isEmailValid(email);
-    const emailValidationMessage = emailIsValid
-      ? ''
-      : ContactFormValidationMessage.INVALID_EMAIL;
-
-    const errors: Record<ContactFormRequiredFields, string> = {
-      firstName: firstName
+      const emailIsValid = isEmailValid(email);
+      const emailValidationMessage = emailIsValid
         ? ''
-        : ContactFormValidationMessage.FIRST_NAME_REQUIRED,
-      lastName: lastName ? '' : ContactFormValidationMessage.LAST_NAME_REQUIRED,
-      email: email
-        ? emailValidationMessage
-        : ContactFormValidationMessage.EMAIL_REQUIRED,
-      description: description
-        ? ''
-        : ContactFormValidationMessage.DESCRIPTION_REQUIRED,
-    };
+        : ContactFormValidationMessage.INVALID_EMAIL;
 
-    if (!firstName || !lastName || !email || !description || !emailIsValid) {
-      setClientValidationErrors(errors);
-      return;
-    }
+      const errors: Record<ContactFormRequiredFields, string> = {
+        firstName: firstName
+          ? ''
+          : ContactFormValidationMessage.FIRST_NAME_REQUIRED,
+        lastName: lastName
+          ? ''
+          : ContactFormValidationMessage.LAST_NAME_REQUIRED,
+        email: email
+          ? emailValidationMessage
+          : ContactFormValidationMessage.EMAIL_REQUIRED,
+        description: description
+          ? ''
+          : ContactFormValidationMessage.DESCRIPTION_REQUIRED,
+      };
 
-    // Clear any previous validation errors
-    setClientValidationErrors(undefined);
-    // Submit the form if all validations pass
-    // This will trigger the action defined in useActionState
-    form.submit();
-  };
+      if (!firstName || !lastName || !email || !description || !emailIsValid) {
+        setClientValidationErrors(errors);
+        return;
+      }
+
+      // Clear any previous validation errors
+      setClientValidationErrors(undefined);
+      // Submit the form if all validations pass
+      startTransition(() => {
+        formAction(formData);
+      });
+    },
+    [],
+  );
 
   return (
     <Card>

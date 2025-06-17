@@ -114,7 +114,9 @@ export async function sendMessage(
 
     const data = response.body.Messages[0];
 
-    if (data.Status === SendEmailV3_1.ResponseStatus.Success) {
+    // Unfortunately mailjet does not properly export the `ResponseStatus` enum so we have to use a string comparison.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+    if (data.Status === 'success') {
       return {
         message: ContactFormResponseMessage.SUCCESS,
         success: true,
