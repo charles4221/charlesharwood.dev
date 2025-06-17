@@ -32,6 +32,12 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  /** Tailwind no longer sets pointer cursor by default, so we add it here. */
+  button,
+  [role='button'] {
+    @apply cursor-pointer;
+  }
 }
 
 @layer components {
