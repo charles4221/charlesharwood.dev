@@ -14,6 +14,7 @@ import {
   ContactFormFields,
   ContactFormResponseMessage,
   ContactFormState,
+  ContactFormValidationMessage,
 } from './types';
 
 export async function sendMessage(
@@ -46,11 +47,12 @@ export async function sendMessage(
     };
   }
 
-  if (!firstName || !lastName || !email || !description) {
-    const emailIsValid = isEmailValid(email);
+  const emailIsValid = isEmailValid(email);
+
+  if (!firstName || !lastName || !email || !description || !emailIsValid) {
     const emailValidationMessage = emailIsValid
       ? ''
-      : 'Please check that you have entered a valid email address.';
+      : ContactFormValidationMessage.INVALID_EMAIL;
 
     return {
       data: {
@@ -64,10 +66,18 @@ export async function sendMessage(
       message: ContactFormResponseMessage.INVALID,
       success: false,
       invalidFieldMessages: {
-        firstName: firstName ? '' : 'First Name is required.',
-        lastName: lastName ? '' : 'Last Name is required.',
-        email: email ? emailValidationMessage : 'Email is required.',
-        description: description ? '' : 'Message is required.',
+        firstName: firstName
+          ? ''
+          : ContactFormValidationMessage.FIRST_NAME_REQUIRED,
+        lastName: lastName
+          ? ''
+          : ContactFormValidationMessage.LAST_NAME_REQUIRED,
+        email: email
+          ? emailValidationMessage
+          : ContactFormValidationMessage.EMAIL_REQUIRED,
+        description: description
+          ? ''
+          : ContactFormValidationMessage.DESCRIPTION_REQUIRED,
       },
     };
   }

@@ -1,9 +1,14 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 
 import { sendMessage } from '@/app/contact/actions';
-import { ContactFormState } from '@/app/contact/types';
+import {
+  ContactFormRequiredFields,
+  ContactFormState,
+  ContactFormValidationMessage,
+} from '@/app/contact/types';
+import { isEmailValid } from '@/utils/is-email-valid';
 
 import { Checkbox } from './Checkbox';
 import { ContactFormResponse } from './ContactFormResponse';
@@ -31,10 +36,54 @@ export const PROJECT_OPTIONS: ProjectOption[] = [
 
 export function ContactForm() {
   const [state, formAction] = useActionState(sendMessage, initialState);
+  const [clientValidationErrors, setClientValidationErrors] =
+    useState<Record<ContactFormRequiredFields, string>>();
+
+  const validateBeforeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Check if the form is valid before submitting
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const email = formData.get('email') as string;
+    const description = formData.get('description') as string;
+
+    const emailIsValid = isEmailValid(email);
+    const emailValidationMessage = emailIsValid
+      ? ''
+      : ContactFormValidationMessage.INVALID_EMAIL;
+
+    const errors: Record<ContactFormRequiredFields, string> = {
+      firstName: firstName
+        ? ''
+        : ContactFormValidationMessage.FIRST_NAME_REQUIRED,
+      lastName: lastName ? '' : ContactFormValidationMessage.LAST_NAME_REQUIRED,
+      email: email
+        ? emailValidationMessage
+        : ContactFormValidationMessage.EMAIL_REQUIRED,
+      description: description
+        ? ''
+        : ContactFormValidationMessage.DESCRIPTION_REQUIRED,
+    };
+
+    if (!firstName || !lastName || !email || !description || !emailIsValid) {
+      setClientValidationErrors(errors);
+      return;
+    }
+
+    // Clear any previous validation errors
+    setClientValidationErrors(undefined);
+    // Submit the form if all validations pass
+    // This will trigger the action defined in useActionState
+    form.submit();
+  };
 
   return (
     <Card>
-      <form noValidate action={formAction}>
+      <form noValidate action={formAction} onSubmit={validateBeforeSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-6">
           <InputWithLabel
             type="text"
@@ -43,7 +92,10 @@ export function ContactForm() {
             placeholder="John"
             required
             defaultValue={state.data?.firstName}
-            invalidMessage={state.invalidFieldMessages?.firstName}
+            invalidMessage={
+              clientValidationErrors?.firstName ||
+              state.invalidFieldMessages?.firstName
+            }
           />
           <InputWithLabel
             type="text"
@@ -52,7 +104,10 @@ export function ContactForm() {
             placeholder="Bacon"
             required
             defaultValue={state.data?.lastName}
-            invalidMessage={state.invalidFieldMessages?.lastName}
+            invalidMessage={
+              clientValidationErrors?.lastName ||
+              state.invalidFieldMessages?.lastName
+            }
           />
           <InputWithLabel
             type="email"
@@ -61,7 +116,9 @@ export function ContactForm() {
             placeholder="bacon@sandwich.com"
             required
             defaultValue={state.data?.email}
-            invalidMessage={state.invalidFieldMessages?.email}
+            invalidMessage={
+              clientValidationErrors?.email || state.invalidFieldMessages?.email
+            }
           />
           <InputWithLabel
             type="text"
@@ -94,7 +151,10 @@ export function ContactForm() {
             required
             wrapperClassName="md:col-span-2"
             defaultValue={state.data?.description}
-            invalidMessage={state.invalidFieldMessages?.description}
+            invalidMessage={
+              clientValidationErrors?.description ||
+              state.invalidFieldMessages?.description
+            }
           />
           <InputWithLabel
             type="text"
