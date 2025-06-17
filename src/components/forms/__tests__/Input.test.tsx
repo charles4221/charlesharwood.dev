@@ -21,7 +21,7 @@ describe('Input component', () => {
     render(<Input placeholder="Enter text" />);
     const inputElement = screen.getByPlaceholderText('Enter text');
     expect(inputElement).toHaveClass(
-      'block w-full rounded p-3 mb-2 bg-slate-100 text-slate-950',
+      'block w-full rounded-sm p-3 mb-2 bg-slate-100 text-slate-950',
     );
   });
 
@@ -35,7 +35,7 @@ describe('Input component', () => {
     render(<Input isTextArea placeholder="Enter text" />);
     const textAreaElement = screen.getByPlaceholderText('Enter text');
     expect(textAreaElement).toHaveClass(
-      'block w-full rounded p-3 mb-2 bg-slate-100 text-slate-950',
+      'block w-full rounded-sm p-3 mb-2 bg-slate-100 text-slate-950',
     );
   });
 

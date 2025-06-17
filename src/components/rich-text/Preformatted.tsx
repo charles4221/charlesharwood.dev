@@ -9,7 +9,7 @@ export const Preformatted: RichTextMapSerializerFunction<
   undefined
 > = function Preformatted({ children }) {
   return (
-    <pre className="mb-7 rounded bg-slate-100 p-4 text-sm last:mb-0 md:p-8 md:text-lg">
+    <pre className="mb-7 rounded-sm bg-slate-100 p-4 text-sm last:mb-0 md:p-8 md:text-lg">
       <code>{children}</code>
     </pre>
   );

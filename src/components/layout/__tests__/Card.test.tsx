@@ -18,7 +18,7 @@ describe('Card component', () => {
   it('applies link styles when isLink is true', () => {
     render(<Card isLink>Link Content</Card>);
     expect(screen.getByText('Link Content')).toHaveClass(
-      'shadow-lg dark:shadow-md dark:shadow-sky-900 hover:shadow-xl hover:dark:shadow-lg hover:dark:shadow-sky-900 hover:bg-slate-300 hover:dark:bg-slate-700 group-hover:bg-slate-300 group-hover:dark:bg-slate-700 group-hover:shadow-xl transition-all',
+      'shadow-lg dark:shadow-md dark:shadow-sky-900 hover:shadow-xl dark:hover:shadow-lg dark:hover:shadow-sky-900 hover:bg-slate-300 dark:hover:bg-slate-700 group-hover:bg-slate-300 dark:group-hover:bg-slate-700 group-hover:shadow-xl transition-all',
     );
   });
 
@@ -30,7 +30,7 @@ describe('Card component', () => {
     );
     expect(screen.getByText('Centered Link Content')).toHaveClass(
       'flex justify-center items-center',
-      'shadow-lg dark:shadow-md dark:shadow-sky-900 hover:shadow-xl hover:dark:shadow-lg hover:dark:shadow-sky-900 hover:bg-slate-300 hover:dark:bg-slate-700 group-hover:bg-slate-300 group-hover:dark:bg-slate-700 group-hover:shadow-xl transition-all',
+      'shadow-lg dark:shadow-md dark:shadow-sky-900 hover:shadow-xl dark:hover:shadow-lg dark:hover:shadow-sky-900 hover:bg-slate-300 dark:hover:bg-slate-700 group-hover:bg-slate-300 dark:group-hover:bg-slate-700 group-hover:shadow-xl transition-all',
     );
   });
 });

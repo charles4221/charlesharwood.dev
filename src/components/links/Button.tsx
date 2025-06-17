@@ -56,7 +56,7 @@ export function Button({
     textColor,
     isCompact ? 'px-2 py-1' : 'px-5 py-3',
     isCTA && 'button--cta',
-    isRounded && 'rounded',
+    isRounded && 'rounded-sm',
     classNameFromProps,
     'disabled' in props && props.disabled && 'opacity-50 cursor-not-allowed',
   );

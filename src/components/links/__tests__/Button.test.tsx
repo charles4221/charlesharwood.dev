@@ -19,7 +19,7 @@ describe('Button', () => {
       'button--cta',
       'px-2',
       'py-1',
-      'rounded',
+      'rounded-sm',
     );
   });
 
@@ -42,10 +42,10 @@ describe('Button', () => {
     expect(buttonElement).toHaveClass('px-2', 'py-1');
   });
 
-  it('renders as rounded button', () => {
+  it('renders as rounded-sm button', () => {
     render(<Button isRounded>Hello</Button>);
     const buttonElement = screen.getByRole('button');
-    expect(buttonElement).toHaveClass('rounded');
+    expect(buttonElement).toHaveClass('rounded-sm');
   });
 
   it('renders with custom class', () => {

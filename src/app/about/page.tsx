@@ -23,7 +23,7 @@ export default async function AboutPage() {
         <div className="max-w-md lg:pl-20">
           <PrismicNextImage
             field={page.data.headshot}
-            className="aspect-square lg:rotate-3 hover:lg:-rotate-3 transition-all rounded-2xl bg-gray-100 shadow-xl"
+            className="aspect-square lg:rotate-3 lg:hover:-rotate-3 transition-all rounded-2xl bg-gray-100 shadow-xl"
             priority
           />
         </div>
