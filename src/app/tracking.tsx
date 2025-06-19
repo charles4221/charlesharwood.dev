@@ -13,7 +13,7 @@ export function Tracking() {
       <SpeedInsights />
       <Script
         defer
-        src="https://umami.charlesharwood.dev/script.js"
+        src="https://analytics.charlesharwood.dev/script.js"
         data-website-id="fd44e4d7-5935-4ef6-b888-4bdf25990f4e"
       />
     </>
