@@ -13,10 +13,8 @@ export type SettingsActions = {
   setTheme: (theme: Theme) => void;
 };
 
-export type SettingsStore = SettingsState & SettingsActions;
-
 export const createSettingsStore: StateCreator<
-  SettingsStore,
+  SettingsState,
   [['zustand/devtools', never]]
 > = (set) => {
   return {
@@ -31,7 +29,7 @@ export const createSettingsStore: StateCreator<
 };
 
 export const SettingsSelectors = {
-  getTheme: (state: SettingsStore) => state.theme,
-  getThemeWithSetter: (state: SettingsStore) =>
-    [state.theme, state.setTheme] as const,
+  getTheme: (state: SettingsState) => state.theme,
+  isThemeSettingActive: (state: SettingsState, theme: Theme) =>
+    state.theme === theme,
 };

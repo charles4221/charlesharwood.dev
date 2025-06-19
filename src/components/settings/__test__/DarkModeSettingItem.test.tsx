@@ -5,7 +5,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 
 import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
 import { UmamiPlugin } from '@/plugins/umami';
-import { useBoundStore } from '@/store/bound';
+import { StoreActions, useBoundStore } from '@/store/bound';
 
 import { DarkModeSettingItem } from '../DarkModeSettingItem';
 
@@ -20,10 +20,7 @@ const mockUmamiPlugin = UmamiPlugin as jest.Mock;
 describe('DarkModeSettingItem', () => {
   beforeEach(() => {
     mockUsePrefersDarkMode.mockReturnValue(false);
-    mockUseBoundStore.mockReturnValue({
-      isActive: false,
-      setTheme: jest.fn(),
-    });
+    mockUseBoundStore.mockReturnValue(false);
     mockUmamiPlugin.mockReturnValue({
       track: jest.fn(),
     });
@@ -55,7 +52,7 @@ describe('DarkModeSettingItem', () => {
     const button = screen.getByTitle('Activate Dark Mode');
     fireEvent.click(button);
 
-    expect(mockUseBoundStore().setTheme).toHaveBeenCalledWith('dark');
+    expect(StoreActions.setTheme).toHaveBeenCalledWith('dark');
     expect(mockUmamiPlugin().track).toHaveBeenCalledWith('Changed Theme', {
       theme: 'dark',
       systemPrefersDarkMode: false,
@@ -78,10 +75,7 @@ describe('DarkModeSettingItem', () => {
   });
 
   it('applies correct variant based on isActive state', () => {
-    mockUseBoundStore.mockReturnValue({
-      isActive: true,
-      setTheme: jest.fn(),
-    });
+    mockUseBoundStore.mockReturnValue(true);
 
     render(
       <DarkModeSettingItem

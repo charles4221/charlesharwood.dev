@@ -8,9 +8,16 @@ import {
 
 import { IS_DEV, IS_TEST } from '@/utils/constants';
 
-import { SettingsStore, createSettingsStore } from './settings';
+import {
+  SettingsActions,
+  SettingsSelectors,
+  SettingsState,
+  createSettingsStore,
+} from './settings';
 
-export type StoreState = SettingsStore;
+// Extend the StoreState and StoreActions types as needed for other store slices
+export type StoreState = SettingsState;
+export type StoreActions = SettingsActions;
 export type PersistedStoreState = Pick<StoreState, 'theme'>;
 
 const getPersistedState = (state: StoreState): PersistedStoreState => ({
@@ -60,3 +67,11 @@ export const useBoundStore = create<StoreState>()(
     devtoolsOptions,
   ),
 );
+
+export const StoreActions: StoreActions = {
+  setTheme: (theme) => useBoundStore.setState({ theme }),
+};
+
+export const StoreSelectors = {
+  ...SettingsSelectors,
+};

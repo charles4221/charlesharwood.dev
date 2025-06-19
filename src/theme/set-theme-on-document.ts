@@ -21,10 +21,18 @@ import { SettingsSelectors } from '@/store/settings';
  * so I think it's a fair compromise.
  */
 export function setThemeOnDocument(newTheme: 'dark' | 'light') {
-  if (newTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-  } else if (newTheme === 'light') {
-    document.documentElement.classList.remove('dark');
+  switch (newTheme) {
+    case 'dark': {
+      document.documentElement.classList.add('dark');
+      return;
+    }
+    case 'light': {
+      document.documentElement.classList.remove('dark');
+      return;
+    }
+    default: {
+      return;
+    }
   }
 }
 
