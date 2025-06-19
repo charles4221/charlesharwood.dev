@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
+import type { RTListItemNode, RTListNode } from '@prismicio/client';
 import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
-import type { RTListItemNode, RTListNode } from '@prismicio/client/types';
 
 export const UnorderedList: RichTextMapSerializerFunction<
   ReactNode,

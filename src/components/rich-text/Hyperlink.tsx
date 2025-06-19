@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
+import type { RTLinkNode } from '@prismicio/client';
 import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
-import type { RTLinkNode } from '@prismicio/client/types';
 import { PrismicNextLink } from '@prismicio/next';
 
 export const Hyperlink: RichTextMapSerializerFunction<

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
+import type { RTParagraphNode } from '@prismicio/client';
 import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
-import type { RTParagraphNode } from '@prismicio/client/types';
 
 export const Paragraph: RichTextMapSerializerFunction<
   ReactNode,

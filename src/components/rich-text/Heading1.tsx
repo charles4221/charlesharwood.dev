@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
+import type { RTHeading1Node } from '@prismicio/client';
 import type { RichTextMapSerializerFunction } from '@prismicio/client/richtext';
-import type { RTHeading1Node } from '@prismicio/client/types';
 
 import { Heading } from '../typography/Heading';
 
