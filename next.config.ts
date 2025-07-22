@@ -1,12 +1,15 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
+import { createClient as createPrismicClient } from '@prismicio/client';
 import { type SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
-import { createClient } from '@/prismic-config';
+import { repositoryName } from '@/prismic-config';
 import { IS_DEV } from '@/utils/constants';
 
 const nextConfig = async (): Promise<NextConfig> => {
-  const client = createClient();
+  const client = createPrismicClient(repositoryName, {
+    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+  });
 
   const repository = await client.getRepository();
   const locales = repository.languages.map((lang) => lang.id);
