@@ -66,8 +66,8 @@ export function Button({
       <PrismicNextLink
         className={compiledClassName}
         {...props}
-        // narrow away the `null` type on `prefetch` prop until Prismic updates it to match the updated type from Next.js
-        prefetch={props.prefetch ?? undefined}
+        // TODO: Remove the casting of "auto" to `null` once the type is fixed in @prismicio/next
+        prefetch={props.prefetch === 'auto' ? null : props.prefetch}
       />
     );
   }
