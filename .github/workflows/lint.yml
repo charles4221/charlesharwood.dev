@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Node Dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
         env:
           FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.NPM_CONFIG_FONT_AWESOME_TOKEN }}
 
