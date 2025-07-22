@@ -1,13 +1,12 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
-import { createClient as createPrismicClient } from '@prismicio/client';
 import { type SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
-import { repositoryName } from '@/prismic-config';
+import { createClient } from '@/prismic-config';
 import { IS_DEV } from '@/utils/constants';
 
 const nextConfig = async (): Promise<NextConfig> => {
-  const client = createPrismicClient(repositoryName);
+  const client = createClient();
 
   const repository = await client.getRepository();
   const locales = repository.languages.map((lang) => lang.id);
@@ -30,20 +29,21 @@ const nextConfig = async (): Promise<NextConfig> => {
         },
       ],
     },
-    redirects: async () => {
-      return [
-        {
-          source: '/portfolio',
-          destination: '/about',
-          permanent: true,
-        },
-        {
-          source: '/project/:slug',
-          destination: '/about',
-          permanent: true,
-        },
-      ];
-    },
+    redirects: () =>
+      new Promise((resolve) => {
+        resolve([
+          {
+            source: '/portfolio',
+            destination: '/about',
+            permanent: true,
+          },
+          {
+            source: '/project/:slug',
+            destination: '/about',
+            permanent: true,
+          },
+        ]);
+      }),
   };
 };
 

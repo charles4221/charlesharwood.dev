@@ -3,9 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { usePrefersDarkMode } from '@/hooks/usePrefersDarkMode';
 import { UmamiPlugin } from '@/plugins/umami';
 import { StoreActions, StoreSelectors, useBoundStore } from '@/store/bound';
+import { SettingsState } from '@/store/settings';
+import { Theme } from '@/theme/types';
 
 import { ThemeOption } from './types';
 import { Button } from '../links/Button';
+
+function makeIsThemeSettingActive(theme: Theme) {
+  return (state: SettingsState) =>
+    StoreSelectors.isThemeSettingActive(state, theme);
+}
 
 export function DarkModeSettingItem({
   label,
@@ -14,9 +21,7 @@ export function DarkModeSettingItem({
   ariaTitle,
 }: ThemeOption) {
   const systemPrefersDarkMode = usePrefersDarkMode();
-  const isActive = useBoundStore((state) =>
-    StoreSelectors.isThemeSettingActive(state, value),
-  );
+  const isActive = useBoundStore(makeIsThemeSettingActive(value));
 
   function handleChangeTheme() {
     StoreActions.setTheme(value);

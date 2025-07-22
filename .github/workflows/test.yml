@@ -14,10 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js v22.17.0
+      - name: Setup Node.js v22.17.1
         uses: actions/setup-node@v3
         with:
-          node-version: '22.17.0'
+          node-version: '22.17.1'
           registry-url: https://npm.fontawesome.com/
           scope: '@fortawesome'
           cache: 'npm'

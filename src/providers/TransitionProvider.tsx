@@ -15,7 +15,7 @@ export function TransitionProvider({ children }: PropsWithChildren) {
 
   // Don't animate route transitions if user prefers reduced motion
   if (prefersReducedMotion) {
-    return children;
+    return <>{children}</>;
   }
 
   return (

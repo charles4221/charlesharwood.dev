@@ -19,7 +19,7 @@
 
 My name is Charles Harwood and I'm a software engineer from the Gold Coast, Australia. I've been working in the tech industry since 2011, and I've been writing crappy code since MySpace was cool.
 
-I'm currently working at [Entain Australia & New Zealand][entain] as a Staff Engineer, working under the Head of Engineering across all product delivery and engineering teams. My focus is on improving the performance and stability of our apps, the quality of our codebases, and helping our teams deliver great experiences to Entain customers.
+I'm currently working at [Entain Australia & New Zealand][entain] as an Engineering Manager, leading and supporting a cross-functional team of engineers to deliver high quality features for our mobile and web apps and our wider platform, with a focus on improving performance, stability, and the quality of our codebases.
 
 My technical focus since 2021 has been [React Native][react-native] with [TypeScript][typescript], but I've been working with [React][react] in general since 2015 (the days of `React.createClass`, what a time to be alive).
 
