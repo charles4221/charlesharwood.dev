@@ -2,6 +2,7 @@ import {
   IconDefinition,
   faGithub,
   faLinkedin,
+  faMastodon,
   faSpotify,
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/pro-solid-svg-icons';
@@ -14,6 +15,7 @@ type SocialLink = {
   title: string;
   icon: IconDefinition;
   href: string;
+  slug: string;
 };
 
 const FOOTER_SOCIAL_LINKS: SocialLink[] = [
@@ -21,16 +23,25 @@ const FOOTER_SOCIAL_LINKS: SocialLink[] = [
     title: 'Find me on GitHub',
     icon: faGithub,
     href: 'https://github.com/charles4221',
+    slug: 'github',
   },
   {
     title: 'Find me on LinkedIn',
     icon: faLinkedin,
     href: 'https://www.linkedin.com/in/charles-harwood-94511b38',
+    slug: 'linkedin',
+  },
+  {
+    title: 'Find me on Mastodon',
+    icon: faMastodon,
+    href: 'https://mastodon.social/@lordofbacon',
+    slug: 'mastodon',
   },
   {
     title: 'Find me on Spotify',
     icon: faSpotify,
     href: 'https://open.spotify.com/user/22rloqf6zlymfmgdebyhmg2ia',
+    slug: 'spotify',
   },
 ];
 
@@ -39,6 +50,7 @@ function SocialLinkItem({
   href,
   icon,
   isExpanded = false,
+  slug,
 }: SocialLink & { isExpanded?: boolean }) {
   return (
     <li key={title}>
@@ -47,7 +59,7 @@ function SocialLinkItem({
           href={href}
           title={title}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={slug === 'mastodon' ? 'me' : 'noopener noreferrer'}
           data-umami-event="Social link"
           data-umami-event-title={title}>
           <FontAwesomeIcon icon={icon} width={24} size="xl" />
