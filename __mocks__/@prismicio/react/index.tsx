@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+
 import { asText, isFilled, type RichTextField } from '@prismicio/client';
 
 export const PrismicText = ({ field }: { field: RichTextField }) => {

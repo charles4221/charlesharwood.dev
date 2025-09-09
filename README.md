@@ -21,7 +21,9 @@ My name is Charles Harwood and I'm a software engineer from the Gold Coast, Aust
 
 I'm currently working at [Entain Australia & New Zealand][entain] as an Engineering Manager, leading and supporting a cross-functional team of engineers to deliver high quality features for our mobile and web apps and our wider platform, with a focus on improving performance, stability, and the quality of our codebases.
 
-My technical focus since 2021 has been [React Native][react-native] with [TypeScript][typescript], but I've been working with [React][react] in general since 2015 (the days of `React.createClass`, what a time to be alive).
+Outside of my day job, I am the active maintainer for the open-source [react-fontawesome][react-fontawesome] library which I also use in many of my projects. The package is downloaded over 1 million times every week, so it certainly keeps me on my toes!
+
+After many years of building websites and online stores primarily with PHP, my technical focus shifted in 2021 to building native mobile applications with [React Native][react-native] and [TypeScript][typescript], although I've been working with [React][react] in general since 2015 (the days of `React.createClass`, what a time to be alive).
 
 ## Why this repo exists
 
@@ -39,7 +41,7 @@ This website was built using everyone and their grandma's favourite tools and li
 - [Next.js][nextjs] for the core framework (and therefore obviously [React][react])
 - [Tailwind CSS][tailwind] utility-first CSS framework for styling
 - [Zustand][zustand] for client state management
-- [Font Awesome Pro][fontawesome] v6 for icons
+- [Font Awesome Pro][fontawesome] for icons
 - [clsx][clsx] for constructing `className` strings conditionally
 - [ESLint][eslint] with [eslint-plugin-unicorn][eslint-unicorn] for linting
 - [Prettier][prettier] for code formatting
@@ -125,6 +127,7 @@ limitations under the License.
 [zustand]: https://zustand-demo.pmnd.rs/
 [clsx]: https://github.com/lukeed/clsx
 [fontawesome]: https://fontawesome.com/
+[react-fontawesome]: https://github.com/FortAwesome/react-fontawesome/
 [eslint]: https://eslint.org/
 [eslint-unicorn]: https://github.com/sindresorhus/eslint-plugin-unicorn
 [prettier]: https://prettier.io/
