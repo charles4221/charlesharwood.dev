@@ -66,8 +66,6 @@ export function Button({
       <PrismicNextLink
         className={compiledClassName}
         {...props}
-        // TODO: Remove the casting of "auto" to `null` once the type is fixed in @prismicio/next
-        // @ts-expect-error TS2322
         prefetch={props.prefetch === 'auto' ? null : props.prefetch}
       />
     );

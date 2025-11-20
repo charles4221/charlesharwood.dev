@@ -1,33 +1,31 @@
 import { cloneElement, type JSX } from 'react';
 
+import {
+  faCss3Alt,
+  faGitAlt,
+  faGithub,
+  faHtml5,
+  faNodeJs,
+  faPhp,
+  faReact,
+  faSwift,
+} from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Card } from '../layout/Card';
 import { Heading } from '../typography/Heading';
 import {
-  CSSIcon,
-  GitHubIcon,
-  GitIcon,
   GraphQLIcon,
-  HTMLIcon,
-  JIRAIcon,
   JestIcon,
   KotlinIcon,
-  MetroIcon,
   NextJSIcon,
-  NodeJSIcon,
-  PHPIcon,
-  ReactIcon,
-  ReactNativeIcon,
-  StorybookIcon,
-  SwiftIcon,
   TailwindIcon,
-  TanstackIcon,
   TypeScriptIcon,
-  WebpackIcon,
 } from '../typography/icons/CustomIcons';
 
 type SkillItemProps = {
   name: string;
-  icon: JSX.Element;
+  icon: JSX.Element | (() => JSX.Element);
   href: string;
 };
 
@@ -39,17 +37,23 @@ export const SKILLS: SkillItemProps[] = [
   },
   {
     name: 'React',
-    icon: ReactIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faReact} color="#149eca" fontSize="3.334em" />
+    ),
     href: 'https://react.dev',
   },
   {
     name: 'React Native',
-    icon: ReactNativeIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faReact} color="#61DAFB" fontSize="3.334em" />
+    ),
     href: 'https://reactnative.dev',
   },
   {
     name: 'Swift',
-    icon: SwiftIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faSwift} color="#F05138" fontSize="3.334em" />
+    ),
     href: 'https://swift.org',
   },
   {
@@ -59,12 +63,16 @@ export const SKILLS: SkillItemProps[] = [
   },
   {
     name: 'PHP',
-    icon: PHPIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faPhp} color="#aeb2d5" fontSize="3.334em" />
+    ),
     href: 'https://www.php.net',
   },
   {
     name: 'Node.js',
-    icon: NodeJSIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faNodeJs} color="#83CD29" fontSize="3.334em" />
+    ),
     href: 'https://nodejs.org',
   },
   {
@@ -74,18 +82,17 @@ export const SKILLS: SkillItemProps[] = [
   },
   {
     name: 'HTML',
-    icon: HTMLIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faHtml5} color="#E44D26" fontSize="3.334em" />
+    ),
     href: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
   },
   {
     name: 'CSS',
-    icon: CSSIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faCss3Alt} color="#33A9DC" fontSize="3.334em" />
+    ),
     href: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
-  },
-  {
-    name: 'Tanstack Query',
-    icon: TanstackIcon,
-    href: 'https://tanstack.com/query/latest',
   },
   {
     name: 'Next.js',
@@ -98,39 +105,21 @@ export const SKILLS: SkillItemProps[] = [
     href: 'https://tailwindcss.com',
   },
   {
-    name: 'Storybook',
-    icon: StorybookIcon,
-    href: 'https://storybook.js.org',
-  },
-  {
     name: 'Jest',
     icon: JestIcon,
     href: 'https://jestjs.io',
   },
   {
-    name: 'Metro',
-    icon: MetroIcon,
-    href: 'https://metrobundler.dev',
-  },
-  {
-    name: 'Webpack',
-    icon: WebpackIcon,
-    href: 'https://webpack.js.org',
-  },
-  {
     name: 'Git',
-    icon: GitIcon,
+    icon: () => (
+      <FontAwesomeIcon icon={faGitAlt} color="#F34F29" fontSize="3.334em" />
+    ),
     href: 'https://git-scm.com',
   },
   {
     name: 'GitHub',
-    icon: GitHubIcon,
+    icon: () => <FontAwesomeIcon icon={faGithub} fontSize="3.334em" />,
     href: 'https://github.com',
-  },
-  {
-    name: 'JIRA',
-    icon: JIRAIcon,
-    href: 'https://www.atlassian.com/software/jira',
   },
 ];
 
@@ -143,9 +132,11 @@ function SkillItem({ name, icon, href }: SkillItemProps) {
         rel="noopener noreferrer"
         className="group">
         <Card isCentered isLink>
-          {cloneElement(icon, {
-            className: 'size-10',
-          })}
+          {typeof icon === 'function'
+            ? icon()
+            : cloneElement(icon, {
+                className: 'size-10',
+              })}
         </Card>
         <p className="mt-3">{name}</p>
       </a>

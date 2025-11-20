@@ -49,6 +49,8 @@ export function DarkModeSetting() {
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   const togglePopover = useEvent(
+    // TODO: remove the eslint-disable comment when the bugs with eslint-plugin-react-hooks are fixed by the React team
+    // eslint-disable-next-line react-hooks/refs
     contextSafe((setExplicitValue?: boolean | MouseEvent) => {
       let isOpening = !isOpen;
       if (typeof setExplicitValue === 'boolean') {

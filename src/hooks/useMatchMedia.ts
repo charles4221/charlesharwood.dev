@@ -12,6 +12,8 @@ export function useMatchMedia(
 
     const getMatchMedia = (): MediaQueryList => {
       if (!MEDIA_QUERY_CACHE) {
+        // TODO: remove the eslint-disable comment when the bugs with eslint-plugin-react-hooks are fixed by the React team
+        // eslint-disable-next-line react-hooks/immutability
         MEDIA_QUERY_CACHE = globalThis.matchMedia(query);
       }
 

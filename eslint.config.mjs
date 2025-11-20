@@ -1,5 +1,7 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
+import { globalIgnores } from 'eslint/config';
+import eslintConfigNextVitals from 'eslint-config-next/core-web-vitals';
+import eslintConfigNextTypescript from 'eslint-config-next/typescript';
 import eslintPluginJest from 'eslint-plugin-jest';
 import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
@@ -7,14 +9,19 @@ import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import tseslint from 'typescript-eslint';
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-  recommendedConfig: eslint.configs.recommended,
-  allConfig: eslint.configs.all,
-});
-
 const FlatConfig = tseslint.config(
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  [
+    globalIgnores([
+      'node_modules/**',
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'coverage/**',
+    ]),
+  ],
+  ...eslintConfigNextVitals,
+  ...eslintConfigNextTypescript,
   eslint.configs.recommended,
   tseslint.configs.eslintRecommended,
   tseslint.configs.recommendedTypeChecked,

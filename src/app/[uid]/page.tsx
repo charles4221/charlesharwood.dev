@@ -11,10 +11,9 @@ import {
 } from '@/utils/constants';
 import { isUidValid } from '@/utils/is-uid-valid';
 
-type Params = { uid: string };
-type Props = { params: Promise<Params> };
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(
+  props: PageProps<'/[uid]'>,
+): Promise<Metadata> {
   const params = await props.params;
   const client = createClient();
   const page = await client.getByUID('page', params.uid).catch(notFound);
@@ -45,7 +44,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page(props: Props) {
+export default async function Page(props: PageProps<'/[uid]'>) {
   const params = await props.params;
 
   // Skip attempting to get the page from Prismic if the UID is invalid
