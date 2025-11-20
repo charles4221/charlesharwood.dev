@@ -17,10 +17,10 @@ jobs:
       - name: Setup Node.js v22.21.1
         uses: actions/setup-node@v3
         with:
-          node-version: "22.21.1"
+          node-version: '22.21.1'
           registry-url: https://npm.fontawesome.com/
-          scope: "@fortawesome"
-          cache: "npm"
+          scope: '@fortawesome'
+          cache: 'npm'
 
       - name: Install Node Dependencies
         run: npm ci
