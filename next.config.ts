@@ -1,54 +1,35 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
-import { createClient as createPrismicClient } from '@prismicio/client';
 import { type SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
-import { repositoryName } from '@/prismic-config';
 import { IS_DEV } from '@/utils/constants';
 
-const nextConfig = async (): Promise<NextConfig> => {
-  const client = createPrismicClient(repositoryName, {
-    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-  });
-
-  const repository = await client.getRepository();
-  const locales = repository.languages.map((lang) => lang.id);
-
-  return {
-    reactCompiler: true,
-    reactStrictMode: true,
-    i18n: {
-      // These are all the locales you want to support in
-      // your application
-      locales,
-      // This is the default locale you want to be used when visiting
-      // a non-locale prefixed path e.g. `/hello`
-      defaultLocale: locales[0],
-    },
-    images: {
-      remotePatterns: [
+const nextConfig: NextConfig = {
+  reactCompiler: true,
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.prismic.io',
+      },
+    ],
+  },
+  redirects: () =>
+    new Promise((resolve) => {
+      resolve([
         {
-          protocol: 'https',
-          hostname: '**.prismic.io',
+          source: '/portfolio',
+          destination: '/about',
+          permanent: true,
         },
-      ],
-    },
-    redirects: () =>
-      new Promise((resolve) => {
-        resolve([
-          {
-            source: '/portfolio',
-            destination: '/about',
-            permanent: true,
-          },
-          {
-            source: '/project/:slug',
-            destination: '/about',
-            permanent: true,
-          },
-        ]);
-      }),
-  };
+        {
+          source: '/project/:slug',
+          destination: '/about',
+          permanent: true,
+        },
+      ]);
+    }),
 };
 
 const withBundleAnalyzer = bundleAnalyzer({

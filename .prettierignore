@@ -1,5 +1,6 @@
 .slicemachine
 .next
+next-env.d.ts
 # auto-generated mocks and models from slicemachine
 src/components/slices/**/mocks.json
 src/components/slices/**/model.json
