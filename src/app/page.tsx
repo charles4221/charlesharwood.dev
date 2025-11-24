@@ -23,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description: page.data.meta_description,
     openGraph: {
+      type: 'website',
       title: page.data.meta_title ?? title,
       description: page.data.meta_description ?? '',
       url: METADATA_BASE,

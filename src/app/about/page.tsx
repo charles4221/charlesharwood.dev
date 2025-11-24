@@ -59,6 +59,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description: page.data.meta_description,
     openGraph: {
+      type: 'profile',
+      firstName: 'Charles',
+      lastName: 'Harwood',
       title: page.data.meta_title ?? title,
       description: page.data.meta_description ?? '',
       url: new URL('/about', METADATA_BASE),

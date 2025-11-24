@@ -44,6 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description: page.data.meta_description,
     openGraph: {
+      type: 'website',
       title,
       description: page.data.meta_description ?? '',
       url: new URL('/contact', METADATA_BASE),

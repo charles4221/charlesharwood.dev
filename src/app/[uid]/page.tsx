@@ -30,6 +30,7 @@ export async function generateMetadata(
     title,
     description: page.data.meta_description,
     openGraph: {
+      type: 'website',
       title,
       description: page.data.meta_description ?? '',
       url: new URL(`/${params.uid}`, METADATA_BASE),
