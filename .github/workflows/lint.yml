@@ -30,6 +30,11 @@ jobs:
       - name: Check Code Formatting with Prettier
         run: npm run format:check
 
+      - name: Build Project
+        run: npm run build
+        env:
+          PRISMIC_ACCESS_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
+
       - name: Lint Code with ESLint
         run: npm run lint
         env:
